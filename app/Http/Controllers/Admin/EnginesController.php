@@ -9,38 +9,105 @@ use App\Http\Requests\StoreEngineRequest;
 use App\Http\Requests\UpdateEngineRequest;
 use App\Models\Engine;
 use App\Models\Manufacturer;
+use App\Models\Team;
 use App\Models\User;
 use Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
+use Yajra\DataTables\Facades\DataTables;
 
 class EnginesController extends Controller
 {
     use MediaUploadingTrait;
 
-    public function index()
+    public function index(Request $request)
     {
         abort_if(Gate::denies('engine_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $engines = Engine::all();
+        if ($request->ajax()) {
+            $query = Engine::with(['creator', 'manufacturer', 'team'])->select(sprintf('%s.*', (new Engine)->table));
+            $table = Datatables::of($query);
 
+            $table->addColumn('placeholder', '&nbsp;');
+            $table->addColumn('actions', '&nbsp;');
+
+            $table->editColumn('actions', function ($row) {
+                $viewGate      = 'engine_show';
+                $editGate      = 'engine_edit';
+                $deleteGate    = 'engine_delete';
+                $crudRoutePart = 'engines';
+
+                return view('partials.datatablesActions', compact(
+                    'viewGate',
+                    'editGate',
+                    'deleteGate',
+                    'crudRoutePart',
+                    'row'
+                ));
+            });
+
+            $table->editColumn('id', function ($row) {
+                return $row->id ? $row->id : "";
+            });
+            $table->addColumn('creator_name', function ($row) {
+                return $row->creator ? $row->creator->name : '';
+            });
+
+            $table->editColumn('name', function ($row) {
+                return $row->name ? $row->name : "";
+            });
+            $table->editColumn('description', function ($row) {
+                return $row->description ? $row->description : "";
+            });
+            $table->addColumn('manufacturer_name', function ($row) {
+                return $row->manufacturer ? $row->manufacturer->name : '';
+            });
+
+            $table->editColumn('bore', function ($row) {
+                return $row->bore ? $row->bore : "";
+            });
+            $table->editColumn('stroke', function ($row) {
+                return $row->stroke ? $row->stroke : "";
+            });
+            $table->editColumn('files', function ($row) {
+                return $row->files ? '<a href="' . $row->files->getUrl() . '" target="_blank">' . trans('global.downloadFile') . '</a>' : '';
+            });
+            $table->editColumn('images', function ($row) {
+                if (!$row->images) {
+                    return '';
+                }
+
+                $links = [];
+
+                foreach ($row->images as $media) {
+                    $links[] = '<a href="' . $media->getUrl() . '" target="_blank"><img src="' . $media->getUrl('thumb') . '" width="50px" height="50px"></a>';
+                }
+
+                return implode(' ', $links);
+            });
+
+            $table->rawColumns(['actions', 'placeholder', 'creator', 'manufacturer', 'files', 'images']);
+
+            return $table->make(true);
+        }
+
+        $users         = User::get();
         $manufacturers = Manufacturer::get();
+        $teams         = Team::get();
 
-        $users = User::get();
-
-        return view('admin.engines.index', compact('engines', 'manufacturers', 'users'));
+        return view('admin.engines.index', compact('users', 'manufacturers', 'teams'));
     }
 
     public function create()
     {
         abort_if(Gate::denies('engine_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $manufacturers = Manufacturer::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
         $creators = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.engines.create', compact('manufacturers', 'creators'));
+        $manufacturers = Manufacturer::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        return view('admin.engines.create', compact('creators', 'manufacturers'));
     }
 
     public function store(StoreEngineRequest $request)
@@ -66,13 +133,13 @@ class EnginesController extends Controller
     {
         abort_if(Gate::denies('engine_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $manufacturers = Manufacturer::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
         $creators = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $engine->load('manufacturer', 'creator');
+        $manufacturers = Manufacturer::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.engines.edit', compact('manufacturers', 'creators', 'engine'));
+        $engine->load('creator', 'manufacturer', 'team');
+
+        return view('admin.engines.edit', compact('creators', 'manufacturers', 'engine'));
     }
 
     public function update(UpdateEngineRequest $request, Engine $engine)
@@ -114,7 +181,7 @@ class EnginesController extends Controller
     {
         abort_if(Gate::denies('engine_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $engine->load('manufacturer', 'creator');
+        $engine->load('creator', 'manufacturer', 'team');
 
         return view('admin.engines.show', compact('engine'));
     }

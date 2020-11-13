@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateCarmodelRequest;
 use App\Models\Car;
 use App\Models\Carmodel;
 use App\Models\Manufacturer;
+use App\Models\Team;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,7 +22,7 @@ class CarmodelController extends Controller
         abort_if(Gate::denies('carmodel_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = Carmodel::with(['manufacturer', 'cars'])->select(sprintf('%s.*', (new Carmodel)->table));
+            $query = Carmodel::with(['manufacturer', 'cars', 'team'])->select(sprintf('%s.*', (new Carmodel)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -69,8 +70,9 @@ class CarmodelController extends Controller
 
         $manufacturers = Manufacturer::get();
         $cars          = Car::get();
+        $teams         = Team::get();
 
-        return view('admin.carmodels.index', compact('manufacturers', 'cars'));
+        return view('admin.carmodels.index', compact('manufacturers', 'cars', 'teams'));
     }
 
     public function create()
@@ -100,7 +102,7 @@ class CarmodelController extends Controller
 
         $cars = Car::all()->pluck('name', 'id');
 
-        $carmodel->load('manufacturer', 'cars');
+        $carmodel->load('manufacturer', 'cars', 'team');
 
         return view('admin.carmodels.edit', compact('manufacturers', 'cars', 'carmodel'));
     }
@@ -117,7 +119,7 @@ class CarmodelController extends Controller
     {
         abort_if(Gate::denies('carmodel_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $carmodel->load('manufacturer', 'cars');
+        $carmodel->load('manufacturer', 'cars', 'team');
 
         return view('admin.carmodels.show', compact('carmodel'));
     }

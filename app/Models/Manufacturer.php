@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\MultiTenantModelTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +14,7 @@ use \DateTimeInterface;
 
 class Manufacturer extends Model implements HasMedia
 {
-    use SoftDeletes, InteractsWithMedia, HasFactory;
+    use SoftDeletes, MultiTenantModelTrait, InteractsWithMedia, HasFactory;
 
     public $table = 'manufacturers';
 
@@ -47,6 +48,7 @@ class Manufacturer extends Model implements HasMedia
         'created_at',
         'updated_at',
         'deleted_at',
+        'team_id',
     ];
 
     protected function serializeDate(DateTimeInterface $date)
@@ -118,5 +120,10 @@ class Manufacturer extends Model implements HasMedia
     public function setLastYearAttribute($value)
     {
         $this->attributes['last_year'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
+    }
+
+    public function team()
+    {
+        return $this->belongsTo(Team::class, 'team_id');
     }
 }

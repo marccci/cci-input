@@ -99,6 +99,8 @@ return [
             'last_year_helper'   => ' ',
             'creator'            => 'Creator',
             'creator_helper'     => ' ',
+            'team'               => 'Team',
+            'team_helper'        => ' ',
         ],
     ],
     'engine'         => [
@@ -129,6 +131,8 @@ return [
             'images_helper'       => ' ',
             'creator'             => 'Creator',
             'creator_helper'      => ' ',
+            'team'                => 'Team',
+            'team_helper'         => ' ',
         ],
     ],
     'car'            => [
@@ -155,6 +159,8 @@ return [
             'carmodel_helper'     => ' ',
             'creator'             => 'Creator',
             'creator_helper'      => ' ',
+            'team'                => 'Team',
+            'team_helper'         => ' ',
         ],
     ],
     'team'           => [
@@ -217,6 +223,8 @@ return [
             'images_helper'     => ' ',
             'car'               => 'Car',
             'car_helper'        => ' ',
+            'team'              => 'Team',
+            'team_helper'       => ' ',
         ],
     ],
     'carmodel'       => [
@@ -241,6 +249,8 @@ return [
             'first_year_helper'   => ' ',
             'last_year'           => 'Last Year',
             'last_year_helper'    => ' ',
+            'team'                => 'Team',
+            'team_helper'         => ' ',
         ],
     ],
 ];
