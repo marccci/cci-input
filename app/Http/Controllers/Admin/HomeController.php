@@ -76,6 +76,23 @@ class HomeController
             $settings3['fields'] = [];
         }
 
-        return view('home', compact('chart1', 'chart2', 'settings3'));
+        $settings4 = [
+            'chart_title'           => 'Engines added',
+            'chart_type'            => 'bar',
+            'report_type'           => 'group_by_date',
+            'model'                 => 'App\Models\Engine',
+            'group_by_field'        => 'created_at',
+            'group_by_period'       => 'day',
+            'aggregate_function'    => 'count',
+            'filter_field'          => 'created_at',
+            'filter_days'           => '7',
+            'group_by_field_format' => 'd-m-Y H:i:s',
+            'column_class'          => 'col-md-12',
+            'entries_number'        => '5',
+        ];
+
+        $chart4 = new LaravelChart($settings4);
+
+        return view('home', compact('chart1', 'chart2', 'settings3', 'chart4'));
     }
 }
