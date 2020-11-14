@@ -32,6 +32,10 @@ class UpdateUserRequest extends FormRequest
                 'required',
                 'array',
             ],
+            'garage'  => [
+                'string',
+                'nullable',
+            ],
         ];
     }
 }

@@ -15,62 +15,119 @@
     </div>
 
     <div class="card-body">
-        <table class=" table table-bordered table-striped table-hover ajaxTable datatable datatable-Garage">
-            <thead>
-                <tr>
-                    <th width="10">
+        <div class="table-responsive">
+            <table class=" table table-bordered table-striped table-hover datatable datatable-Garage">
+                <thead>
+                    <tr>
+                        <th width="10">
 
-                    </th>
-                    <th>
-                        {{ trans('cruds.garage.fields.id') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.garage.fields.user') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.garage.fields.files') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.garage.fields.images') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.garage.fields.car') }}
-                    </th>
-                    <th>
-                        &nbsp;
-                    </th>
-                </tr>
-                <tr>
-                    <td>
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                        <select class="search">
-                            <option value>{{ trans('global.all') }}</option>
-                            @foreach($users as $key => $item)
-                                <option value="{{ $item->name }}">{{ $item->name }}</option>
-                            @endforeach
-                        </select>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                        <select class="search">
-                            <option value>{{ trans('global.all') }}</option>
-                            @foreach($cars as $key => $item)
-                                <option value="{{ $item->name }}">{{ $item->name }}</option>
-                            @endforeach
-                        </select>
-                    </td>
-                    <td>
-                    </td>
-                </tr>
-            </thead>
-        </table>
+                        </th>
+                        <th>
+                            {{ trans('cruds.garage.fields.id') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.garage.fields.user') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.garage.fields.files') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.garage.fields.images') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.garage.fields.car') }}
+                        </th>
+                        <th>
+                            &nbsp;
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                        <td>
+                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                        </td>
+                        <td>
+                            <select class="search">
+                                <option value>{{ trans('global.all') }}</option>
+                                @foreach($users as $key => $item)
+                                    <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                            <select class="search">
+                                <option value>{{ trans('global.all') }}</option>
+                                @foreach($cars as $key => $item)
+                                    <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($garages as $key => $garage)
+                        <tr data-entry-id="{{ $garage->id }}">
+                            <td>
+
+                            </td>
+                            <td>
+                                {{ $garage->id ?? '' }}
+                            </td>
+                            <td>
+                                {{ $garage->user->name ?? '' }}
+                            </td>
+                            <td>
+                                @foreach($garage->files as $key => $media)
+                                    <a href="{{ $media->getUrl() }}" target="_blank">
+                                        {{ trans('global.view_file') }}
+                                    </a>
+                                @endforeach
+                            </td>
+                            <td>
+                                @foreach($garage->images as $key => $media)
+                                    <a href="{{ $media->getUrl() }}" target="_blank" style="display: inline-block">
+                                        <img src="{{ $media->getUrl('thumb') }}">
+                                    </a>
+                                @endforeach
+                            </td>
+                            <td>
+                                {{ $garage->car->name ?? '' }}
+                            </td>
+                            <td>
+                                @can('garage_show')
+                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.garages.show', $garage->id) }}">
+                                        {{ trans('global.view') }}
+                                    </a>
+                                @endcan
+
+                                @can('garage_edit')
+                                    <a class="btn btn-xs btn-info" href="{{ route('admin.garages.edit', $garage->id) }}">
+                                        {{ trans('global.edit') }}
+                                    </a>
+                                @endcan
+
+                                @can('garage_delete')
+                                    <form action="{{ route('admin.garages.destroy', $garage->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                    </form>
+                                @endcan
+
+                            </td>
+
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
@@ -83,14 +140,14 @@
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
 @can('garage_delete')
-  let deleteButtonTrans = '{{ trans('global.datatables.delete') }}';
+  let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,
     url: "{{ route('admin.garages.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
-      var ids = $.map(dt.rows({ selected: true }).data(), function (entry) {
-          return entry.id
+      var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
+          return $(entry).data('entry-id')
       });
 
       if (ids.length === 0) {
@@ -112,27 +169,12 @@
   dtButtons.push(deleteButton)
 @endcan
 
-  let dtOverrideGlobals = {
-    buttons: dtButtons,
-    processing: true,
-    serverSide: true,
-    retrieve: true,
-    aaSorting: [],
-    ajax: "{{ route('admin.garages.index') }}",
-    columns: [
-      { data: 'placeholder', name: 'placeholder' },
-{ data: 'id', name: 'id' },
-{ data: 'user_name', name: 'user.name' },
-{ data: 'files', name: 'files', sortable: false, searchable: false },
-{ data: 'images', name: 'images', sortable: false, searchable: false },
-{ data: 'car_name', name: 'car.name' },
-{ data: 'actions', name: '{{ trans('global.actions') }}' }
-    ],
+  $.extend(true, $.fn.dataTable.defaults, {
     orderCellsTop: true,
     order: [[ 1, 'desc' ]],
     pageLength: 100,
-  };
-  let table = $('.datatable-Garage').DataTable(dtOverrideGlobals);
+  });
+  let table = $('.datatable-Garage:not(.ajaxTable)').DataTable({ buttons: dtButtons })
   $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();
@@ -145,7 +187,7 @@
         .search(value, strict)
         .draw()
   });
-});
+})
 
 </script>
 @endsection

@@ -17,6 +17,10 @@ class StoreEngineRequest extends FormRequest
     public function rules()
     {
         return [
+            'creator_id'      => [
+                'required',
+                'integer',
+            ],
             'name'            => [
                 'string',
                 'required',
@@ -35,10 +39,6 @@ class StoreEngineRequest extends FormRequest
             ],
             'stroke'          => [
                 'numeric',
-            ],
-            'creator_id'      => [
-                'required',
-                'integer',
             ],
         ];
     }

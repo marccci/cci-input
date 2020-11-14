@@ -100,13 +100,13 @@ return [
         'string'  => ':attribute moet :size tekens lang zijn.',
         'array'   => ':attribute moet :size items bevatten.',
     ],
-    'starts_with'                    => 'The :attribute must start with one of the following: :values.',
+    'starts_with'                    => ':attribute moet beginnen met een van de volgende: :values.',
     'string'                         => ':attribute moet een sting zijn.',
     'timezone'                       => ':attribute moet een geldige zone zijn.',
     'unique'                         => ':attribute werd reeds genomen.',
     'uploaded'                       => ':attribute is niet geupload.',
     'url'                            => 'Het formaat van :attribute is ongeldig.',
-    'uuid'                           => 'The :attribute must be a valid UUID.',
+    'uuid'                           => ':attribute moet een geldige UUID zijn.',
     'custom'                         => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
