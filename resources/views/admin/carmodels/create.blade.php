@@ -10,6 +10,34 @@
         <form method="POST" action="{{ route("admin.carmodels.store") }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
+                <label class="required" for="creator_id">{{ trans('cruds.carmodel.fields.creator') }}</label>
+                <select class="form-control select2 {{ $errors->has('creator') ? 'is-invalid' : '' }}" name="creator_id" id="creator_id" required>
+                    @foreach($creators as $id => $creator)
+                        <option value="{{ $id }}" {{ old('creator_id') == $id ? 'selected' : '' }}>{{ $creator }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('creator'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('creator') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.carmodel.fields.creator_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="owner_id">{{ trans('cruds.carmodel.fields.owner') }}</label>
+                <select class="form-control select2 {{ $errors->has('owner') ? 'is-invalid' : '' }}" name="owner_id" id="owner_id" required>
+                    @foreach($owners as $id => $owner)
+                        <option value="{{ $id }}" {{ old('owner_id') == $id ? 'selected' : '' }}>{{ $owner }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('owner'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('owner') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.carmodel.fields.owner_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <label class="required" for="name">{{ trans('cruds.carmodel.fields.name') }}</label>
                 <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', '') }}" required>
                 @if($errors->has('name'))

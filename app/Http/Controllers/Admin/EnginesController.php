@@ -41,9 +41,11 @@ class EnginesController extends Controller
 
         $creators = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
+        $owners = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
         $manufacturers = Manufacturer::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.engines.create', compact('creators', 'manufacturers'));
+        return view('admin.engines.create', compact('creators', 'owners', 'manufacturers'));
     }
 
     public function store(StoreEngineRequest $request)
@@ -71,11 +73,13 @@ class EnginesController extends Controller
 
         $creators = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
+        $owners = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
         $manufacturers = Manufacturer::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $engine->load('creator', 'manufacturer', 'team');
+        $engine->load('creator', 'owner', 'manufacturer', 'team');
 
-        return view('admin.engines.edit', compact('creators', 'manufacturers', 'engine'));
+        return view('admin.engines.edit', compact('creators', 'owners', 'manufacturers', 'engine'));
     }
 
     public function update(UpdateEngineRequest $request, Engine $engine)
@@ -117,7 +121,7 @@ class EnginesController extends Controller
     {
         abort_if(Gate::denies('engine_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $engine->load('creator', 'manufacturer', 'team');
+        $engine->load('creator', 'owner', 'manufacturer', 'team');
 
         return view('admin.engines.show', compact('engine'));
     }

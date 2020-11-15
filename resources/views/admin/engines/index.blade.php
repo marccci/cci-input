@@ -26,10 +26,13 @@
                             {{ trans('cruds.engine.fields.id') }}
                         </th>
                         <th>
+                            {{ trans('cruds.engine.fields.name') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.engine.fields.creator') }}
                         </th>
                         <th>
-                            {{ trans('cruds.engine.fields.name') }}
+                            {{ trans('cruds.engine.fields.owner') }}
                         </th>
                         <th>
                             {{ trans('cruds.engine.fields.description') }}
@@ -68,14 +71,14 @@
                             {{ trans('cruds.engine.fields.images') }}
                         </th>
                         <th>
-                            {{ trans('cruds.engine.fields.owner') }}
-                        </th>
-                        <th>
                             &nbsp;
                         </th>
                     </tr>
                     <tr>
                         <td>
+                        </td>
+                        <td>
+                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                         </td>
                         <td>
                             <input class="search" type="text" placeholder="{{ trans('global.search') }}">
@@ -89,7 +92,12 @@
                             </select>
                         </td>
                         <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                            <select class="search">
+                                <option value>{{ trans('global.all') }}</option>
+                                @foreach($users as $key => $item)
+                                    <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
                         </td>
                         <td>
                             <input class="search" type="text" placeholder="{{ trans('global.search') }}">
@@ -131,9 +139,6 @@
                         <td>
                         </td>
                         <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
                         </td>
                     </tr>
                 </thead>
@@ -147,10 +152,13 @@
                                 {{ $engine->id ?? '' }}
                             </td>
                             <td>
+                                {{ $engine->name ?? '' }}
+                            </td>
+                            <td>
                                 {{ $engine->creator->name ?? '' }}
                             </td>
                             <td>
-                                {{ $engine->name ?? '' }}
+                                {{ $engine->owner->name ?? '' }}
                             </td>
                             <td>
                                 {{ $engine->description ?? '' }}
@@ -195,9 +203,6 @@
                                         <img src="{{ $media->getUrl('thumb') }}">
                                     </a>
                                 @endforeach
-                            </td>
-                            <td>
-                                {{ $engine->owner ?? '' }}
                             </td>
                             <td>
                                 @can('engine_show')

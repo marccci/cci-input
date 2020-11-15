@@ -10,6 +10,7 @@ use App\Models\Car;
 use App\Models\Carmodel;
 use App\Models\Manufacturer;
 use App\Models\Team;
+use App\Models\User;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,24 +23,30 @@ class CarmodelController extends Controller
 
         $carmodels = Carmodel::all();
 
+        $users = User::get();
+
         $manufacturers = Manufacturer::get();
 
         $cars = Car::get();
 
         $teams = Team::get();
 
-        return view('admin.carmodels.index', compact('carmodels', 'manufacturers', 'cars', 'teams'));
+        return view('admin.carmodels.index', compact('carmodels', 'users', 'manufacturers', 'cars', 'teams'));
     }
 
     public function create()
     {
         abort_if(Gate::denies('carmodel_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $creators = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $owners = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
         $manufacturers = Manufacturer::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $cars = Car::all()->pluck('name', 'id');
 
-        return view('admin.carmodels.create', compact('manufacturers', 'cars'));
+        return view('admin.carmodels.create', compact('creators', 'owners', 'manufacturers', 'cars'));
     }
 
     public function store(StoreCarmodelRequest $request)
@@ -54,13 +61,17 @@ class CarmodelController extends Controller
     {
         abort_if(Gate::denies('carmodel_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $creators = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $owners = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
         $manufacturers = Manufacturer::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $cars = Car::all()->pluck('name', 'id');
 
-        $carmodel->load('manufacturer', 'cars', 'team');
+        $carmodel->load('creator', 'owner', 'manufacturer', 'cars', 'team');
 
-        return view('admin.carmodels.edit', compact('manufacturers', 'cars', 'carmodel'));
+        return view('admin.carmodels.edit', compact('creators', 'owners', 'manufacturers', 'cars', 'carmodel'));
     }
 
     public function update(UpdateCarmodelRequest $request, Carmodel $carmodel)
@@ -75,7 +86,7 @@ class CarmodelController extends Controller
     {
         abort_if(Gate::denies('carmodel_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $carmodel->load('manufacturer', 'cars', 'team');
+        $carmodel->load('creator', 'owner', 'manufacturer', 'cars', 'team');
 
         return view('admin.carmodels.show', compact('carmodel'));
     }

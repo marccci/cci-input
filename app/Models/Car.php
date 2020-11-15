@@ -36,7 +36,7 @@ class Car extends Model implements HasMedia
 
     protected $fillable = [
         'creator_id',
-        'owner',
+        'owner_id',
         'name',
         'carmodel',
         'manufacturer_id',
@@ -61,6 +61,11 @@ class Car extends Model implements HasMedia
     public function creator()
     {
         return $this->belongsTo(User::class, 'creator_id');
+    }
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'owner_id');
     }
 
     public function manufacturer()

@@ -17,9 +17,13 @@ class StoreGarageRequest extends FormRequest
     public function rules()
     {
         return [
-            'car_id' => [
+            'user_id' => [
                 'required',
                 'integer',
+            ],
+            'car'     => [
+                'string',
+                'required',
             ],
         ];
     }

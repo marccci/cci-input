@@ -24,8 +24,12 @@
                 <span class="help-block">{{ trans('cruds.car.fields.creator_helper') }}</span>
             </div>
             <div class="form-group">
-                <label class="required" for="owner">{{ trans('cruds.car.fields.owner') }}</label>
-                <input class="form-control {{ $errors->has('owner') ? 'is-invalid' : '' }}" type="number" name="owner" id="owner" value="{{ old('owner', '') }}" step="1" required>
+                <label class="required" for="owner_id">{{ trans('cruds.car.fields.owner') }}</label>
+                <select class="form-control select2 {{ $errors->has('owner') ? 'is-invalid' : '' }}" name="owner_id" id="owner_id" required>
+                    @foreach($owners as $id => $owner)
+                        <option value="{{ $id }}" {{ old('owner_id') == $id ? 'selected' : '' }}>{{ $owner }}</option>
+                    @endforeach
+                </select>
                 @if($errors->has('owner'))
                     <div class="invalid-feedback">
                         {{ $errors->first('owner') }}

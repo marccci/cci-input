@@ -41,9 +41,11 @@ class CarsController extends Controller
 
         $creators = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
+        $owners = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
         $manufacturers = Manufacturer::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.cars.create', compact('creators', 'manufacturers'));
+        return view('admin.cars.create', compact('creators', 'owners', 'manufacturers'));
     }
 
     public function store(StoreCarRequest $request)
@@ -71,11 +73,13 @@ class CarsController extends Controller
 
         $creators = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
+        $owners = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
         $manufacturers = Manufacturer::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $car->load('creator', 'manufacturer', 'team');
+        $car->load('creator', 'owner', 'manufacturer', 'team');
 
-        return view('admin.cars.edit', compact('creators', 'manufacturers', 'car'));
+        return view('admin.cars.edit', compact('creators', 'owners', 'manufacturers', 'car'));
     }
 
     public function update(UpdateCarRequest $request, Car $car)
@@ -121,7 +125,7 @@ class CarsController extends Controller
     {
         abort_if(Gate::denies('car_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $car->load('creator', 'manufacturer', 'team');
+        $car->load('creator', 'owner', 'manufacturer', 'team');
 
         return view('admin.cars.show', compact('car'));
     }

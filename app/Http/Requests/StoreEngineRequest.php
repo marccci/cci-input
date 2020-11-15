@@ -17,13 +17,17 @@ class StoreEngineRequest extends FormRequest
     public function rules()
     {
         return [
+            'name'              => [
+                'string',
+                'required',
+            ],
             'creator_id'        => [
                 'required',
                 'integer',
             ],
-            'name'              => [
-                'string',
+            'owner_id'          => [
                 'required',
+                'integer',
             ],
             'description'       => [
                 'string',
@@ -69,10 +73,6 @@ class StoreEngineRequest extends FormRequest
             ],
             'stroke'            => [
                 'numeric',
-                'required',
-            ],
-            'owner'             => [
-                'string',
                 'required',
             ],
         ];

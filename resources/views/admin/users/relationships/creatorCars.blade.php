@@ -66,7 +66,7 @@
                                 {{ $car->creator->name ?? '' }}
                             </td>
                             <td>
-                                {{ $car->owner ?? '' }}
+                                {{ $car->owner->name ?? '' }}
                             </td>
                             <td>
                                 {{ $car->name ?? '' }}

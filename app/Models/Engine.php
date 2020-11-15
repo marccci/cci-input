@@ -39,8 +39,9 @@ class Engine extends Model implements HasMedia
     ];
 
     protected $fillable = [
-        'creator_id',
         'name',
+        'creator_id',
+        'owner_id',
         'description',
         'manufacturer_id',
         'cylinder_number',
@@ -52,7 +53,6 @@ class Engine extends Model implements HasMedia
         'bore',
         'stroke',
         'created_at',
-        'owner',
         'updated_at',
         'deleted_at',
         'team_id',
@@ -72,6 +72,11 @@ class Engine extends Model implements HasMedia
     public function creator()
     {
         return $this->belongsTo(User::class, 'creator_id');
+    }
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'owner_id');
     }
 
     public function manufacturer()

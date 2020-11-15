@@ -10,6 +10,16 @@
         <form method="POST" action="{{ route("admin.engines.store") }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
+                <label class="required" for="name">{{ trans('cruds.engine.fields.name') }}</label>
+                <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', '') }}" required>
+                @if($errors->has('name'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('name') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.engine.fields.name_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <label class="required" for="creator_id">{{ trans('cruds.engine.fields.creator') }}</label>
                 <select class="form-control select2 {{ $errors->has('creator') ? 'is-invalid' : '' }}" name="creator_id" id="creator_id" required>
                     @foreach($creators as $id => $creator)
@@ -24,14 +34,18 @@
                 <span class="help-block">{{ trans('cruds.engine.fields.creator_helper') }}</span>
             </div>
             <div class="form-group">
-                <label class="required" for="name">{{ trans('cruds.engine.fields.name') }}</label>
-                <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', '') }}" required>
-                @if($errors->has('name'))
+                <label class="required" for="owner_id">{{ trans('cruds.engine.fields.owner') }}</label>
+                <select class="form-control select2 {{ $errors->has('owner') ? 'is-invalid' : '' }}" name="owner_id" id="owner_id" required>
+                    @foreach($owners as $id => $owner)
+                        <option value="{{ $id }}" {{ old('owner_id') == $id ? 'selected' : '' }}>{{ $owner }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('owner'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('name') }}
+                        {{ $errors->first('owner') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.engine.fields.name_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.engine.fields.owner_helper') }}</span>
             </div>
             <div class="form-group">
                 <label for="description">{{ trans('cruds.engine.fields.description') }}</label>
@@ -158,16 +172,6 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.engine.fields.images_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label class="required" for="owner">{{ trans('cruds.engine.fields.owner') }}</label>
-                <input class="form-control {{ $errors->has('owner') ? 'is-invalid' : '' }}" type="text" name="owner" id="owner" value="{{ old('owner', '') }}" required>
-                @if($errors->has('owner'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('owner') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.engine.fields.owner_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

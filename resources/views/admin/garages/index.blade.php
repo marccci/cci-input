@@ -29,13 +29,13 @@
                             {{ trans('cruds.garage.fields.user') }}
                         </th>
                         <th>
+                            {{ trans('cruds.garage.fields.car') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.garage.fields.files') }}
                         </th>
                         <th>
                             {{ trans('cruds.garage.fields.images') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.garage.fields.car') }}
                         </th>
                         <th>
                             &nbsp;
@@ -56,16 +56,11 @@
                             </select>
                         </td>
                         <td>
+                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                         </td>
                         <td>
                         </td>
                         <td>
-                            <select class="search">
-                                <option value>{{ trans('global.all') }}</option>
-                                @foreach($cars as $key => $item)
-                                    <option value="{{ $item->name }}">{{ $item->name }}</option>
-                                @endforeach
-                            </select>
                         </td>
                         <td>
                         </td>
@@ -84,6 +79,9 @@
                                 {{ $garage->user->name ?? '' }}
                             </td>
                             <td>
+                                {{ $garage->car ?? '' }}
+                            </td>
+                            <td>
                                 @foreach($garage->files as $key => $media)
                                     <a href="{{ $media->getUrl() }}" target="_blank">
                                         {{ trans('global.view_file') }}
@@ -96,9 +94,6 @@
                                         <img src="{{ $media->getUrl('thumb') }}">
                                     </a>
                                 @endforeach
-                            </td>
-                            <td>
-                                {{ $garage->car->name ?? '' }}
                             </td>
                             <td>
                                 @can('garage_show')

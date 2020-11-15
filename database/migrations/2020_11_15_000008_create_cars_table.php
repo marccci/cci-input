@@ -13,7 +13,6 @@ class CreateCarsTable extends Migration
             $table->string('name');
             $table->string('engine');
             $table->string('carmodel')->nullable();
-            $table->integer('owner');
             $table->timestamps();
             $table->softDeletes();
         });

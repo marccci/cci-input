@@ -11,8 +11,8 @@
             @method('PUT')
             @csrf
             <div class="form-group">
-                <label for="user_id">{{ trans('cruds.garage.fields.user') }}</label>
-                <select class="form-control select2 {{ $errors->has('user') ? 'is-invalid' : '' }}" name="user_id" id="user_id">
+                <label class="required" for="user_id">{{ trans('cruds.garage.fields.user') }}</label>
+                <select class="form-control select2 {{ $errors->has('user') ? 'is-invalid' : '' }}" name="user_id" id="user_id" required>
                     @foreach($users as $id => $user)
                         <option value="{{ $id }}" {{ (old('user_id') ? old('user_id') : $garage->user->id ?? '') == $id ? 'selected' : '' }}>{{ $user }}</option>
                     @endforeach
@@ -23,6 +23,16 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.garage.fields.user_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="car">{{ trans('cruds.garage.fields.car') }}</label>
+                <input class="form-control {{ $errors->has('car') ? 'is-invalid' : '' }}" type="text" name="car" id="car" value="{{ old('car', $garage->car) }}" required>
+                @if($errors->has('car'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('car') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.garage.fields.car_helper') }}</span>
             </div>
             <div class="form-group">
                 <label for="files">{{ trans('cruds.garage.fields.files') }}</label>
@@ -45,20 +55,6 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.garage.fields.images_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label class="required" for="car_id">{{ trans('cruds.garage.fields.car') }}</label>
-                <select class="form-control select2 {{ $errors->has('car') ? 'is-invalid' : '' }}" name="car_id" id="car_id" required>
-                    @foreach($cars as $id => $car)
-                        <option value="{{ $id }}" {{ (old('car_id') ? old('car_id') : $garage->car->id ?? '') == $id ? 'selected' : '' }}>{{ $car }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('car'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('car') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.garage.fields.car_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">
