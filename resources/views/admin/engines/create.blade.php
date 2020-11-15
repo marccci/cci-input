@@ -138,8 +138,8 @@
                 <span class="help-block">{{ trans('cruds.engine.fields.bore_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="stroke">{{ trans('cruds.engine.fields.stroke') }}</label>
-                <input class="form-control {{ $errors->has('stroke') ? 'is-invalid' : '' }}" type="number" name="stroke" id="stroke" value="{{ old('stroke', '') }}" step="0.01">
+                <label class="required" for="stroke">{{ trans('cruds.engine.fields.stroke') }}</label>
+                <input class="form-control {{ $errors->has('stroke') ? 'is-invalid' : '' }}" type="number" name="stroke" id="stroke" value="{{ old('stroke', '') }}" step="0.01" required>
                 @if($errors->has('stroke'))
                     <div class="invalid-feedback">
                         {{ $errors->first('stroke') }}
