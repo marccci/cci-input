@@ -28,9 +28,6 @@
                             {{ trans('cruds.engine.fields.creator') }}
                         </th>
                         <th>
-                            {{ trans('cruds.engine.fields.owner') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.engine.fields.name') }}
                         </th>
                         <th>
@@ -70,6 +67,9 @@
                             {{ trans('cruds.engine.fields.images') }}
                         </th>
                         <th>
+                            {{ trans('cruds.engine.fields.owner') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -85,9 +85,6 @@
                             </td>
                             <td>
                                 {{ $engine->creator->name ?? '' }}
-                            </td>
-                            <td>
-                                {{ $engine->owner ?? '' }}
                             </td>
                             <td>
                                 {{ $engine->name ?? '' }}
@@ -135,6 +132,9 @@
                                         <img src="{{ $media->getUrl('thumb') }}">
                                     </a>
                                 @endforeach
+                            </td>
+                            <td>
+                                {{ $engine->owner ?? '' }}
                             </td>
                             <td>
                                 @can('engine_show')

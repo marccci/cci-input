@@ -21,12 +21,6 @@ class StoreEngineRequest extends FormRequest
                 'required',
                 'integer',
             ],
-            'owner'             => [
-                'required',
-                'integer',
-                'min:-2147483648',
-                'max:2147483647',
-            ],
             'name'              => [
                 'string',
                 'required',
@@ -75,6 +69,10 @@ class StoreEngineRequest extends FormRequest
             ],
             'stroke'            => [
                 'numeric',
+                'required',
+            ],
+            'owner'             => [
+                'string',
                 'required',
             ],
         ];

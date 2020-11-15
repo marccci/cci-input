@@ -24,16 +24,6 @@
                 <span class="help-block">{{ trans('cruds.engine.fields.creator_helper') }}</span>
             </div>
             <div class="form-group">
-                <label class="required" for="owner">{{ trans('cruds.engine.fields.owner') }}</label>
-                <input class="form-control {{ $errors->has('owner') ? 'is-invalid' : '' }}" type="number" name="owner" id="owner" value="{{ old('owner', '') }}" step="1" required>
-                @if($errors->has('owner'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('owner') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.engine.fields.owner_helper') }}</span>
-            </div>
-            <div class="form-group">
                 <label class="required" for="name">{{ trans('cruds.engine.fields.name') }}</label>
                 <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', '') }}" required>
                 @if($errors->has('name'))
@@ -168,6 +158,16 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.engine.fields.images_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="owner">{{ trans('cruds.engine.fields.owner') }}</label>
+                <input class="form-control {{ $errors->has('owner') ? 'is-invalid' : '' }}" type="text" name="owner" id="owner" value="{{ old('owner', '') }}" required>
+                @if($errors->has('owner'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('owner') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.engine.fields.owner_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">
