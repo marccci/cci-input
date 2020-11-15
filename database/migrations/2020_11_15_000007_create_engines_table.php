@@ -13,7 +13,7 @@ class CreateEnginesTable extends Migration
             $table->string('name');
             $table->string('description')->nullable();
             $table->float('bore', 15, 3);
-            $table->float('stroke', 15, 2)->nullable();
+            $table->float('stroke', 15, 2);
             $table->integer('owner');
             $table->integer('cylinder_number');
             $table->string('block_config');

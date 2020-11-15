@@ -75,6 +75,7 @@ class UpdateEngineRequest extends FormRequest
             ],
             'stroke'            => [
                 'numeric',
+                'required',
             ],
         ];
     }

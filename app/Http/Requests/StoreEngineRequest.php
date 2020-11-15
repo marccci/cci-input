@@ -75,6 +75,7 @@ class StoreEngineRequest extends FormRequest
             ],
             'stroke'            => [
                 'numeric',
+                'required',
             ],
         ];
     }
