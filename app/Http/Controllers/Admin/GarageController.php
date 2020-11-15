@@ -7,7 +7,6 @@ use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\MassDestroyGarageRequest;
 use App\Http\Requests\StoreGarageRequest;
 use App\Http\Requests\UpdateGarageRequest;
-use App\Models\Car;
 use App\Models\Garage;
 use App\Models\Team;
 use App\Models\User;
@@ -28,11 +27,9 @@ class GarageController extends Controller
 
         $users = User::get();
 
-        $cars = Car::get();
-
         $teams = Team::get();
 
-        return view('admin.garages.index', compact('garages', 'users', 'cars', 'teams'));
+        return view('admin.garages.index', compact('garages', 'users', 'teams'));
     }
 
     public function create()
@@ -41,9 +38,7 @@ class GarageController extends Controller
 
         $users = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $cars = Car::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        return view('admin.garages.create', compact('users', 'cars'));
+        return view('admin.garages.create', compact('users'));
     }
 
     public function store(StoreGarageRequest $request)
@@ -71,11 +66,9 @@ class GarageController extends Controller
 
         $users = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $cars = Car::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $garage->load('user', 'team');
 
-        $garage->load('user', 'car', 'team');
-
-        return view('admin.garages.edit', compact('users', 'cars', 'garage'));
+        return view('admin.garages.edit', compact('users', 'garage'));
     }
 
     public function update(UpdateGarageRequest $request, Garage $garage)
@@ -121,7 +114,7 @@ class GarageController extends Controller
     {
         abort_if(Gate::denies('garage_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $garage->load('user', 'car', 'team');
+        $garage->load('user', 'team');
 
         return view('admin.garages.show', compact('garage'));
     }

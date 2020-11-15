@@ -36,7 +36,7 @@
                             {{ trans('cruds.car.fields.owner') }}
                         </th>
                         <td>
-                            {{ $car->owner }}
+                            {{ $car->owner->name ?? '' }}
                         </td>
                     </tr>
                     <tr>

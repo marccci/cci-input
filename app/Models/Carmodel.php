@@ -29,6 +29,8 @@ class Carmodel extends Model
     ];
 
     protected $fillable = [
+        'creator_id',
+        'owner_id',
         'name',
         'manufacturer_id',
         'first_year',
@@ -42,6 +44,16 @@ class Carmodel extends Model
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'creator_id');
+    }
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'owner_id');
     }
 
     public function manufacturer()

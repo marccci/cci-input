@@ -29,6 +29,9 @@
                             {{ trans('cruds.manufacturer.fields.creator') }}
                         </th>
                         <th>
+                            {{ trans('cruds.manufacturer.fields.owner') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.manufacturer.fields.name') }}
                         </th>
                         <th>
@@ -53,9 +56,6 @@
                             {{ trans('cruds.manufacturer.fields.last_year') }}
                         </th>
                         <th>
-                            {{ trans('cruds.manufacturer.fields.owner') }}
-                        </th>
-                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -64,6 +64,14 @@
                         </td>
                         <td>
                             <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                        </td>
+                        <td>
+                            <select class="search">
+                                <option value>{{ trans('global.all') }}</option>
+                                @foreach($users as $key => $item)
+                                    <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
                         </td>
                         <td>
                             <select class="search">
@@ -94,9 +102,6 @@
                         <td>
                         </td>
                         <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
                         </td>
                     </tr>
                 </thead>
@@ -111,6 +116,9 @@
                             </td>
                             <td>
                                 {{ $manufacturer->creator->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $manufacturer->owner->name ?? '' }}
                             </td>
                             <td>
                                 {{ $manufacturer->name ?? '' }}
@@ -143,9 +151,6 @@
                             </td>
                             <td>
                                 {{ $manufacturer->last_year ?? '' }}
-                            </td>
-                            <td>
-                                {{ $manufacturer->owner ?? '' }}
                             </td>
                             <td>
                                 @can('manufacturer_show')

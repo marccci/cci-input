@@ -10,6 +10,7 @@ class CreateGaragesTable extends Migration
     {
         Schema::create('garages', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('car');
             $table->timestamps();
             $table->softDeletes();
         });

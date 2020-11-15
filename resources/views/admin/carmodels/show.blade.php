@@ -25,6 +25,22 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.carmodel.fields.creator') }}
+                        </th>
+                        <td>
+                            {{ $carmodel->creator->name ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.carmodel.fields.owner') }}
+                        </th>
+                        <td>
+                            {{ $carmodel->owner->name ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.carmodel.fields.name') }}
                         </th>
                         <td>

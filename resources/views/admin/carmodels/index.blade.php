@@ -26,6 +26,12 @@
                             {{ trans('cruds.carmodel.fields.id') }}
                         </th>
                         <th>
+                            {{ trans('cruds.carmodel.fields.creator') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.carmodel.fields.owner') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.carmodel.fields.name') }}
                         </th>
                         <th>
@@ -49,6 +55,22 @@
                         </td>
                         <td>
                             <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                        </td>
+                        <td>
+                            <select class="search">
+                                <option value>{{ trans('global.all') }}</option>
+                                @foreach($users as $key => $item)
+                                    <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </td>
+                        <td>
+                            <select class="search">
+                                <option value>{{ trans('global.all') }}</option>
+                                @foreach($users as $key => $item)
+                                    <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
                         </td>
                         <td>
                             <input class="search" type="text" placeholder="{{ trans('global.search') }}">
@@ -85,6 +107,12 @@
                             </td>
                             <td>
                                 {{ $carmodel->id ?? '' }}
+                            </td>
+                            <td>
+                                {{ $carmodel->creator->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $carmodel->owner->name ?? '' }}
                             </td>
                             <td>
                                 {{ $carmodel->name ?? '' }}

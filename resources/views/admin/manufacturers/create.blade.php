@@ -24,6 +24,20 @@
                 <span class="help-block">{{ trans('cruds.manufacturer.fields.creator_helper') }}</span>
             </div>
             <div class="form-group">
+                <label class="required" for="owner_id">{{ trans('cruds.manufacturer.fields.owner') }}</label>
+                <select class="form-control select2 {{ $errors->has('owner') ? 'is-invalid' : '' }}" name="owner_id" id="owner_id" required>
+                    @foreach($owners as $id => $owner)
+                        <option value="{{ $id }}" {{ old('owner_id') == $id ? 'selected' : '' }}>{{ $owner }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('owner'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('owner') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.manufacturer.fields.owner_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <label class="required" for="name">{{ trans('cruds.manufacturer.fields.name') }}</label>
                 <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', '') }}" required>
                 @if($errors->has('name'))
@@ -104,16 +118,6 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.manufacturer.fields.last_year_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label class="required" for="owner">{{ trans('cruds.manufacturer.fields.owner') }}</label>
-                <input class="form-control {{ $errors->has('owner') ? 'is-invalid' : '' }}" type="text" name="owner" id="owner" value="{{ old('owner', '') }}" required>
-                @if($errors->has('owner'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('owner') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.manufacturer.fields.owner_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

@@ -23,6 +23,7 @@ class Garage extends Model implements HasMedia
     ];
 
     public static $searchable = [
+        'car',
         'files',
         'images',
     ];
@@ -35,7 +36,7 @@ class Garage extends Model implements HasMedia
 
     protected $fillable = [
         'user_id',
-        'car_id',
+        'car',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -73,11 +74,6 @@ class Garage extends Model implements HasMedia
         });
 
         return $files;
-    }
-
-    public function car()
-    {
-        return $this->belongsTo(Car::class, 'car_id');
     }
 
     public function team()

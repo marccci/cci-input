@@ -10,7 +10,6 @@ class CreateEnginesTable extends Migration
     {
         Schema::create('engines', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
             $table->string('description')->nullable();
             $table->float('bore', 15, 3);
             $table->float('stroke', 15, 2);
@@ -20,7 +19,7 @@ class CreateEnginesTable extends Migration
             $table->integer('engine_power');
             $table->integer('engine_size');
             $table->string('engine_size_units');
-            $table->string('owner');
+            $table->string('name');
             $table->timestamps();
             $table->softDeletes();
         });

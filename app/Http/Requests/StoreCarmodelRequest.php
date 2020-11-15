@@ -17,6 +17,14 @@ class StoreCarmodelRequest extends FormRequest
     public function rules()
     {
         return [
+            'creator_id' => [
+                'required',
+                'integer',
+            ],
+            'owner_id'   => [
+                'required',
+                'integer',
+            ],
             'name'       => [
                 'string',
                 'required',

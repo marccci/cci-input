@@ -28,13 +28,13 @@
                             {{ trans('cruds.garage.fields.user') }}
                         </th>
                         <th>
+                            {{ trans('cruds.garage.fields.car') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.garage.fields.files') }}
                         </th>
                         <th>
                             {{ trans('cruds.garage.fields.images') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.garage.fields.car') }}
                         </th>
                         <th>
                             &nbsp;
@@ -54,6 +54,9 @@
                                 {{ $garage->user->name ?? '' }}
                             </td>
                             <td>
+                                {{ $garage->car ?? '' }}
+                            </td>
+                            <td>
                                 @foreach($garage->files as $key => $media)
                                     <a href="{{ $media->getUrl() }}" target="_blank">
                                         {{ trans('global.view_file') }}
@@ -66,9 +69,6 @@
                                         <img src="{{ $media->getUrl('thumb') }}">
                                     </a>
                                 @endforeach
-                            </td>
-                            <td>
-                                {{ $garage->car->name ?? '' }}
                             </td>
                             <td>
                                 @can('garage_show')
