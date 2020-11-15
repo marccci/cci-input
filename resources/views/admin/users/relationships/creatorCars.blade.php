@@ -28,6 +28,9 @@
                             {{ trans('cruds.car.fields.creator') }}
                         </th>
                         <th>
+                            {{ trans('cruds.car.fields.owner') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.car.fields.name') }}
                         </th>
                         <th>
@@ -38,6 +41,9 @@
                         </th>
                         <th>
                             {{ trans('cruds.car.fields.engine') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.car.fields.file') }}
                         </th>
                         <th>
                             {{ trans('cruds.car.fields.image') }}
@@ -60,6 +66,9 @@
                                 {{ $car->creator->name ?? '' }}
                             </td>
                             <td>
+                                {{ $car->owner ?? '' }}
+                            </td>
+                            <td>
                                 {{ $car->name ?? '' }}
                             </td>
                             <td>
@@ -72,11 +81,18 @@
                                 {{ $car->engine ?? '' }}
                             </td>
                             <td>
-                                @if($car->image)
-                                    <a href="{{ $car->image->getUrl() }}" target="_blank">
+                                @foreach($car->file as $key => $media)
+                                    <a href="{{ $media->getUrl() }}" target="_blank">
                                         {{ trans('global.view_file') }}
                                     </a>
-                                @endif
+                                @endforeach
+                            </td>
+                            <td>
+                                @foreach($car->image as $key => $media)
+                                    <a href="{{ $media->getUrl() }}" target="_blank">
+                                        {{ trans('global.view_file') }}
+                                    </a>
+                                @endforeach
                             </td>
                             <td>
                                 @can('car_show')

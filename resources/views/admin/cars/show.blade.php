@@ -33,6 +33,14 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.car.fields.owner') }}
+                        </th>
+                        <td>
+                            {{ $car->owner }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.car.fields.name') }}
                         </th>
                         <td>
@@ -65,14 +73,26 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.car.fields.file') }}
+                        </th>
+                        <td>
+                            @foreach($car->file as $key => $media)
+                                <a href="{{ $media->getUrl() }}" target="_blank">
+                                    {{ trans('global.view_file') }}
+                                </a>
+                            @endforeach
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.car.fields.image') }}
                         </th>
                         <td>
-                            @if($car->image)
-                                <a href="{{ $car->image->getUrl() }}" target="_blank">
+                            @foreach($car->image as $key => $media)
+                                <a href="{{ $media->getUrl() }}" target="_blank">
                                     {{ trans('global.view_file') }}
                                 </a>
-                            @endif
+                            @endforeach
                         </td>
                     </tr>
                 </tbody>

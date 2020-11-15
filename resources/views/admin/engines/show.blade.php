@@ -33,6 +33,14 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.engine.fields.owner') }}
+                        </th>
+                        <td>
+                            {{ $engine->owner }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.engine.fields.name') }}
                         </th>
                         <td>
@@ -53,6 +61,54 @@
                         </th>
                         <td>
                             {{ $engine->manufacturer->name ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.engine.fields.cylinder_number') }}
+                        </th>
+                        <td>
+                            {{ $engine->cylinder_number }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.engine.fields.block_config') }}
+                        </th>
+                        <td>
+                            {{ $engine->block_config }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.engine.fields.power_units') }}
+                        </th>
+                        <td>
+                            {{ $engine->power_units }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.engine.fields.engine_power') }}
+                        </th>
+                        <td>
+                            {{ $engine->engine_power }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.engine.fields.engine_size') }}
+                        </th>
+                        <td>
+                            {{ $engine->engine_size }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.engine.fields.engine_size_units') }}
+                        </th>
+                        <td>
+                            {{ $engine->engine_size_units }}
                         </td>
                     </tr>
                     <tr>

@@ -13,6 +13,8 @@ class AddRelationshipFieldsToGaragesTable extends Migration
             $table->foreign('user_id', 'user_fk_2578922')->references('id')->on('users');
             $table->unsignedInteger('car_id');
             $table->foreign('car_id', 'car_fk_2586495')->references('id')->on('cars');
+            $table->unsignedInteger('team_id')->nullable();
+            $table->foreign('team_id', 'team_fk_2587510')->references('id')->on('teams');
         });
     }
 }

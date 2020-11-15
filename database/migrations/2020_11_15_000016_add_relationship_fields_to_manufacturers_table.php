@@ -11,6 +11,8 @@ class AddRelationshipFieldsToManufacturersTable extends Migration
         Schema::table('manufacturers', function (Blueprint $table) {
             $table->unsignedInteger('creator_id');
             $table->foreign('creator_id', 'creator_fk_2586857')->references('id')->on('users');
+            $table->unsignedInteger('team_id')->nullable();
+            $table->foreign('team_id', 'team_fk_2587506')->references('id')->on('teams');
         });
     }
 }

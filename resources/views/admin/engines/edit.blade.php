@@ -25,6 +25,16 @@
                 <span class="help-block">{{ trans('cruds.engine.fields.creator_helper') }}</span>
             </div>
             <div class="form-group">
+                <label class="required" for="owner">{{ trans('cruds.engine.fields.owner') }}</label>
+                <input class="form-control {{ $errors->has('owner') ? 'is-invalid' : '' }}" type="number" name="owner" id="owner" value="{{ old('owner', $engine->owner) }}" step="1" required>
+                @if($errors->has('owner'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('owner') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.engine.fields.owner_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <label class="required" for="name">{{ trans('cruds.engine.fields.name') }}</label>
                 <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', $engine->name) }}" required>
                 @if($errors->has('name'))
@@ -57,6 +67,66 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.engine.fields.manufacturer_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="cylinder_number">{{ trans('cruds.engine.fields.cylinder_number') }}</label>
+                <input class="form-control {{ $errors->has('cylinder_number') ? 'is-invalid' : '' }}" type="number" name="cylinder_number" id="cylinder_number" value="{{ old('cylinder_number', $engine->cylinder_number) }}" step="1" required>
+                @if($errors->has('cylinder_number'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('cylinder_number') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.engine.fields.cylinder_number_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="block_config">{{ trans('cruds.engine.fields.block_config') }}</label>
+                <input class="form-control {{ $errors->has('block_config') ? 'is-invalid' : '' }}" type="text" name="block_config" id="block_config" value="{{ old('block_config', $engine->block_config) }}" required>
+                @if($errors->has('block_config'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('block_config') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.engine.fields.block_config_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="power_units">{{ trans('cruds.engine.fields.power_units') }}</label>
+                <input class="form-control {{ $errors->has('power_units') ? 'is-invalid' : '' }}" type="text" name="power_units" id="power_units" value="{{ old('power_units', $engine->power_units) }}" required>
+                @if($errors->has('power_units'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('power_units') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.engine.fields.power_units_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="engine_power">{{ trans('cruds.engine.fields.engine_power') }}</label>
+                <input class="form-control {{ $errors->has('engine_power') ? 'is-invalid' : '' }}" type="number" name="engine_power" id="engine_power" value="{{ old('engine_power', $engine->engine_power) }}" step="1" required>
+                @if($errors->has('engine_power'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('engine_power') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.engine.fields.engine_power_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="engine_size">{{ trans('cruds.engine.fields.engine_size') }}</label>
+                <input class="form-control {{ $errors->has('engine_size') ? 'is-invalid' : '' }}" type="number" name="engine_size" id="engine_size" value="{{ old('engine_size', $engine->engine_size) }}" step="1" required>
+                @if($errors->has('engine_size'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('engine_size') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.engine.fields.engine_size_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="engine_size_units">{{ trans('cruds.engine.fields.engine_size_units') }}</label>
+                <input class="form-control {{ $errors->has('engine_size_units') ? 'is-invalid' : '' }}" type="text" name="engine_size_units" id="engine_size_units" value="{{ old('engine_size_units', $engine->engine_size_units) }}" required>
+                @if($errors->has('engine_size_units'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('engine_size_units') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.engine.fields.engine_size_units_helper') }}</span>
             </div>
             <div class="form-group">
                 <label class="required" for="bore">{{ trans('cruds.engine.fields.bore') }}</label>

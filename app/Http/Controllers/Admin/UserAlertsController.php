@@ -10,61 +10,16 @@ use App\Models\UserAlert;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Yajra\DataTables\Facades\DataTables;
 
 class UserAlertsController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         abort_if(Gate::denies('user_alert_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        if ($request->ajax()) {
-            $query = UserAlert::with(['users'])->select(sprintf('%s.*', (new UserAlert)->table));
-            $table = Datatables::of($query);
+        $userAlerts = UserAlert::all();
 
-            $table->addColumn('placeholder', '&nbsp;');
-            $table->addColumn('actions', '&nbsp;');
-
-            $table->editColumn('actions', function ($row) {
-                $viewGate      = 'user_alert_show';
-                $editGate      = 'user_alert_edit';
-                $deleteGate    = 'user_alert_delete';
-                $crudRoutePart = 'user-alerts';
-
-                return view('partials.datatablesActions', compact(
-                    'viewGate',
-                    'editGate',
-                    'deleteGate',
-                    'crudRoutePart',
-                    'row'
-                ));
-            });
-
-            $table->editColumn('id', function ($row) {
-                return $row->id ? $row->id : "";
-            });
-            $table->editColumn('alert_text', function ($row) {
-                return $row->alert_text ? $row->alert_text : "";
-            });
-            $table->editColumn('alert_link', function ($row) {
-                return $row->alert_link ? $row->alert_link : "";
-            });
-            $table->editColumn('user', function ($row) {
-                $labels = [];
-
-                foreach ($row->users as $user) {
-                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $user->name);
-                }
-
-                return implode(' ', $labels);
-            });
-
-            $table->rawColumns(['actions', 'placeholder', 'user']);
-
-            return $table->make(true);
-        }
-
-        return view('admin.userAlerts.index');
+        return view('admin.userAlerts.index', compact('userAlerts'));
     }
 
     public function create()

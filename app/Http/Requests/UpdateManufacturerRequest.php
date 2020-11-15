@@ -17,29 +17,37 @@ class UpdateManufacturerRequest extends FormRequest
     public function rules()
     {
         return [
-            'creator_id'  => [
+            'creator_id'   => [
                 'required',
                 'integer',
             ],
-            'name'        => [
+            'name'         => [
                 'string',
                 'required',
             ],
-            'description' => [
+            'description'  => [
                 'string',
                 'nullable',
             ],
-            'country'     => [
+            'country'      => [
                 'string',
                 'required',
             ],
-            'first_year'  => [
+            'country_code' => [
+                'string',
+                'required',
+            ],
+            'first_year'   => [
                 'required',
                 'date_format:' . config('panel.date_format'),
             ],
-            'last_year'   => [
+            'last_year'    => [
                 'required',
                 'date_format:' . config('panel.date_format'),
+            ],
+            'owner'        => [
+                'string',
+                'required',
             ],
         ];
     }

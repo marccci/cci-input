@@ -9,76 +9,30 @@ use App\Http\Requests\StoreCarRequest;
 use App\Http\Requests\UpdateCarRequest;
 use App\Models\Car;
 use App\Models\Manufacturer;
+use App\Models\Team;
 use App\Models\User;
 use Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
-use Yajra\DataTables\Facades\DataTables;
 
 class CarsController extends Controller
 {
     use MediaUploadingTrait;
 
-    public function index(Request $request)
+    public function index()
     {
         abort_if(Gate::denies('car_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        if ($request->ajax()) {
-            $query = Car::with(['creator', 'manufacturer'])->select(sprintf('%s.*', (new Car)->table));
-            $table = Datatables::of($query);
+        $cars = Car::all();
 
-            $table->addColumn('placeholder', '&nbsp;');
-            $table->addColumn('actions', '&nbsp;');
+        $users = User::get();
 
-            $table->editColumn('actions', function ($row) {
-                $viewGate      = 'car_show';
-                $editGate      = 'car_edit';
-                $deleteGate    = 'car_delete';
-                $crudRoutePart = 'cars';
-
-                return view('partials.datatablesActions', compact(
-                    'viewGate',
-                    'editGate',
-                    'deleteGate',
-                    'crudRoutePart',
-                    'row'
-                ));
-            });
-
-            $table->editColumn('id', function ($row) {
-                return $row->id ? $row->id : "";
-            });
-            $table->addColumn('creator_name', function ($row) {
-                return $row->creator ? $row->creator->name : '';
-            });
-
-            $table->editColumn('name', function ($row) {
-                return $row->name ? $row->name : "";
-            });
-            $table->editColumn('carmodel', function ($row) {
-                return $row->carmodel ? $row->carmodel : "";
-            });
-            $table->addColumn('manufacturer_name', function ($row) {
-                return $row->manufacturer ? $row->manufacturer->name : '';
-            });
-
-            $table->editColumn('engine', function ($row) {
-                return $row->engine ? $row->engine : "";
-            });
-            $table->editColumn('image', function ($row) {
-                return $row->image ? '<a href="' . $row->image->getUrl() . '" target="_blank">' . trans('global.downloadFile') . '</a>' : '';
-            });
-
-            $table->rawColumns(['actions', 'placeholder', 'creator', 'manufacturer', 'image']);
-
-            return $table->make(true);
-        }
-
-        $users         = User::get();
         $manufacturers = Manufacturer::get();
 
-        return view('admin.cars.index', compact('users', 'manufacturers'));
+        $teams = Team::get();
+
+        return view('admin.cars.index', compact('cars', 'users', 'manufacturers', 'teams'));
     }
 
     public function create()
@@ -96,8 +50,12 @@ class CarsController extends Controller
     {
         $car = Car::create($request->all());
 
-        if ($request->input('image', false)) {
-            $car->addMedia(storage_path('tmp/uploads/' . $request->input('image')))->toMediaCollection('image');
+        foreach ($request->input('file', []) as $file) {
+            $car->addMedia(storage_path('tmp/uploads/' . $file))->toMediaCollection('file');
+        }
+
+        foreach ($request->input('image', []) as $file) {
+            $car->addMedia(storage_path('tmp/uploads/' . $file))->toMediaCollection('image');
         }
 
         if ($media = $request->input('ck-media', false)) {
@@ -115,7 +73,7 @@ class CarsController extends Controller
 
         $manufacturers = Manufacturer::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $car->load('creator', 'manufacturer');
+        $car->load('creator', 'manufacturer', 'team');
 
         return view('admin.cars.edit', compact('creators', 'manufacturers', 'car'));
     }
@@ -124,16 +82,36 @@ class CarsController extends Controller
     {
         $car->update($request->all());
 
-        if ($request->input('image', false)) {
-            if (!$car->image || $request->input('image') !== $car->image->file_name) {
-                if ($car->image) {
-                    $car->image->delete();
+        if (count($car->file) > 0) {
+            foreach ($car->file as $media) {
+                if (!in_array($media->file_name, $request->input('file', []))) {
+                    $media->delete();
                 }
-
-                $car->addMedia(storage_path('tmp/uploads/' . $request->input('image')))->toMediaCollection('image');
             }
-        } elseif ($car->image) {
-            $car->image->delete();
+        }
+
+        $media = $car->file->pluck('file_name')->toArray();
+
+        foreach ($request->input('file', []) as $file) {
+            if (count($media) === 0 || !in_array($file, $media)) {
+                $car->addMedia(storage_path('tmp/uploads/' . $file))->toMediaCollection('file');
+            }
+        }
+
+        if (count($car->image) > 0) {
+            foreach ($car->image as $media) {
+                if (!in_array($media->file_name, $request->input('image', []))) {
+                    $media->delete();
+                }
+            }
+        }
+
+        $media = $car->image->pluck('file_name')->toArray();
+
+        foreach ($request->input('image', []) as $file) {
+            if (count($media) === 0 || !in_array($file, $media)) {
+                $car->addMedia(storage_path('tmp/uploads/' . $file))->toMediaCollection('image');
+            }
         }
 
         return redirect()->route('admin.cars.index');
@@ -143,7 +121,7 @@ class CarsController extends Controller
     {
         abort_if(Gate::denies('car_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $car->load('creator', 'manufacturer');
+        $car->load('creator', 'manufacturer', 'team');
 
         return view('admin.cars.show', compact('car'));
     }

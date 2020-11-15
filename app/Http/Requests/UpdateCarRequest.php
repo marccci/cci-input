@@ -21,6 +21,12 @@ class UpdateCarRequest extends FormRequest
                 'required',
                 'integer',
             ],
+            'owner'           => [
+                'required',
+                'integer',
+                'min:-2147483648',
+                'max:2147483647',
+            ],
             'name'            => [
                 'string',
                 'required',
