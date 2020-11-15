@@ -73,7 +73,7 @@
             </div>
             <div class="form-group">
                 <label class="required" for="cylinder_number">{{ trans('cruds.engine.fields.cylinder_number') }}</label>
-                <input class="form-control {{ $errors->has('cylinder_number') ? 'is-invalid' : '' }}" type="number" name="cylinder_number" id="cylinder_number" value="{{ old('cylinder_number', '') }}" step="1" required>
+                <input class="form-control {{ $errors->has('cylinder_number') ? 'is-invalid' : '' }}" type="number" name="cylinder_number" id="cylinder_number" value="{{ old('cylinder_number', '1') }}" step="1" required>
                 @if($errors->has('cylinder_number'))
                     <div class="invalid-feedback">
                         {{ $errors->first('cylinder_number') }}
