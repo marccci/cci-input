@@ -14,13 +14,13 @@ class CreateEnginesTable extends Migration
             $table->string('description')->nullable();
             $table->float('bore', 15, 3);
             $table->float('stroke', 15, 2);
-            $table->integer('owner');
             $table->integer('cylinder_number');
             $table->string('block_config');
             $table->string('power_units');
             $table->integer('engine_power');
             $table->integer('engine_size');
             $table->string('engine_size_units');
+            $table->string('owner');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -40,7 +40,6 @@ class Engine extends Model implements HasMedia
 
     protected $fillable = [
         'creator_id',
-        'owner',
         'name',
         'description',
         'manufacturer_id',
@@ -53,6 +52,7 @@ class Engine extends Model implements HasMedia
         'bore',
         'stroke',
         'created_at',
+        'owner',
         'updated_at',
         'deleted_at',
         'team_id',

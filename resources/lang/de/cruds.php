@@ -139,8 +139,6 @@ return [
             'creator_helper'           => ' ',
             'team'                     => 'Team',
             'team_helper'              => ' ',
-            'owner'                    => 'Owner',
-            'owner_helper'             => ' ',
             'cylinder_number'          => 'Cylinder Number',
             'cylinder_number_helper'   => 'How many pistons does it have?',
             'block_config'             => 'Block Config',
@@ -153,6 +151,8 @@ return [
             'engine_size_helper'       => 'Size in cubic inches (CID) or centimeters (CC)',
             'engine_size_units'        => 'Engine Size Units',
             'engine_size_units_helper' => 'CID or CC',
+            'owner'                    => 'Owner',
+            'owner_helper'             => ' ',
         ],
     ],
     'car'            => [
