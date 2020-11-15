@@ -15,6 +15,8 @@ class CreateManufacturersTable extends Migration
             $table->string('country');
             $table->date('first_year');
             $table->date('last_year');
+            $table->string('country_code');
+            $table->string('owner');
             $table->timestamps();
             $table->softDeletes();
         });

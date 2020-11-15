@@ -8,6 +8,7 @@ use App\Http\Requests\MassDestroyManufacturerRequest;
 use App\Http\Requests\StoreManufacturerRequest;
 use App\Http\Requests\UpdateManufacturerRequest;
 use App\Models\Manufacturer;
+use App\Models\Team;
 use App\Models\User;
 use Gate;
 use Illuminate\Http\Request;
@@ -26,7 +27,9 @@ class ManufacturersController extends Controller
 
         $users = User::get();
 
-        return view('admin.manufacturers.index', compact('manufacturers', 'users'));
+        $teams = Team::get();
+
+        return view('admin.manufacturers.index', compact('manufacturers', 'users', 'teams'));
     }
 
     public function create()
@@ -42,12 +45,12 @@ class ManufacturersController extends Controller
     {
         $manufacturer = Manufacturer::create($request->all());
 
-        foreach ($request->input('image', []) as $file) {
-            $manufacturer->addMedia(storage_path('tmp/uploads/' . $file))->toMediaCollection('image');
-        }
-
         if ($request->input('logo', false)) {
             $manufacturer->addMedia(storage_path('tmp/uploads/' . $request->input('logo')))->toMediaCollection('logo');
+        }
+
+        foreach ($request->input('image', []) as $file) {
+            $manufacturer->addMedia(storage_path('tmp/uploads/' . $file))->toMediaCollection('image');
         }
 
         if ($media = $request->input('ck-media', false)) {
@@ -63,7 +66,7 @@ class ManufacturersController extends Controller
 
         $creators = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $manufacturer->load('creator');
+        $manufacturer->load('creator', 'team');
 
         return view('admin.manufacturers.edit', compact('creators', 'manufacturer'));
     }
@@ -71,6 +74,18 @@ class ManufacturersController extends Controller
     public function update(UpdateManufacturerRequest $request, Manufacturer $manufacturer)
     {
         $manufacturer->update($request->all());
+
+        if ($request->input('logo', false)) {
+            if (!$manufacturer->logo || $request->input('logo') !== $manufacturer->logo->file_name) {
+                if ($manufacturer->logo) {
+                    $manufacturer->logo->delete();
+                }
+
+                $manufacturer->addMedia(storage_path('tmp/uploads/' . $request->input('logo')))->toMediaCollection('logo');
+            }
+        } elseif ($manufacturer->logo) {
+            $manufacturer->logo->delete();
+        }
 
         if (count($manufacturer->image) > 0) {
             foreach ($manufacturer->image as $media) {
@@ -88,18 +103,6 @@ class ManufacturersController extends Controller
             }
         }
 
-        if ($request->input('logo', false)) {
-            if (!$manufacturer->logo || $request->input('logo') !== $manufacturer->logo->file_name) {
-                if ($manufacturer->logo) {
-                    $manufacturer->logo->delete();
-                }
-
-                $manufacturer->addMedia(storage_path('tmp/uploads/' . $request->input('logo')))->toMediaCollection('logo');
-            }
-        } elseif ($manufacturer->logo) {
-            $manufacturer->logo->delete();
-        }
-
         return redirect()->route('admin.manufacturers.index');
     }
 
@@ -107,7 +110,7 @@ class ManufacturersController extends Controller
     {
         abort_if(Gate::denies('manufacturer_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $manufacturer->load('creator', 'manufacturerEngines', 'manufacturerCars');
+        $manufacturer->load('creator', 'team', 'manufacturerEngines', 'manufacturerCars');
 
         return view('admin.manufacturers.show', compact('manufacturer'));
     }

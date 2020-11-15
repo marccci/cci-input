@@ -49,6 +49,18 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.manufacturer.fields.logo') }}
+                        </th>
+                        <td>
+                            @if($manufacturer->logo)
+                                <a href="{{ $manufacturer->logo->getUrl() }}" target="_blank" style="display: inline-block">
+                                    <img src="{{ $manufacturer->logo->getUrl('thumb') }}">
+                                </a>
+                            @endif
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.manufacturer.fields.image') }}
                         </th>
                         <td>
@@ -69,14 +81,10 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.manufacturer.fields.logo') }}
+                            {{ trans('cruds.manufacturer.fields.country_code') }}
                         </th>
                         <td>
-                            @if($manufacturer->logo)
-                                <a href="{{ $manufacturer->logo->getUrl() }}" target="_blank" style="display: inline-block">
-                                    <img src="{{ $manufacturer->logo->getUrl('thumb') }}">
-                                </a>
-                            @endif
+                            {{ $manufacturer->country_code }}
                         </td>
                     </tr>
                     <tr>
@@ -93,6 +101,14 @@
                         </th>
                         <td>
                             {{ $manufacturer->last_year }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.manufacturer.fields.owner') }}
+                        </th>
+                        <td>
+                            {{ $manufacturer->owner }}
                         </td>
                     </tr>
                 </tbody>

@@ -20,19 +20,19 @@ class ManufacturersApiController extends Controller
     {
         abort_if(Gate::denies('manufacturer_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new ManufacturerResource(Manufacturer::with(['creator'])->get());
+        return new ManufacturerResource(Manufacturer::with(['creator', 'team'])->get());
     }
 
     public function store(StoreManufacturerRequest $request)
     {
         $manufacturer = Manufacturer::create($request->all());
 
-        if ($request->input('image', false)) {
-            $manufacturer->addMedia(storage_path('tmp/uploads/' . $request->input('image')))->toMediaCollection('image');
-        }
-
         if ($request->input('logo', false)) {
             $manufacturer->addMedia(storage_path('tmp/uploads/' . $request->input('logo')))->toMediaCollection('logo');
+        }
+
+        if ($request->input('image', false)) {
+            $manufacturer->addMedia(storage_path('tmp/uploads/' . $request->input('image')))->toMediaCollection('image');
         }
 
         return (new ManufacturerResource($manufacturer))
@@ -44,24 +44,12 @@ class ManufacturersApiController extends Controller
     {
         abort_if(Gate::denies('manufacturer_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new ManufacturerResource($manufacturer->load(['creator']));
+        return new ManufacturerResource($manufacturer->load(['creator', 'team']));
     }
 
     public function update(UpdateManufacturerRequest $request, Manufacturer $manufacturer)
     {
         $manufacturer->update($request->all());
-
-        if ($request->input('image', false)) {
-            if (!$manufacturer->image || $request->input('image') !== $manufacturer->image->file_name) {
-                if ($manufacturer->image) {
-                    $manufacturer->image->delete();
-                }
-
-                $manufacturer->addMedia(storage_path('tmp/uploads/' . $request->input('image')))->toMediaCollection('image');
-            }
-        } elseif ($manufacturer->image) {
-            $manufacturer->image->delete();
-        }
 
         if ($request->input('logo', false)) {
             if (!$manufacturer->logo || $request->input('logo') !== $manufacturer->logo->file_name) {
@@ -73,6 +61,18 @@ class ManufacturersApiController extends Controller
             }
         } elseif ($manufacturer->logo) {
             $manufacturer->logo->delete();
+        }
+
+        if ($request->input('image', false)) {
+            if (!$manufacturer->image || $request->input('image') !== $manufacturer->image->file_name) {
+                if ($manufacturer->image) {
+                    $manufacturer->image->delete();
+                }
+
+                $manufacturer->addMedia(storage_path('tmp/uploads/' . $request->input('image')))->toMediaCollection('image');
+            }
+        } elseif ($manufacturer->image) {
+            $manufacturer->image->delete();
         }
 
         return (new ManufacturerResource($manufacturer))

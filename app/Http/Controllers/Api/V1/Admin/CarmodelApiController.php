@@ -17,7 +17,7 @@ class CarmodelApiController extends Controller
     {
         abort_if(Gate::denies('carmodel_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new CarmodelResource(Carmodel::with(['manufacturer', 'cars'])->get());
+        return new CarmodelResource(Carmodel::with(['manufacturer', 'cars', 'team'])->get());
     }
 
     public function store(StoreCarmodelRequest $request)
@@ -34,7 +34,7 @@ class CarmodelApiController extends Controller
     {
         abort_if(Gate::denies('carmodel_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new CarmodelResource($carmodel->load(['manufacturer', 'cars']));
+        return new CarmodelResource($carmodel->load(['manufacturer', 'cars', 'team']));
     }
 
     public function update(UpdateCarmodelRequest $request, Carmodel $carmodel)

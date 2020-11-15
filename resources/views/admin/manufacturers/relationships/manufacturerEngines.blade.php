@@ -28,6 +28,9 @@
                             {{ trans('cruds.engine.fields.creator') }}
                         </th>
                         <th>
+                            {{ trans('cruds.engine.fields.owner') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.engine.fields.name') }}
                         </th>
                         <th>
@@ -35,6 +38,24 @@
                         </th>
                         <th>
                             {{ trans('cruds.engine.fields.manufacturer') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.engine.fields.cylinder_number') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.engine.fields.block_config') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.engine.fields.power_units') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.engine.fields.engine_power') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.engine.fields.engine_size') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.engine.fields.engine_size_units') }}
                         </th>
                         <th>
                             {{ trans('cruds.engine.fields.bore') }}
@@ -66,6 +87,9 @@
                                 {{ $engine->creator->name ?? '' }}
                             </td>
                             <td>
+                                {{ $engine->owner ?? '' }}
+                            </td>
+                            <td>
                                 {{ $engine->name ?? '' }}
                             </td>
                             <td>
@@ -73,6 +97,24 @@
                             </td>
                             <td>
                                 {{ $engine->manufacturer->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $engine->cylinder_number ?? '' }}
+                            </td>
+                            <td>
+                                {{ $engine->block_config ?? '' }}
+                            </td>
+                            <td>
+                                {{ $engine->power_units ?? '' }}
+                            </td>
+                            <td>
+                                {{ $engine->engine_power ?? '' }}
+                            </td>
+                            <td>
+                                {{ $engine->engine_size ?? '' }}
+                            </td>
+                            <td>
+                                {{ $engine->engine_size_units ?? '' }}
                             </td>
                             <td>
                                 {{ $engine->bore ?? '' }}

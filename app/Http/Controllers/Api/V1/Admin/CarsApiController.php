@@ -20,12 +20,16 @@ class CarsApiController extends Controller
     {
         abort_if(Gate::denies('car_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new CarResource(Car::with(['creator', 'manufacturer'])->get());
+        return new CarResource(Car::with(['creator', 'manufacturer', 'team'])->get());
     }
 
     public function store(StoreCarRequest $request)
     {
         $car = Car::create($request->all());
+
+        if ($request->input('file', false)) {
+            $car->addMedia(storage_path('tmp/uploads/' . $request->input('file')))->toMediaCollection('file');
+        }
 
         if ($request->input('image', false)) {
             $car->addMedia(storage_path('tmp/uploads/' . $request->input('image')))->toMediaCollection('image');
@@ -40,12 +44,24 @@ class CarsApiController extends Controller
     {
         abort_if(Gate::denies('car_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new CarResource($car->load(['creator', 'manufacturer']));
+        return new CarResource($car->load(['creator', 'manufacturer', 'team']));
     }
 
     public function update(UpdateCarRequest $request, Car $car)
     {
         $car->update($request->all());
+
+        if ($request->input('file', false)) {
+            if (!$car->file || $request->input('file') !== $car->file->file_name) {
+                if ($car->file) {
+                    $car->file->delete();
+                }
+
+                $car->addMedia(storage_path('tmp/uploads/' . $request->input('file')))->toMediaCollection('file');
+            }
+        } elseif ($car->file) {
+            $car->file->delete();
+        }
 
         if ($request->input('image', false)) {
             if (!$car->image || $request->input('image') !== $car->image->file_name) {

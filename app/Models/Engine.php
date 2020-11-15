@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\MultiTenantModelTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -12,7 +13,7 @@ use \DateTimeInterface;
 
 class Engine extends Model implements HasMedia
 {
-    use SoftDeletes, InteractsWithMedia, HasFactory;
+    use SoftDeletes, MultiTenantModelTrait, InteractsWithMedia, HasFactory;
 
     public $table = 'engines';
 
@@ -21,28 +22,40 @@ class Engine extends Model implements HasMedia
         'images',
     ];
 
-    public static $searchable = [
-        'name',
-        'bore',
-        'files',
-    ];
-
     protected $dates = [
         'created_at',
         'updated_at',
         'deleted_at',
     ];
 
+    public static $searchable = [
+        'name',
+        'cylinder_number',
+        'block_config',
+        'engine_power',
+        'engine_size',
+        'bore',
+        'files',
+    ];
+
     protected $fillable = [
+        'creator_id',
+        'owner',
         'name',
         'description',
         'manufacturer_id',
+        'cylinder_number',
+        'block_config',
+        'power_units',
+        'engine_power',
+        'engine_size',
+        'engine_size_units',
         'bore',
         'stroke',
-        'creator_id',
         'created_at',
         'updated_at',
         'deleted_at',
+        'team_id',
     ];
 
     protected function serializeDate(DateTimeInterface $date)
@@ -54,6 +67,11 @@ class Engine extends Model implements HasMedia
     {
         $this->addMediaConversion('thumb')->fit('crop', 50, 50);
         $this->addMediaConversion('preview')->fit('crop', 120, 120);
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'creator_id');
     }
 
     public function manufacturer()
@@ -78,8 +96,8 @@ class Engine extends Model implements HasMedia
         return $files;
     }
 
-    public function creator()
+    public function team()
     {
-        return $this->belongsTo(User::class, 'creator_id');
+        return $this->belongsTo(Team::class, 'team_id');
     }
 }

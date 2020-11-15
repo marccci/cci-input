@@ -35,19 +35,25 @@
                             {{ trans('cruds.manufacturer.fields.description') }}
                         </th>
                         <th>
+                            {{ trans('cruds.manufacturer.fields.logo') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.manufacturer.fields.image') }}
                         </th>
                         <th>
                             {{ trans('cruds.manufacturer.fields.country') }}
                         </th>
                         <th>
-                            {{ trans('cruds.manufacturer.fields.logo') }}
+                            {{ trans('cruds.manufacturer.fields.country_code') }}
                         </th>
                         <th>
                             {{ trans('cruds.manufacturer.fields.first_year') }}
                         </th>
                         <th>
                             {{ trans('cruds.manufacturer.fields.last_year') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.manufacturer.fields.owner') }}
                         </th>
                         <th>
                             &nbsp;
@@ -76,6 +82,11 @@
                         <td>
                         </td>
                         <td>
+                        </td>
+                        <td>
+                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                        </td>
+                        <td>
                             <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                         </td>
                         <td>
@@ -83,6 +94,7 @@
                         <td>
                         </td>
                         <td>
+                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                         </td>
                         <td>
                         </td>
@@ -107,6 +119,13 @@
                                 {{ $manufacturer->description ?? '' }}
                             </td>
                             <td>
+                                @if($manufacturer->logo)
+                                    <a href="{{ $manufacturer->logo->getUrl() }}" target="_blank" style="display: inline-block">
+                                        <img src="{{ $manufacturer->logo->getUrl('thumb') }}">
+                                    </a>
+                                @endif
+                            </td>
+                            <td>
                                 @foreach($manufacturer->image as $key => $media)
                                     <a href="{{ $media->getUrl() }}" target="_blank" style="display: inline-block">
                                         <img src="{{ $media->getUrl('thumb') }}">
@@ -117,17 +136,16 @@
                                 {{ $manufacturer->country ?? '' }}
                             </td>
                             <td>
-                                @if($manufacturer->logo)
-                                    <a href="{{ $manufacturer->logo->getUrl() }}" target="_blank" style="display: inline-block">
-                                        <img src="{{ $manufacturer->logo->getUrl('thumb') }}">
-                                    </a>
-                                @endif
+                                {{ $manufacturer->country_code ?? '' }}
                             </td>
                             <td>
                                 {{ $manufacturer->first_year ?? '' }}
                             </td>
                             <td>
                                 {{ $manufacturer->last_year ?? '' }}
+                            </td>
+                            <td>
+                                {{ $manufacturer->owner ?? '' }}
                             </td>
                             <td>
                                 @can('manufacturer_show')

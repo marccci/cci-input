@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\MultiTenantModelTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,20 +14,13 @@ use \DateTimeInterface;
 
 class Manufacturer extends Model implements HasMedia
 {
-    use SoftDeletes, InteractsWithMedia, HasFactory;
+    use SoftDeletes, MultiTenantModelTrait, InteractsWithMedia, HasFactory;
 
     public $table = 'manufacturers';
 
     protected $appends = [
-        'image',
         'logo',
-    ];
-
-    public static $searchable = [
-        'name',
-        'country',
-        'first_year',
-        'last_year',
+        'image',
     ];
 
     protected $dates = [
@@ -37,16 +31,28 @@ class Manufacturer extends Model implements HasMedia
         'deleted_at',
     ];
 
+    public static $searchable = [
+        'name',
+        'country',
+        'country_code',
+        'first_year',
+        'last_year',
+        'owner',
+    ];
+
     protected $fillable = [
         'creator_id',
         'name',
         'description',
         'country',
+        'country_code',
         'first_year',
         'last_year',
         'created_at',
+        'owner',
         'updated_at',
         'deleted_at',
+        'team_id',
     ];
 
     protected function serializeDate(DateTimeInterface $date)
@@ -75,18 +81,6 @@ class Manufacturer extends Model implements HasMedia
         return $this->belongsTo(User::class, 'creator_id');
     }
 
-    public function getImageAttribute()
-    {
-        $files = $this->getMedia('image');
-        $files->each(function ($item) {
-            $item->url       = $item->getUrl();
-            $item->thumbnail = $item->getUrl('thumb');
-            $item->preview   = $item->getUrl('preview');
-        });
-
-        return $files;
-    }
-
     public function getLogoAttribute()
     {
         $file = $this->getMedia('logo')->last();
@@ -98,6 +92,18 @@ class Manufacturer extends Model implements HasMedia
         }
 
         return $file;
+    }
+
+    public function getImageAttribute()
+    {
+        $files = $this->getMedia('image');
+        $files->each(function ($item) {
+            $item->url       = $item->getUrl();
+            $item->thumbnail = $item->getUrl('thumb');
+            $item->preview   = $item->getUrl('preview');
+        });
+
+        return $files;
     }
 
     public function getFirstYearAttribute($value)
@@ -118,5 +124,10 @@ class Manufacturer extends Model implements HasMedia
     public function setLastYearAttribute($value)
     {
         $this->attributes['last_year'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
+    }
+
+    public function team()
+    {
+        return $this->belongsTo(Team::class, 'team_id');
     }
 }
