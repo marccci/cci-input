@@ -52,6 +52,9 @@
                             {{ trans('cruds.manufacturer.fields.last_year') }}
                         </th>
                         <th>
+                            {{ trans('cruds.manufacturer.fields.owner') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -99,6 +102,9 @@
                             </td>
                             <td>
                                 {{ $manufacturer->last_year ?? '' }}
+                            </td>
+                            <td>
+                                {{ $manufacturer->owner->name ?? '' }}
                             </td>
                             <td>
                                 @can('manufacturer_show')

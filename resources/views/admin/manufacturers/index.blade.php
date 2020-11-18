@@ -53,6 +53,9 @@
                             {{ trans('cruds.manufacturer.fields.last_year') }}
                         </th>
                         <th>
+                            {{ trans('cruds.manufacturer.fields.owner') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -89,6 +92,14 @@
                         <td>
                         </td>
                         <td>
+                        </td>
+                        <td>
+                            <select class="search">
+                                <option value>{{ trans('global.all') }}</option>
+                                @foreach($users as $key => $item)
+                                    <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
                         </td>
                         <td>
                         </td>
@@ -137,6 +148,9 @@
                             </td>
                             <td>
                                 {{ $manufacturer->last_year ?? '' }}
+                            </td>
+                            <td>
+                                {{ $manufacturer->owner->name ?? '' }}
                             </td>
                             <td>
                                 @can('manufacturer_show')

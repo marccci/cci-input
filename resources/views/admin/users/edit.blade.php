@@ -59,16 +59,6 @@
                 <span class="help-block">{{ trans('cruds.user.fields.roles_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="garage">{{ trans('cruds.user.fields.garage') }}</label>
-                <input class="form-control {{ $errors->has('garage') ? 'is-invalid' : '' }}" type="text" name="garage" id="garage" value="{{ old('garage', $user->garage) }}">
-                @if($errors->has('garage'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('garage') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.user.fields.garage_helper') }}</span>
-            </div>
-            <div class="form-group">
                 <label for="team_id">{{ trans('cruds.user.fields.team') }}</label>
                 <select class="form-control select2 {{ $errors->has('team') ? 'is-invalid' : '' }}" name="team_id" id="team_id">
                     @foreach($teams as $id => $team)
