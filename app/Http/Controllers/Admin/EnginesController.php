@@ -15,24 +15,111 @@ use Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
+use Yajra\DataTables\Facades\DataTables;
 
 class EnginesController extends Controller
 {
     use MediaUploadingTrait;
 
-    public function index()
+    public function index(Request $request)
     {
         abort_if(Gate::denies('engine_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $engines = Engine::all();
+        if ($request->ajax()) {
+            $query = Engine::with(['creator', 'owner', 'manufacturer', 'team'])->select(sprintf('%s.*', (new Engine)->table));
+            $table = Datatables::of($query);
 
-        $users = User::get();
+            $table->addColumn('placeholder', '&nbsp;');
+            $table->addColumn('actions', '&nbsp;');
 
+            $table->editColumn('actions', function ($row) {
+                $viewGate      = 'engine_show';
+                $editGate      = 'engine_edit';
+                $deleteGate    = 'engine_delete';
+                $crudRoutePart = 'engines';
+
+                return view('partials.datatablesActions', compact(
+                    'viewGate',
+                    'editGate',
+                    'deleteGate',
+                    'crudRoutePart',
+                    'row'
+                ));
+            });
+
+            $table->editColumn('id', function ($row) {
+                return $row->id ? $row->id : "";
+            });
+            $table->editColumn('name', function ($row) {
+                return $row->name ? $row->name : "";
+            });
+            $table->addColumn('creator_name', function ($row) {
+                return $row->creator ? $row->creator->name : '';
+            });
+
+            $table->addColumn('owner_name', function ($row) {
+                return $row->owner ? $row->owner->name : '';
+            });
+
+            $table->editColumn('description', function ($row) {
+                return $row->description ? $row->description : "";
+            });
+            $table->addColumn('manufacturer_name', function ($row) {
+                return $row->manufacturer ? $row->manufacturer->name : '';
+            });
+
+            $table->editColumn('cylinder_number', function ($row) {
+                return $row->cylinder_number ? $row->cylinder_number : "";
+            });
+            $table->editColumn('block_config', function ($row) {
+                return $row->block_config ? $row->block_config : "";
+            });
+            $table->editColumn('power_units', function ($row) {
+                return $row->power_units ? $row->power_units : "";
+            });
+            $table->editColumn('engine_power', function ($row) {
+                return $row->engine_power ? $row->engine_power : "";
+            });
+            $table->editColumn('engine_size', function ($row) {
+                return $row->engine_size ? $row->engine_size : "";
+            });
+            $table->editColumn('engine_size_units', function ($row) {
+                return $row->engine_size_units ? $row->engine_size_units : "";
+            });
+            $table->editColumn('bore', function ($row) {
+                return $row->bore ? $row->bore : "";
+            });
+            $table->editColumn('stroke', function ($row) {
+                return $row->stroke ? $row->stroke : "";
+            });
+            $table->editColumn('files', function ($row) {
+                return $row->files ? '<a href="' . $row->files->getUrl() . '" target="_blank">' . trans('global.downloadFile') . '</a>' : '';
+            });
+            $table->editColumn('images', function ($row) {
+                if (!$row->images) {
+                    return '';
+                }
+
+                $links = [];
+
+                foreach ($row->images as $media) {
+                    $links[] = '<a href="' . $media->getUrl() . '" target="_blank"><img src="' . $media->getUrl('thumb') . '" width="50px" height="50px"></a>';
+                }
+
+                return implode(' ', $links);
+            });
+
+            $table->rawColumns(['actions', 'placeholder', 'creator', 'owner', 'manufacturer', 'files', 'images']);
+
+            return $table->make(true);
+        }
+
+        $users         = User::get();
+        $users         = User::get();
         $manufacturers = Manufacturer::get();
+        $teams         = Team::get();
 
-        $teams = Team::get();
-
-        return view('admin.engines.index', compact('engines', 'users', 'manufacturers', 'teams'));
+        return view('admin.engines.index', compact('users', 'users', 'manufacturers', 'teams'));
     }
 
     public function create()
