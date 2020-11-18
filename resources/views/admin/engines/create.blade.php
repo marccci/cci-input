@@ -10,16 +10,6 @@
         <form method="POST" action="{{ route("admin.engines.store") }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label class="required" for="name">{{ trans('cruds.engine.fields.name') }}</label>
-                <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', '') }}" required>
-                @if($errors->has('name'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('name') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.engine.fields.name_helper') }}</span>
-            </div>
-            <div class="form-group">
                 <label class="required" for="creator_id">{{ trans('cruds.engine.fields.creator') }}</label>
                 <select class="form-control select2 {{ $errors->has('creator') ? 'is-invalid' : '' }}" name="creator_id" id="creator_id" required>
                     @foreach($creators as $id => $creator)
@@ -46,6 +36,16 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.engine.fields.owner_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="name">{{ trans('cruds.engine.fields.name') }}</label>
+                <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', '') }}" required>
+                @if($errors->has('name'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('name') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.engine.fields.name_helper') }}</span>
             </div>
             <div class="form-group">
                 <label for="description">{{ trans('cruds.engine.fields.description') }}</label>

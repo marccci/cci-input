@@ -25,14 +25,6 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.engine.fields.name') }}
-                        </th>
-                        <td>
-                            {{ $engine->name }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.engine.fields.creator') }}
                         </th>
                         <td>
@@ -45,6 +37,14 @@
                         </th>
                         <td>
                             {{ $engine->owner->name ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.engine.fields.name') }}
+                        </th>
+                        <td>
+                            {{ $engine->name }}
                         </td>
                     </tr>
                     <tr>

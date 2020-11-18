@@ -39,26 +39,6 @@
                 <span class="help-block">{{ trans('cruds.car.fields.owner_helper') }}</span>
             </div>
             <div class="form-group">
-                <label class="required" for="name">{{ trans('cruds.car.fields.name') }}</label>
-                <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', $car->name) }}" required>
-                @if($errors->has('name'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('name') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.car.fields.name_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label for="carmodel">{{ trans('cruds.car.fields.carmodel') }}</label>
-                <input class="form-control {{ $errors->has('carmodel') ? 'is-invalid' : '' }}" type="text" name="carmodel" id="carmodel" value="{{ old('carmodel', $car->carmodel) }}">
-                @if($errors->has('carmodel'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('carmodel') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.car.fields.carmodel_helper') }}</span>
-            </div>
-            <div class="form-group">
                 <label class="required" for="manufacturer_id">{{ trans('cruds.car.fields.manufacturer') }}</label>
                 <select class="form-control select2 {{ $errors->has('manufacturer') ? 'is-invalid' : '' }}" name="manufacturer_id" id="manufacturer_id" required>
                     @foreach($manufacturers as $id => $manufacturer)
@@ -71,6 +51,26 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.car.fields.manufacturer_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="carmodel">{{ trans('cruds.car.fields.carmodel') }}</label>
+                <input class="form-control {{ $errors->has('carmodel') ? 'is-invalid' : '' }}" type="text" name="carmodel" id="carmodel" value="{{ old('carmodel', $car->carmodel) }}">
+                @if($errors->has('carmodel'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('carmodel') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.car.fields.carmodel_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="name">{{ trans('cruds.car.fields.name') }}</label>
+                <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', $car->name) }}" required>
+                @if($errors->has('name'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('name') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.car.fields.name_helper') }}</span>
             </div>
             <div class="form-group">
                 <label class="required" for="engine">{{ trans('cruds.car.fields.engine') }}</label>

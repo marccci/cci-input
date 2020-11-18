@@ -31,13 +31,13 @@
                             {{ trans('cruds.car.fields.owner') }}
                         </th>
                         <th>
-                            {{ trans('cruds.car.fields.name') }}
+                            {{ trans('cruds.car.fields.manufacturer') }}
                         </th>
                         <th>
                             {{ trans('cruds.car.fields.carmodel') }}
                         </th>
                         <th>
-                            {{ trans('cruds.car.fields.manufacturer') }}
+                            {{ trans('cruds.car.fields.name') }}
                         </th>
                         <th>
                             {{ trans('cruds.car.fields.engine') }}
@@ -69,13 +69,13 @@
                                 {{ $car->owner->name ?? '' }}
                             </td>
                             <td>
-                                {{ $car->name ?? '' }}
+                                {{ $car->manufacturer->name ?? '' }}
                             </td>
                             <td>
                                 {{ $car->carmodel ?? '' }}
                             </td>
                             <td>
-                                {{ $car->manufacturer->name ?? '' }}
+                                {{ $car->name ?? '' }}
                             </td>
                             <td>
                                 {{ $car->engine ?? '' }}

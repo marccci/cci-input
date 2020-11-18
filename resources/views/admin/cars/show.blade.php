@@ -41,10 +41,10 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.car.fields.name') }}
+                            {{ trans('cruds.car.fields.manufacturer') }}
                         </th>
                         <td>
-                            {{ $car->name }}
+                            {{ $car->manufacturer->name ?? '' }}
                         </td>
                     </tr>
                     <tr>
@@ -57,10 +57,10 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.car.fields.manufacturer') }}
+                            {{ trans('cruds.car.fields.name') }}
                         </th>
                         <td>
-                            {{ $car->manufacturer->name ?? '' }}
+                            {{ $car->name }}
                         </td>
                     </tr>
                     <tr>

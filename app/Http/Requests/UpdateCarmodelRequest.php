@@ -30,12 +30,6 @@ class UpdateCarmodelRequest extends FormRequest
                 'required',
                 'unique:carmodels,name,' . request()->route('carmodel')->id,
             ],
-            'cars.*'     => [
-                'integer',
-            ],
-            'cars'       => [
-                'array',
-            ],
             'first_year' => [
                 'required',
                 'date_format:' . config('panel.date_format'),
@@ -43,6 +37,12 @@ class UpdateCarmodelRequest extends FormRequest
             'last_year'  => [
                 'required',
                 'date_format:' . config('panel.date_format'),
+            ],
+            'cars.*'     => [
+                'integer',
+            ],
+            'cars'       => [
+                'array',
             ],
         ];
     }

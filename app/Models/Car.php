@@ -23,8 +23,8 @@ class Car extends Model implements HasMedia
     ];
 
     public static $searchable = [
-        'name',
         'carmodel',
+        'name',
         'engine',
     ];
 
@@ -37,9 +37,9 @@ class Car extends Model implements HasMedia
     protected $fillable = [
         'creator_id',
         'owner_id',
-        'name',
-        'carmodel',
         'manufacturer_id',
+        'carmodel',
+        'name',
         'engine',
         'created_at',
         'updated_at',
