@@ -35,10 +35,6 @@ class StoreUserRequest extends FormRequest
                 'required',
                 'array',
             ],
-            'garage'   => [
-                'string',
-                'nullable',
-            ],
         ];
     }
 }

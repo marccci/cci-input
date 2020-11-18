@@ -107,6 +107,20 @@
                 <span class="help-block">{{ trans('cruds.manufacturer.fields.last_year_helper') }}</span>
             </div>
             <div class="form-group">
+                <label class="required" for="owner_id">{{ trans('cruds.manufacturer.fields.owner') }}</label>
+                <select class="form-control select2 {{ $errors->has('owner') ? 'is-invalid' : '' }}" name="owner_id" id="owner_id" required>
+                    @foreach($owners as $id => $owner)
+                        <option value="{{ $id }}" {{ (old('owner_id') ? old('owner_id') : $manufacturer->owner->id ?? '') == $id ? 'selected' : '' }}>{{ $owner }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('owner'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('owner') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.manufacturer.fields.owner_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>

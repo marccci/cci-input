@@ -48,6 +48,7 @@ class Manufacturer extends Model implements HasMedia
         'first_year',
         'last_year',
         'created_at',
+        'owner_id',
         'updated_at',
         'deleted_at',
         'team_id',
@@ -122,6 +123,11 @@ class Manufacturer extends Model implements HasMedia
     public function setLastYearAttribute($value)
     {
         $this->attributes['last_year'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
+    }
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'owner_id');
     }
 
     public function team()
