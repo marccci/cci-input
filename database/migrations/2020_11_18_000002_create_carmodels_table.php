@@ -9,7 +9,7 @@ class CreateCarmodelsTable extends Migration
     public function up()
     {
         Schema::create('carmodels', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('name')->unique();
             $table->date('first_year');
             $table->date('last_year');

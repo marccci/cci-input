@@ -9,7 +9,7 @@ class AddRelationshipFieldsToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedInteger('team_id')->nullable();
+            $table->unsignedBigInteger('team_id')->nullable();
             $table->foreign('team_id', 'team_fk_2472572')->references('id')->on('teams');
         });
     }

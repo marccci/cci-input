@@ -38,9 +38,7 @@ class ManufacturersController extends Controller
 
         $creators = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $owners = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        return view('admin.manufacturers.create', compact('creators', 'owners'));
+        return view('admin.manufacturers.create', compact('creators'));
     }
 
     public function store(StoreManufacturerRequest $request)
@@ -68,11 +66,9 @@ class ManufacturersController extends Controller
 
         $creators = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $owners = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $manufacturer->load('creator', 'team');
 
-        $manufacturer->load('creator', 'owner', 'team');
-
-        return view('admin.manufacturers.edit', compact('creators', 'owners', 'manufacturer'));
+        return view('admin.manufacturers.edit', compact('creators', 'manufacturer'));
     }
 
     public function update(UpdateManufacturerRequest $request, Manufacturer $manufacturer)
@@ -114,7 +110,7 @@ class ManufacturersController extends Controller
     {
         abort_if(Gate::denies('manufacturer_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $manufacturer->load('creator', 'owner', 'team', 'manufacturerEngines', 'manufacturerCars');
+        $manufacturer->load('creator', 'team', 'manufacturerEngines', 'manufacturerCars');
 
         return view('admin.manufacturers.show', compact('manufacturer'));
     }

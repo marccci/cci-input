@@ -105,8 +105,6 @@ return [
             'team_helper'         => ' ',
             'country_code'        => 'Country Code',
             'country_code_helper' => ' ',
-            'owner'               => 'Owner',
-            'owner_helper'        => ' ',
         ],
     ],
     'engine'         => [
