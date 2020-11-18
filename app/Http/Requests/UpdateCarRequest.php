@@ -25,17 +25,17 @@ class UpdateCarRequest extends FormRequest
                 'required',
                 'integer',
             ],
-            'name'            => [
-                'string',
+            'manufacturer_id' => [
                 'required',
+                'integer',
             ],
             'carmodel'        => [
                 'string',
                 'nullable',
             ],
-            'manufacturer_id' => [
+            'name'            => [
+                'string',
                 'required',
-                'integer',
             ],
             'engine'          => [
                 'string',

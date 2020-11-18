@@ -31,13 +31,13 @@
                         {{ trans('cruds.car.fields.owner') }}
                     </th>
                     <th>
-                        {{ trans('cruds.car.fields.name') }}
+                        {{ trans('cruds.car.fields.manufacturer') }}
                     </th>
                     <th>
                         {{ trans('cruds.car.fields.carmodel') }}
                     </th>
                     <th>
-                        {{ trans('cruds.car.fields.manufacturer') }}
+                        {{ trans('cruds.car.fields.name') }}
                     </th>
                     <th>
                         {{ trans('cruds.car.fields.engine') }}
@@ -75,18 +75,18 @@
                         </select>
                     </td>
                     <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
                         <select class="search">
                             <option value>{{ trans('global.all') }}</option>
                             @foreach($manufacturers as $key => $item)
                                 <option value="{{ $item->name }}">{{ $item->name }}</option>
                             @endforeach
                         </select>
+                    </td>
+                    <td>
+                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                    </td>
+                    <td>
+                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
@@ -153,9 +153,9 @@
 { data: 'id', name: 'id' },
 { data: 'creator_name', name: 'creator.name' },
 { data: 'owner_name', name: 'owner.name' },
-{ data: 'name', name: 'name' },
-{ data: 'carmodel', name: 'carmodel' },
 { data: 'manufacturer_name', name: 'manufacturer.name' },
+{ data: 'carmodel', name: 'carmodel' },
+{ data: 'name', name: 'name' },
 { data: 'engine', name: 'engine' },
 { data: 'file', name: 'file', sortable: false, searchable: false },
 { data: 'image', name: 'image', sortable: false, searchable: false },

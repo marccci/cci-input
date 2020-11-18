@@ -25,13 +25,13 @@
                         {{ trans('cruds.engine.fields.id') }}
                     </th>
                     <th>
-                        {{ trans('cruds.engine.fields.name') }}
-                    </th>
-                    <th>
                         {{ trans('cruds.engine.fields.creator') }}
                     </th>
                     <th>
                         {{ trans('cruds.engine.fields.owner') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.engine.fields.name') }}
                     </th>
                     <th>
                         {{ trans('cruds.engine.fields.description') }}
@@ -80,23 +80,23 @@
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
+                        <select class="search">
+                            <option value>{{ trans('global.all') }}</option>
+                            @foreach($users as $key => $item)
+                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
+                    </td>
+                    <td>
+                        <select class="search">
+                            <option value>{{ trans('global.all') }}</option>
+                            @foreach($users as $key => $item)
+                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
+                    </td>
+                    <td>
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                        <select class="search">
-                            <option value>{{ trans('global.all') }}</option>
-                            @foreach($users as $key => $item)
-                                <option value="{{ $item->name }}">{{ $item->name }}</option>
-                            @endforeach
-                        </select>
-                    </td>
-                    <td>
-                        <select class="search">
-                            <option value>{{ trans('global.all') }}</option>
-                            @foreach($users as $key => $item)
-                                <option value="{{ $item->name }}">{{ $item->name }}</option>
-                            @endforeach
-                        </select>
                     </td>
                     <td>
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
@@ -193,9 +193,9 @@
     columns: [
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
-{ data: 'name', name: 'name' },
 { data: 'creator_name', name: 'creator.name' },
 { data: 'owner_name', name: 'owner.name' },
+{ data: 'name', name: 'name' },
 { data: 'description', name: 'description' },
 { data: 'manufacturer_name', name: 'manufacturer.name' },
 { data: 'cylinder_number', name: 'cylinder_number' },

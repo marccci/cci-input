@@ -37,13 +37,13 @@
                         {{ trans('cruds.carmodel.fields.manufacturer') }}
                     </th>
                     <th>
-                        {{ trans('cruds.carmodel.fields.car') }}
-                    </th>
-                    <th>
                         {{ trans('cruds.carmodel.fields.first_year') }}
                     </th>
                     <th>
                         {{ trans('cruds.carmodel.fields.last_year') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.carmodel.fields.car') }}
                     </th>
                     <th>
                         &nbsp;
@@ -83,16 +83,16 @@
                         </select>
                     </td>
                     <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
                         <select class="search">
                             <option value>{{ trans('global.all') }}</option>
                             @foreach($cars as $key => $item)
                                 <option value="{{ $item->name }}">{{ $item->name }}</option>
                             @endforeach
                         </select>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
                     </td>
                     <td>
                     </td>
@@ -154,9 +154,9 @@
 { data: 'owner_name', name: 'owner.name' },
 { data: 'name', name: 'name' },
 { data: 'manufacturer_name', name: 'manufacturer.name' },
-{ data: 'car', name: 'cars.name' },
 { data: 'first_year', name: 'first_year' },
 { data: 'last_year', name: 'last_year' },
+{ data: 'car', name: 'cars.name' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,

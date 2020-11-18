@@ -10,9 +10,9 @@ class CreateCarCarmodelPivotTable extends Migration
     {
         Schema::create('car_carmodel', function (Blueprint $table) {
             $table->unsignedBigInteger('carmodel_id');
-            $table->foreign('carmodel_id', 'carmodel_id_fk_2578973')->references('id')->on('carmodels')->onDelete('cascade');
+            $table->foreign('carmodel_id', 'carmodel_id_fk_2617918')->references('id')->on('carmodels')->onDelete('cascade');
             $table->unsignedBigInteger('car_id');
-            $table->foreign('car_id', 'car_id_fk_2578973')->references('id')->on('cars')->onDelete('cascade');
+            $table->foreign('car_id', 'car_id_fk_2617918')->references('id')->on('cars')->onDelete('cascade');
         });
     }
 }

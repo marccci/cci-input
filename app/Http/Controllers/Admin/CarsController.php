@@ -58,16 +58,16 @@ class CarsController extends Controller
                 return $row->owner ? $row->owner->name : '';
             });
 
-            $table->editColumn('name', function ($row) {
-                return $row->name ? $row->name : "";
-            });
-            $table->editColumn('carmodel', function ($row) {
-                return $row->carmodel ? $row->carmodel : "";
-            });
             $table->addColumn('manufacturer_name', function ($row) {
                 return $row->manufacturer ? $row->manufacturer->name : '';
             });
 
+            $table->editColumn('carmodel', function ($row) {
+                return $row->carmodel ? $row->carmodel : "";
+            });
+            $table->editColumn('name', function ($row) {
+                return $row->name ? $row->name : "";
+            });
             $table->editColumn('engine', function ($row) {
                 return $row->engine ? $row->engine : "";
             });

@@ -61,11 +61,6 @@ class Carmodel extends Model
         return $this->belongsTo(Manufacturer::class, 'manufacturer_id');
     }
 
-    public function cars()
-    {
-        return $this->belongsToMany(Car::class);
-    }
-
     public function getFirstYearAttribute($value)
     {
         return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
@@ -84,6 +79,11 @@ class Carmodel extends Model
     public function setLastYearAttribute($value)
     {
         $this->attributes['last_year'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
+    }
+
+    public function cars()
+    {
+        return $this->belongsToMany(Car::class);
     }
 
     public function team()
