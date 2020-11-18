@@ -14,22 +14,84 @@ use Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
+use Yajra\DataTables\Facades\DataTables;
 
 class GarageController extends Controller
 {
     use MediaUploadingTrait;
 
-    public function index()
+    public function index(Request $request)
     {
         abort_if(Gate::denies('garage_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $garages = Garage::all();
+        if ($request->ajax()) {
+            $query = Garage::with(['user', 'team'])->select(sprintf('%s.*', (new Garage)->table));
+            $table = Datatables::of($query);
+
+            $table->addColumn('placeholder', '&nbsp;');
+            $table->addColumn('actions', '&nbsp;');
+
+            $table->editColumn('actions', function ($row) {
+                $viewGate      = 'garage_show';
+                $editGate      = 'garage_edit';
+                $deleteGate    = 'garage_delete';
+                $crudRoutePart = 'garages';
+
+                return view('partials.datatablesActions', compact(
+                    'viewGate',
+                    'editGate',
+                    'deleteGate',
+                    'crudRoutePart',
+                    'row'
+                ));
+            });
+
+            $table->editColumn('id', function ($row) {
+                return $row->id ? $row->id : "";
+            });
+            $table->addColumn('user_name', function ($row) {
+                return $row->user ? $row->user->name : '';
+            });
+
+            $table->editColumn('car', function ($row) {
+                return $row->car ? $row->car : "";
+            });
+            $table->editColumn('files', function ($row) {
+                if (!$row->files) {
+                    return '';
+                }
+
+                $links = [];
+
+                foreach ($row->files as $media) {
+                    $links[] = '<a href="' . $media->getUrl() . '" target="_blank">' . trans('global.downloadFile') . '</a>';
+                }
+
+                return implode(', ', $links);
+            });
+            $table->editColumn('images', function ($row) {
+                if (!$row->images) {
+                    return '';
+                }
+
+                $links = [];
+
+                foreach ($row->images as $media) {
+                    $links[] = '<a href="' . $media->getUrl() . '" target="_blank"><img src="' . $media->getUrl('thumb') . '" width="50px" height="50px"></a>';
+                }
+
+                return implode(' ', $links);
+            });
+
+            $table->rawColumns(['actions', 'placeholder', 'user', 'files', 'images']);
+
+            return $table->make(true);
+        }
 
         $users = User::get();
-
         $teams = Team::get();
 
-        return view('admin.garages.index', compact('garages', 'users', 'teams'));
+        return view('admin.garages.index', compact('users', 'teams'));
     }
 
     public function create()

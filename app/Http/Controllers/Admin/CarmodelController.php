@@ -14,24 +14,76 @@ use App\Models\User;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Yajra\DataTables\Facades\DataTables;
 
 class CarmodelController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         abort_if(Gate::denies('carmodel_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $carmodels = Carmodel::all();
+        if ($request->ajax()) {
+            $query = Carmodel::with(['creator', 'owner', 'manufacturer', 'cars', 'team'])->select(sprintf('%s.*', (new Carmodel)->table));
+            $table = Datatables::of($query);
 
-        $users = User::get();
+            $table->addColumn('placeholder', '&nbsp;');
+            $table->addColumn('actions', '&nbsp;');
 
+            $table->editColumn('actions', function ($row) {
+                $viewGate      = 'carmodel_show';
+                $editGate      = 'carmodel_edit';
+                $deleteGate    = 'carmodel_delete';
+                $crudRoutePart = 'carmodels';
+
+                return view('partials.datatablesActions', compact(
+                    'viewGate',
+                    'editGate',
+                    'deleteGate',
+                    'crudRoutePart',
+                    'row'
+                ));
+            });
+
+            $table->editColumn('id', function ($row) {
+                return $row->id ? $row->id : "";
+            });
+            $table->addColumn('creator_name', function ($row) {
+                return $row->creator ? $row->creator->name : '';
+            });
+
+            $table->addColumn('owner_name', function ($row) {
+                return $row->owner ? $row->owner->name : '';
+            });
+
+            $table->editColumn('name', function ($row) {
+                return $row->name ? $row->name : "";
+            });
+            $table->addColumn('manufacturer_name', function ($row) {
+                return $row->manufacturer ? $row->manufacturer->name : '';
+            });
+
+            $table->editColumn('car', function ($row) {
+                $labels = [];
+
+                foreach ($row->cars as $car) {
+                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $car->name);
+                }
+
+                return implode(' ', $labels);
+            });
+
+            $table->rawColumns(['actions', 'placeholder', 'creator', 'owner', 'manufacturer', 'car']);
+
+            return $table->make(true);
+        }
+
+        $users         = User::get();
+        $users         = User::get();
         $manufacturers = Manufacturer::get();
+        $cars          = Car::get();
+        $teams         = Team::get();
 
-        $cars = Car::get();
-
-        $teams = Team::get();
-
-        return view('admin.carmodels.index', compact('carmodels', 'users', 'manufacturers', 'cars', 'teams'));
+        return view('admin.carmodels.index', compact('users', 'users', 'manufacturers', 'cars', 'teams'));
     }
 
     public function create()

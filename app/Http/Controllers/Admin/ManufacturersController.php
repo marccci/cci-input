@@ -14,22 +14,96 @@ use Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
+use Yajra\DataTables\Facades\DataTables;
 
 class ManufacturersController extends Controller
 {
     use MediaUploadingTrait;
 
-    public function index()
+    public function index(Request $request)
     {
         abort_if(Gate::denies('manufacturer_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $manufacturers = Manufacturer::all();
+        if ($request->ajax()) {
+            $query = Manufacturer::with(['creator', 'owner', 'team'])->select(sprintf('%s.*', (new Manufacturer)->table));
+            $table = Datatables::of($query);
+
+            $table->addColumn('placeholder', '&nbsp;');
+            $table->addColumn('actions', '&nbsp;');
+
+            $table->editColumn('actions', function ($row) {
+                $viewGate      = 'manufacturer_show';
+                $editGate      = 'manufacturer_edit';
+                $deleteGate    = 'manufacturer_delete';
+                $crudRoutePart = 'manufacturers';
+
+                return view('partials.datatablesActions', compact(
+                    'viewGate',
+                    'editGate',
+                    'deleteGate',
+                    'crudRoutePart',
+                    'row'
+                ));
+            });
+
+            $table->editColumn('id', function ($row) {
+                return $row->id ? $row->id : "";
+            });
+            $table->addColumn('creator_name', function ($row) {
+                return $row->creator ? $row->creator->name : '';
+            });
+
+            $table->addColumn('owner_name', function ($row) {
+                return $row->owner ? $row->owner->name : '';
+            });
+
+            $table->editColumn('name', function ($row) {
+                return $row->name ? $row->name : "";
+            });
+            $table->editColumn('description', function ($row) {
+                return $row->description ? $row->description : "";
+            });
+            $table->editColumn('logo', function ($row) {
+                if ($photo = $row->logo) {
+                    return sprintf(
+                        '<a href="%s" target="_blank"><img src="%s" width="50px" height="50px"></a>',
+                        $photo->url,
+                        $photo->thumbnail
+                    );
+                }
+
+                return '';
+            });
+            $table->editColumn('image', function ($row) {
+                if (!$row->image) {
+                    return '';
+                }
+
+                $links = [];
+
+                foreach ($row->image as $media) {
+                    $links[] = '<a href="' . $media->getUrl() . '" target="_blank"><img src="' . $media->getUrl('thumb') . '" width="50px" height="50px"></a>';
+                }
+
+                return implode(' ', $links);
+            });
+            $table->editColumn('country', function ($row) {
+                return $row->country ? $row->country : "";
+            });
+            $table->editColumn('country_code', function ($row) {
+                return $row->country_code ? $row->country_code : "";
+            });
+
+            $table->rawColumns(['actions', 'placeholder', 'creator', 'owner', 'logo', 'image']);
+
+            return $table->make(true);
+        }
 
         $users = User::get();
-
+        $users = User::get();
         $teams = Team::get();
 
-        return view('admin.manufacturers.index', compact('manufacturers', 'users', 'teams'));
+        return view('admin.manufacturers.index', compact('users', 'users', 'teams'));
     }
 
     public function create()
