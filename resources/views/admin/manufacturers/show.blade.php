@@ -33,14 +33,6 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.manufacturer.fields.owner') }}
-                        </th>
-                        <td>
-                            {{ $manufacturer->owner->name ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.manufacturer.fields.name') }}
                         </th>
                         <td>

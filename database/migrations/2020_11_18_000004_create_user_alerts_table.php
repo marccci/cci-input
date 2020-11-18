@@ -9,7 +9,7 @@ class CreateUserAlertsTable extends Migration
     public function up()
     {
         Schema::create('user_alerts', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('alert_text')->nullable();
             $table->string('alert_link')->nullable();
             $table->timestamps();

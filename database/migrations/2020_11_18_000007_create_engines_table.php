@@ -9,7 +9,7 @@ class CreateEnginesTable extends Migration
     public function up()
     {
         Schema::create('engines', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('description')->nullable();
             $table->float('bore', 15, 3);
             $table->float('stroke', 15, 2);

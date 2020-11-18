@@ -29,9 +29,6 @@
                             {{ trans('cruds.manufacturer.fields.creator') }}
                         </th>
                         <th>
-                            {{ trans('cruds.manufacturer.fields.owner') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.manufacturer.fields.name') }}
                         </th>
                         <th>
@@ -64,14 +61,6 @@
                         </td>
                         <td>
                             <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                            <select class="search">
-                                <option value>{{ trans('global.all') }}</option>
-                                @foreach($users as $key => $item)
-                                    <option value="{{ $item->name }}">{{ $item->name }}</option>
-                                @endforeach
-                            </select>
                         </td>
                         <td>
                             <select class="search">
@@ -116,9 +105,6 @@
                             </td>
                             <td>
                                 {{ $manufacturer->creator->name ?? '' }}
-                            </td>
-                            <td>
-                                {{ $manufacturer->owner->name ?? '' }}
                             </td>
                             <td>
                                 {{ $manufacturer->name ?? '' }}

@@ -28,9 +28,6 @@
                             {{ trans('cruds.manufacturer.fields.creator') }}
                         </th>
                         <th>
-                            {{ trans('cruds.manufacturer.fields.owner') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.manufacturer.fields.name') }}
                         </th>
                         <th>
@@ -70,9 +67,6 @@
                             </td>
                             <td>
                                 {{ $manufacturer->creator->name ?? '' }}
-                            </td>
-                            <td>
-                                {{ $manufacturer->owner->name ?? '' }}
                             </td>
                             <td>
                                 {{ $manufacturer->name ?? '' }}

@@ -9,11 +9,11 @@ class CreateQaTopicsTable extends Migration
     public function up()
     {
         Schema::create('qa_topics', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('subject');
-            $table->integer('creator_id')->unsigned();
+            $table->unsignedBigInteger('creator_id');
             $table->foreign('creator_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('receiver_id')->unsigned();
+            $table->unsignedBigInteger('receiver_id');
             $table->foreign('receiver_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

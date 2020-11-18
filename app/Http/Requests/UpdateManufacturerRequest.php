@@ -45,10 +45,6 @@ class UpdateManufacturerRequest extends FormRequest
                 'required',
                 'date_format:' . config('panel.date_format'),
             ],
-            'owner'        => [
-                'string',
-                'required',
-            ],
         ];
     }
 }
