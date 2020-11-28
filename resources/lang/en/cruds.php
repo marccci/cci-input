@@ -78,7 +78,7 @@ return [
             'id'                  => 'ID',
             'id_helper'           => ' ',
             'name'                => 'Name',
-            'name_helper'         => ' ',
+            'name_helper'         => ' Put something here',
             'description'         => 'Description',
             'description_helper'  => ' ',
             'created_at'          => 'Created at',
