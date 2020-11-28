@@ -247,6 +247,8 @@ return [
             'team_helper'       => ' ',
             'car'               => 'Car',
             'car_helper'        => ' ',
+            'name'              => 'Name',
+            'name_helper'       => ' ',
         ],
     ],
     'carmodel'       => [

@@ -25,6 +25,14 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.garage.fields.name') }}
+                        </th>
+                        <td>
+                            {{ $garage->name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.garage.fields.car') }}
                         </th>
                         <td>

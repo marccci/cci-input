@@ -25,6 +25,9 @@
                         {{ trans('cruds.garage.fields.user') }}
                     </th>
                     <th>
+                        {{ trans('cruds.garage.fields.name') }}
+                    </th>
+                    <th>
                         {{ trans('cruds.garage.fields.car') }}
                     </th>
                     <th>
@@ -47,6 +50,9 @@
                                 <option value="{{ $item->name }}">{{ $item->name }}</option>
                             @endforeach
                         </select>
+                    </td>
+                    <td>
+                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
@@ -111,6 +117,7 @@
     columns: [
       { data: 'placeholder', name: 'placeholder' },
 { data: 'user_name', name: 'user.name' },
+{ data: 'name', name: 'name' },
 { data: 'car', name: 'car' },
 { data: 'files', name: 'files', sortable: false, searchable: false },
 { data: 'images', name: 'images', sortable: false, searchable: false },

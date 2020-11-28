@@ -50,6 +50,9 @@ class GarageController extends Controller
                 return $row->user ? $row->user->name : '';
             });
 
+            $table->editColumn('name', function ($row) {
+                return $row->name ? $row->name : "";
+            });
             $table->editColumn('car', function ($row) {
                 return $row->car ? $row->car : "";
             });
