@@ -73,26 +73,18 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.engine.fields.block_config') }}
-                        </th>
-                        <td>
-                            {{ $engine->block_config }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.engine.fields.power_units') }}
-                        </th>
-                        <td>
-                            {{ $engine->power_units }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.engine.fields.engine_power') }}
                         </th>
                         <td>
                             {{ $engine->engine_power }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.engine.fields.engine_power_units') }}
+                        </th>
+                        <td>
+                            {{ App\Models\Engine::ENGINE_POWER_UNITS_RADIO[$engine->engine_power_units] ?? '' }}
                         </td>
                     </tr>
                     <tr>
@@ -108,7 +100,7 @@
                             {{ trans('cruds.engine.fields.engine_size_units') }}
                         </th>
                         <td>
-                            {{ $engine->engine_size_units }}
+                            {{ App\Models\Engine::ENGINE_SIZE_UNITS_RADIO[$engine->engine_size_units] ?? '' }}
                         </td>
                     </tr>
                     <tr>
@@ -149,6 +141,14 @@
                                     <img src="{{ $media->getUrl('thumb') }}">
                                 </a>
                             @endforeach
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.engine.fields.block_config') }}
+                        </th>
+                        <td>
+                            {{ App\Models\Engine::BLOCK_CONFIG_RADIO[$engine->block_config] ?? '' }}
                         </td>
                     </tr>
                 </tbody>

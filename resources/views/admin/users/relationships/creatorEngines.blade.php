@@ -43,13 +43,10 @@
                             {{ trans('cruds.engine.fields.cylinder_number') }}
                         </th>
                         <th>
-                            {{ trans('cruds.engine.fields.block_config') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.engine.fields.power_units') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.engine.fields.engine_power') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.engine.fields.engine_power_units') }}
                         </th>
                         <th>
                             {{ trans('cruds.engine.fields.engine_size') }}
@@ -68,6 +65,9 @@
                         </th>
                         <th>
                             {{ trans('cruds.engine.fields.images') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.engine.fields.block_config') }}
                         </th>
                         <th>
                             &nbsp;
@@ -102,19 +102,16 @@
                                 {{ $engine->cylinder_number ?? '' }}
                             </td>
                             <td>
-                                {{ $engine->block_config ?? '' }}
-                            </td>
-                            <td>
-                                {{ $engine->power_units ?? '' }}
-                            </td>
-                            <td>
                                 {{ $engine->engine_power ?? '' }}
+                            </td>
+                            <td>
+                                {{ App\Models\Engine::ENGINE_POWER_UNITS_RADIO[$engine->engine_power_units] ?? '' }}
                             </td>
                             <td>
                                 {{ $engine->engine_size ?? '' }}
                             </td>
                             <td>
-                                {{ $engine->engine_size_units ?? '' }}
+                                {{ App\Models\Engine::ENGINE_SIZE_UNITS_RADIO[$engine->engine_size_units] ?? '' }}
                             </td>
                             <td>
                                 {{ $engine->bore ?? '' }}
@@ -135,6 +132,9 @@
                                         <img src="{{ $media->getUrl('thumb') }}">
                                     </a>
                                 @endforeach
+                            </td>
+                            <td>
+                                {{ App\Models\Engine::BLOCK_CONFIG_RADIO[$engine->block_config] ?? '' }}
                             </td>
                             <td>
                                 @can('engine_show')
