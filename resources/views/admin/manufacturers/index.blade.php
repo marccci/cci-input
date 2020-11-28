@@ -22,9 +22,6 @@
 
                     </th>
                     <th>
-                        {{ trans('cruds.manufacturer.fields.id') }}
-                    </th>
-                    <th>
                         {{ trans('cruds.manufacturer.fields.creator') }}
                     </th>
                     <th>
@@ -60,9 +57,6 @@
                 </tr>
                 <tr>
                     <td>
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
                         <select class="search">
@@ -155,7 +149,6 @@
     ajax: "{{ route('admin.manufacturers.index') }}",
     columns: [
       { data: 'placeholder', name: 'placeholder' },
-{ data: 'id', name: 'id' },
 { data: 'creator_name', name: 'creator.name' },
 { data: 'owner_name', name: 'owner.name' },
 { data: 'name', name: 'name' },

@@ -22,9 +22,6 @@
 
                         </th>
                         <th>
-                            {{ trans('cruds.garage.fields.id') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.garage.fields.user') }}
                         </th>
                         <th>
@@ -46,9 +43,6 @@
                         <tr data-entry-id="{{ $garage->id }}">
                             <td>
 
-                            </td>
-                            <td>
-                                {{ $garage->id ?? '' }}
                             </td>
                             <td>
                                 {{ $garage->user->name ?? '' }}

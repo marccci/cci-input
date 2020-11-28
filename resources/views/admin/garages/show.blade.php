@@ -17,14 +17,6 @@
                 <tbody>
                     <tr>
                         <th>
-                            {{ trans('cruds.garage.fields.id') }}
-                        </th>
-                        <td>
-                            {{ $garage->id }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.garage.fields.user') }}
                         </th>
                         <td>

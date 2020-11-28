@@ -22,9 +22,6 @@
 
                     </th>
                     <th>
-                        {{ trans('cruds.carmodel.fields.id') }}
-                    </th>
-                    <th>
                         {{ trans('cruds.carmodel.fields.creator') }}
                     </th>
                     <th>
@@ -51,9 +48,6 @@
                 </tr>
                 <tr>
                     <td>
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
                         <select class="search">
@@ -149,7 +143,6 @@
     ajax: "{{ route('admin.carmodels.index') }}",
     columns: [
       { data: 'placeholder', name: 'placeholder' },
-{ data: 'id', name: 'id' },
 { data: 'creator_name', name: 'creator.name' },
 { data: 'owner_name', name: 'owner.name' },
 { data: 'name', name: 'name' },

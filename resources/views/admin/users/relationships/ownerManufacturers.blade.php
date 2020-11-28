@@ -22,9 +22,6 @@
 
                         </th>
                         <th>
-                            {{ trans('cruds.manufacturer.fields.id') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.manufacturer.fields.creator') }}
                         </th>
                         <th>
@@ -64,9 +61,6 @@
                         <tr data-entry-id="{{ $manufacturer->id }}">
                             <td>
 
-                            </td>
-                            <td>
-                                {{ $manufacturer->id ?? '' }}
                             </td>
                             <td>
                                 {{ $manufacturer->creator->name ?? '' }}
