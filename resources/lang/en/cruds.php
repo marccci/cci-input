@@ -222,7 +222,7 @@ return [
         ],
     ],
     'carUser'        => [
-        'title'          => 'My Garage',
+        'title'          => 'My Garages',
         'title_singular' => 'My Garage',
     ],
     'garage'         => [
