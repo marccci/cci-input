@@ -39,15 +39,6 @@ class Engine extends Model implements HasMedia
         'imperial' => 'Imperial',
     ];
 
-    public static $searchable = [
-        'name',
-        'cylinder_number',
-        'engine_power',
-        'engine_size',
-        'bore',
-        'block_config',
-    ];
-
     const BLOCK_CONFIG_RADIO = [
         'i' => 'Inline',
         'v' => 'V',
@@ -57,6 +48,15 @@ class Engine extends Model implements HasMedia
         'r' => 'Radial',
     ];
 
+    public static $searchable = [
+        'name',
+        'cylinder_number',
+        'engine_power',
+        'engine_size',
+        'bore',
+        'files',
+        'block_config',
+    ];
 
     protected $fillable = [
         'creator_id',
