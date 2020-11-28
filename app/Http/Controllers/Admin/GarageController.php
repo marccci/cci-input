@@ -46,9 +46,6 @@ class GarageController extends Controller
                 ));
             });
 
-            $table->editColumn('id', function ($row) {
-                return $row->id ? $row->id : "";
-            });
             $table->addColumn('user_name', function ($row) {
                 return $row->user ? $row->user->name : '';
             });

@@ -17,14 +17,6 @@
                 <tbody>
                     <tr>
                         <th>
-                            {{ trans('cruds.carmodel.fields.id') }}
-                        </th>
-                        <td>
-                            {{ $carmodel->id }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.carmodel.fields.creator') }}
                         </th>
                         <td>

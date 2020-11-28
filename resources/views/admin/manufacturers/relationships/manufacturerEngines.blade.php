@@ -22,9 +22,6 @@
 
                         </th>
                         <th>
-                            {{ trans('cruds.engine.fields.id') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.engine.fields.creator') }}
                         </th>
                         <th>
@@ -79,9 +76,6 @@
                         <tr data-entry-id="{{ $engine->id }}">
                             <td>
 
-                            </td>
-                            <td>
-                                {{ $engine->id ?? '' }}
                             </td>
                             <td>
                                 {{ $engine->creator->name ?? '' }}

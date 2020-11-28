@@ -47,9 +47,6 @@ class EnginesController extends Controller
                 ));
             });
 
-            $table->editColumn('id', function ($row) {
-                return $row->id ? $row->id : "";
-            });
             $table->addColumn('creator_name', function ($row) {
                 return $row->creator ? $row->creator->name : '';
             });

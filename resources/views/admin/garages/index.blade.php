@@ -22,9 +22,6 @@
 
                     </th>
                     <th>
-                        {{ trans('cruds.garage.fields.id') }}
-                    </th>
-                    <th>
                         {{ trans('cruds.garage.fields.user') }}
                     </th>
                     <th>
@@ -42,9 +39,6 @@
                 </tr>
                 <tr>
                     <td>
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
                         <select class="search">
@@ -116,7 +110,6 @@
     ajax: "{{ route('admin.garages.index') }}",
     columns: [
       { data: 'placeholder', name: 'placeholder' },
-{ data: 'id', name: 'id' },
 { data: 'user_name', name: 'user.name' },
 { data: 'car', name: 'car' },
 { data: 'files', name: 'files', sortable: false, searchable: false },

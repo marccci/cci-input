@@ -5,7 +5,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    Dashboard for me!!
+                    Dashboard
                 </div>
 
                 <div class="card-body">
