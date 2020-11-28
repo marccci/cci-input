@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'failed'   => 'Diese Kontodaten sind uns nicht bekannt.',
+    'failed'   => 'sddsdds',
     'throttle' => 'Zu vielzfdsdfe fehlerhafte Versuche. Bitte versuchen sie es in :seconds Sekunden erneut.',
 ];

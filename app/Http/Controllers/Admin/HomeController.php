@@ -60,7 +60,7 @@ class HomeController
                 'created_at' => '',
                 'files'      => '',
                 'images'     => '',
-                'car'        => 'name',
+                'car'        => '',
             ],
         ];
 
