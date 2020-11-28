@@ -11,6 +11,7 @@ class CreateGaragesTable extends Migration
         Schema::create('garages', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('car');
+            $table->string('name');
             $table->timestamps();
             $table->softDeletes();
         });

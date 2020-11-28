@@ -36,6 +36,7 @@ class Garage extends Model implements HasMedia
 
     protected $fillable = [
         'user_id',
+        'name',
         'car',
         'created_at',
         'updated_at',

@@ -25,6 +25,9 @@
                             {{ trans('cruds.garage.fields.user') }}
                         </th>
                         <th>
+                            {{ trans('cruds.garage.fields.name') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.garage.fields.car') }}
                         </th>
                         <th>
@@ -46,6 +49,9 @@
                             </td>
                             <td>
                                 {{ $garage->user->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $garage->name ?? '' }}
                             </td>
                             <td>
                                 {{ $garage->car ?? '' }}

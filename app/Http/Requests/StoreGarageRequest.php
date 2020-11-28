@@ -21,6 +21,10 @@ class StoreGarageRequest extends FormRequest
                 'required',
                 'integer',
             ],
+            'name'    => [
+                'string',
+                'required',
+            ],
             'car'     => [
                 'string',
                 'required',
