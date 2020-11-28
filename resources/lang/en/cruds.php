@@ -78,7 +78,7 @@ return [
             'id'                  => 'ID',
             'id_helper'           => ' ',
             'name'                => 'Name',
-            'name_helper'         => ' Put something here',
+            'name_helper'         => ' ',
             'description'         => 'Description',
             'description_helper'  => ' ',
             'created_at'          => 'Created at',
@@ -222,8 +222,8 @@ return [
         ],
     ],
     'carUser'        => [
-        'title'          => 'My Garages',
-        'title_singular' => 'My Garage',
+        'title'          => 'My Cars',
+        'title_singular' => 'My Car',
     ],
     'garage'         => [
         'title'          => 'My Cars',
