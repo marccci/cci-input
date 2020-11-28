@@ -50,9 +50,6 @@ class EnginesController extends Controller
             $table->editColumn('id', function ($row) {
                 return $row->id ? $row->id : "";
             });
-            $table->editColumn('name', function ($row) {
-                return $row->name ? $row->name : "";
-            });
             $table->addColumn('creator_name', function ($row) {
                 return $row->creator ? $row->creator->name : '';
             });
@@ -61,6 +58,9 @@ class EnginesController extends Controller
                 return $row->owner ? $row->owner->name : '';
             });
 
+            $table->editColumn('name', function ($row) {
+                return $row->name ? $row->name : "";
+            });
             $table->editColumn('description', function ($row) {
                 return $row->description ? $row->description : "";
             });
@@ -71,20 +71,17 @@ class EnginesController extends Controller
             $table->editColumn('cylinder_number', function ($row) {
                 return $row->cylinder_number ? $row->cylinder_number : "";
             });
-            $table->editColumn('block_config', function ($row) {
-                return $row->block_config ? $row->block_config : "";
-            });
-            $table->editColumn('power_units', function ($row) {
-                return $row->power_units ? $row->power_units : "";
-            });
             $table->editColumn('engine_power', function ($row) {
                 return $row->engine_power ? $row->engine_power : "";
+            });
+            $table->editColumn('engine_power_units', function ($row) {
+                return $row->engine_power_units ? Engine::ENGINE_POWER_UNITS_RADIO[$row->engine_power_units] : '';
             });
             $table->editColumn('engine_size', function ($row) {
                 return $row->engine_size ? $row->engine_size : "";
             });
             $table->editColumn('engine_size_units', function ($row) {
-                return $row->engine_size_units ? $row->engine_size_units : "";
+                return $row->engine_size_units ? Engine::ENGINE_SIZE_UNITS_RADIO[$row->engine_size_units] : '';
             });
             $table->editColumn('bore', function ($row) {
                 return $row->bore ? $row->bore : "";
@@ -107,6 +104,9 @@ class EnginesController extends Controller
                 }
 
                 return implode(' ', $links);
+            });
+            $table->editColumn('block_config', function ($row) {
+                return $row->block_config ? Engine::BLOCK_CONFIG_RADIO[$row->block_config] : '';
             });
 
             $table->rawColumns(['actions', 'placeholder', 'creator', 'owner', 'manufacturer', 'files', 'images']);

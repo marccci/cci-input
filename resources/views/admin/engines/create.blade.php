@@ -82,26 +82,6 @@
                 <span class="help-block">{{ trans('cruds.engine.fields.cylinder_number_helper') }}</span>
             </div>
             <div class="form-group">
-                <label class="required" for="block_config">{{ trans('cruds.engine.fields.block_config') }}</label>
-                <input class="form-control {{ $errors->has('block_config') ? 'is-invalid' : '' }}" type="text" name="block_config" id="block_config" value="{{ old('block_config', 'inline') }}" required>
-                @if($errors->has('block_config'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('block_config') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.engine.fields.block_config_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label class="required" for="power_units">{{ trans('cruds.engine.fields.power_units') }}</label>
-                <input class="form-control {{ $errors->has('power_units') ? 'is-invalid' : '' }}" type="text" name="power_units" id="power_units" value="{{ old('power_units', '') }}" required>
-                @if($errors->has('power_units'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('power_units') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.engine.fields.power_units_helper') }}</span>
-            </div>
-            <div class="form-group">
                 <label class="required" for="engine_power">{{ trans('cruds.engine.fields.engine_power') }}</label>
                 <input class="form-control {{ $errors->has('engine_power') ? 'is-invalid' : '' }}" type="number" name="engine_power" id="engine_power" value="{{ old('engine_power', '') }}" step="1" required>
                 @if($errors->has('engine_power'))
@@ -110,6 +90,21 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.engine.fields.engine_power_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required">{{ trans('cruds.engine.fields.engine_power_units') }}</label>
+                @foreach(App\Models\Engine::ENGINE_POWER_UNITS_RADIO as $key => $label)
+                    <div class="form-check {{ $errors->has('engine_power_units') ? 'is-invalid' : '' }}">
+                        <input class="form-check-input" type="radio" id="engine_power_units_{{ $key }}" name="engine_power_units" value="{{ $key }}" {{ old('engine_power_units', 'hp') === (string) $key ? 'checked' : '' }} required>
+                        <label class="form-check-label" for="engine_power_units_{{ $key }}">{{ $label }}</label>
+                    </div>
+                @endforeach
+                @if($errors->has('engine_power_units'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('engine_power_units') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.engine.fields.engine_power_units_helper') }}</span>
             </div>
             <div class="form-group">
                 <label class="required" for="engine_size">{{ trans('cruds.engine.fields.engine_size') }}</label>
@@ -122,8 +117,13 @@
                 <span class="help-block">{{ trans('cruds.engine.fields.engine_size_helper') }}</span>
             </div>
             <div class="form-group">
-                <label class="required" for="engine_size_units">{{ trans('cruds.engine.fields.engine_size_units') }}</label>
-                <input class="form-control {{ $errors->has('engine_size_units') ? 'is-invalid' : '' }}" type="text" name="engine_size_units" id="engine_size_units" value="{{ old('engine_size_units', '') }}" required>
+                <label class="required">{{ trans('cruds.engine.fields.engine_size_units') }}</label>
+                @foreach(App\Models\Engine::ENGINE_SIZE_UNITS_RADIO as $key => $label)
+                    <div class="form-check {{ $errors->has('engine_size_units') ? 'is-invalid' : '' }}">
+                        <input class="form-check-input" type="radio" id="engine_size_units_{{ $key }}" name="engine_size_units" value="{{ $key }}" {{ old('engine_size_units', 'metric') === (string) $key ? 'checked' : '' }} required>
+                        <label class="form-check-label" for="engine_size_units_{{ $key }}">{{ $label }}</label>
+                    </div>
+                @endforeach
                 @if($errors->has('engine_size_units'))
                     <div class="invalid-feedback">
                         {{ $errors->first('engine_size_units') }}
@@ -172,6 +172,21 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.engine.fields.images_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required">{{ trans('cruds.engine.fields.block_config') }}</label>
+                @foreach(App\Models\Engine::BLOCK_CONFIG_RADIO as $key => $label)
+                    <div class="form-check {{ $errors->has('block_config') ? 'is-invalid' : '' }}">
+                        <input class="form-check-input" type="radio" id="block_config_{{ $key }}" name="block_config" value="{{ $key }}" {{ old('block_config', 'i') === (string) $key ? 'checked' : '' }} required>
+                        <label class="form-check-label" for="block_config_{{ $key }}">{{ $label }}</label>
+                    </div>
+                @endforeach
+                @if($errors->has('block_config'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('block_config') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.engine.fields.block_config_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

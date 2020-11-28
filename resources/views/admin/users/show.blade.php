@@ -94,6 +94,11 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="#owner_manufacturers" role="tab" data-toggle="tab">
+                {{ trans('cruds.manufacturer.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="#user_user_alerts" role="tab" data-toggle="tab">
                 {{ trans('cruds.userAlert.title') }}
             </a>
@@ -111,6 +116,9 @@
         </div>
         <div class="tab-pane" role="tabpanel" id="creator_cars">
             @includeIf('admin.users.relationships.creatorCars', ['cars' => $user->creatorCars])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="owner_manufacturers">
+            @includeIf('admin.users.relationships.ownerManufacturers', ['manufacturers' => $user->ownerManufacturers])
         </div>
         <div class="tab-pane" role="tabpanel" id="user_user_alerts">
             @includeIf('admin.users.relationships.userUserAlerts', ['userAlerts' => $user->userUserAlerts])

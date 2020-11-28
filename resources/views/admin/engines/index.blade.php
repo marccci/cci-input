@@ -43,13 +43,10 @@
                         {{ trans('cruds.engine.fields.cylinder_number') }}
                     </th>
                     <th>
-                        {{ trans('cruds.engine.fields.block_config') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.engine.fields.power_units') }}
-                    </th>
-                    <th>
                         {{ trans('cruds.engine.fields.engine_power') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.engine.fields.engine_power_units') }}
                     </th>
                     <th>
                         {{ trans('cruds.engine.fields.engine_size') }}
@@ -68,6 +65,9 @@
                     </th>
                     <th>
                         {{ trans('cruds.engine.fields.images') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.engine.fields.block_config') }}
                     </th>
                     <th>
                         &nbsp;
@@ -116,26 +116,41 @@
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
+                        <select class="search" strict="true">
+                            <option value>{{ trans('global.all') }}</option>
+                            @foreach(App\Models\Engine::ENGINE_POWER_UNITS_RADIO as $key => $item)
+                                <option value="{{ $key }}">{{ $item }}</option>
+                            @endforeach
+                        </select>
+                    </td>
+                    <td>
+                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                    </td>
+                    <td>
+                        <select class="search" strict="true">
+                            <option value>{{ trans('global.all') }}</option>
+                            @foreach(App\Models\Engine::ENGINE_SIZE_UNITS_RADIO as $key => $item)
+                                <option value="{{ $key }}">{{ $item }}</option>
+                            @endforeach
+                        </select>
+                    </td>
+                    <td>
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
                     </td>
                     <td>
+                        <select class="search" strict="true">
+                            <option value>{{ trans('global.all') }}</option>
+                            @foreach(App\Models\Engine::BLOCK_CONFIG_RADIO as $key => $item)
+                                <option value="{{ $key }}">{{ $item }}</option>
+                            @endforeach
+                        </select>
                     </td>
                     <td>
                     </td>
@@ -199,15 +214,15 @@
 { data: 'description', name: 'description' },
 { data: 'manufacturer_name', name: 'manufacturer.name' },
 { data: 'cylinder_number', name: 'cylinder_number' },
-{ data: 'block_config', name: 'block_config' },
-{ data: 'power_units', name: 'power_units' },
 { data: 'engine_power', name: 'engine_power' },
+{ data: 'engine_power_units', name: 'engine_power_units' },
 { data: 'engine_size', name: 'engine_size' },
 { data: 'engine_size_units', name: 'engine_size_units' },
 { data: 'bore', name: 'bore' },
 { data: 'stroke', name: 'stroke' },
 { data: 'files', name: 'files', sortable: false, searchable: false },
 { data: 'images', name: 'images', sortable: false, searchable: false },
+{ data: 'block_config', name: 'block_config' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,

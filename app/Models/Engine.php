@@ -28,31 +28,51 @@ class Engine extends Model implements HasMedia
         'deleted_at',
     ];
 
+    const ENGINE_POWER_UNITS_RADIO = [
+        'hp' => 'HP',
+        'ps' => 'PS',
+        'kw' => 'KW',
+    ];
+
+    const ENGINE_SIZE_UNITS_RADIO = [
+        'metric'   => 'Metric',
+        'imperial' => 'Imperial',
+    ];
+
+    const BLOCK_CONFIG_RADIO = [
+        'i' => 'Inline',
+        'v' => 'V',
+        'b' => 'Boxer',
+        'w' => 'W',
+        'o' => 'Rotary',
+        'r' => 'Radial',
+    ];
+
     public static $searchable = [
         'name',
         'cylinder_number',
-        'block_config',
         'engine_power',
         'engine_size',
         'bore',
         'files',
+        'block_config',
     ];
 
     protected $fillable = [
-        'name',
         'creator_id',
         'owner_id',
+        'name',
         'description',
         'manufacturer_id',
         'cylinder_number',
-        'block_config',
-        'power_units',
         'engine_power',
+        'engine_power_units',
         'engine_size',
         'engine_size_units',
         'bore',
         'stroke',
         'created_at',
+        'block_config',
         'updated_at',
         'deleted_at',
         'team_id',

@@ -17,62 +17,59 @@ class UpdateEngineRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'              => [
+            'creator_id'         => [
+                'required',
+                'integer',
+            ],
+            'owner_id'           => [
+                'required',
+                'integer',
+            ],
+            'name'               => [
                 'string',
                 'required',
             ],
-            'creator_id'        => [
-                'required',
-                'integer',
-            ],
-            'owner_id'          => [
-                'required',
-                'integer',
-            ],
-            'description'       => [
+            'description'        => [
                 'string',
                 'nullable',
             ],
-            'manufacturer_id'   => [
+            'manufacturer_id'    => [
                 'required',
                 'integer',
             ],
-            'cylinder_number'   => [
-                'required',
-                'integer',
-                'min:-2147483648',
-                'max:2147483647',
-            ],
-            'block_config'      => [
-                'string',
-                'required',
-            ],
-            'power_units'       => [
-                'string',
-                'required',
-            ],
-            'engine_power'      => [
+            'cylinder_number'    => [
                 'required',
                 'integer',
                 'min:-2147483648',
                 'max:2147483647',
             ],
-            'engine_size'       => [
+            'engine_power'       => [
                 'required',
                 'integer',
                 'min:-2147483648',
                 'max:2147483647',
             ],
-            'engine_size_units' => [
-                'string',
+            'engine_power_units' => [
                 'required',
             ],
-            'bore'              => [
+            'engine_size'        => [
+                'required',
+                'integer',
+                'min:-2147483648',
+                'max:2147483647',
+            ],
+            'engine_size_units'  => [
+                'required',
+            ],
+            'bore'               => [
                 'numeric',
                 'required',
             ],
-            'stroke'            => [
+            'stroke'             => [
                 'numeric',
+                'required',
+            ],
+            'block_config'       => [
                 'required',
             ],
         ];

@@ -87,6 +87,11 @@ class User extends Authenticatable
         return $this->hasMany(Car::class, 'creator_id', 'id');
     }
 
+    public function ownerManufacturers()
+    {
+        return $this->hasMany(Manufacturer::class, 'owner_id', 'id');
+    }
+
     public function userUserAlerts()
     {
         return $this->belongsToMany(UserAlert::class);
