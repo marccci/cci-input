@@ -154,8 +154,8 @@ return [
         ],
     ],
     'car'            => [
-        'title'          => 'Cars',
-        'title_singular' => 'Car',
+        'title'          => 'Auto's',
+        'title_singular' => 'Auto',
         'fields'         => [
             'id'                  => 'ID',
             'id_helper'           => ' ',
