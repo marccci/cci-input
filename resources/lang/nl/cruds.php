@@ -154,8 +154,8 @@ return [
         ],
     ],
     'car'            => [
-        'title'          => 'Cars',
-        'title_singular' => 'Car',
+        'title'          => 'Auto's',
+        'title_singular' => 'Auto',
         'fields'         => [
             'id'                  => 'ID',
             'id_helper'           => ' ',
@@ -222,12 +222,12 @@ return [
         ],
     ],
     'carUser'        => [
-        'title'          => 'My Cars',
-        'title_singular' => 'My Car',
+        'title'          => 'My Garage',
+        'title_singular' => 'My Garage',
     ],
     'garage'         => [
-        'title'          => 'My Cars',
-        'title_singular' => 'My Car',
+        'title'          => 'Mijn Auto's',
+        'title_singular' => 'Mijn Auto',
         'fields'         => [
             'id'                => 'ID',
             'id_helper'         => ' ',

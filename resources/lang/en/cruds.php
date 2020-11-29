@@ -222,8 +222,8 @@ return [
         ],
     ],
     'carUser'        => [
-        'title'          => 'My Cars',
-        'title_singular' => 'My Car',
+        'title'          => 'My Garage',
+        'title_singular' => 'My Garage',
     ],
     'garage'         => [
         'title'          => 'My Cars',
