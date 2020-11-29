@@ -226,8 +226,8 @@ return [
         'title_singular' => 'My Garage',
     ],
     'garage'         => [
-        'title'          => 'My Cars',
-        'title_singular' => 'My Car',
+        'title'          => 'Mijn Auto's',
+        'title_singular' => 'Mijn Auto',
         'fields'         => [
             'id'                => 'ID',
             'id_helper'         => ' ',
