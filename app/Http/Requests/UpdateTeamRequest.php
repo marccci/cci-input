@@ -20,6 +20,7 @@ class UpdateTeamRequest extends FormRequest
             'name' => [
                 'string',
                 'required',
+                'unique:teams,name,' . request()->route('team')->id,
             ],
         ];
     }

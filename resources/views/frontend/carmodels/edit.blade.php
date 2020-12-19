@@ -66,24 +66,6 @@
                             <span class="help-block">{{ trans('cruds.carmodel.fields.manufacturer_helper') }}</span>
                         </div>
                         <div class="form-group">
-                            <label for="cars">{{ trans('cruds.carmodel.fields.car') }}</label>
-                            <div style="padding-bottom: 4px">
-                                <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
-                                <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
-                            </div>
-                            <select class="form-control select2" name="cars[]" id="cars" multiple>
-                                @foreach($cars as $id => $car)
-                                    <option value="{{ $id }}" {{ (in_array($id, old('cars', [])) || $carmodel->cars->contains($id)) ? 'selected' : '' }}>{{ $car }}</option>
-                                @endforeach
-                            </select>
-                            @if($errors->has('cars'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('cars') }}
-                                </div>
-                            @endif
-                            <span class="help-block">{{ trans('cruds.carmodel.fields.car_helper') }}</span>
-                        </div>
-                        <div class="form-group">
                             <label class="required" for="first_year">{{ trans('cruds.carmodel.fields.first_year') }}</label>
                             <input class="form-control date" type="text" name="first_year" id="first_year" value="{{ old('first_year', $carmodel->first_year) }}" required>
                             @if($errors->has('first_year'))
@@ -102,6 +84,24 @@
                                 </div>
                             @endif
                             <span class="help-block">{{ trans('cruds.carmodel.fields.last_year_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="cars">{{ trans('cruds.carmodel.fields.car') }}</label>
+                            <div style="padding-bottom: 4px">
+                                <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
+                                <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
+                            </div>
+                            <select class="form-control select2" name="cars[]" id="cars" multiple>
+                                @foreach($cars as $id => $car)
+                                    <option value="{{ $id }}" {{ (in_array($id, old('cars', [])) || $carmodel->cars->contains($id)) ? 'selected' : '' }}>{{ $car }}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('cars'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('cars') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.carmodel.fields.car_helper') }}</span>
                         </div>
                         <div class="form-group">
                             <button class="btn btn-danger" type="submit">

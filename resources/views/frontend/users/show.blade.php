@@ -60,14 +60,6 @@
                                         @endforeach
                                     </td>
                                 </tr>
-                                <tr>
-                                    <th>
-                                        {{ trans('cruds.user.fields.garage') }}
-                                    </th>
-                                    <td>
-                                        {{ $user->garage }}
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                         <div class="form-group">

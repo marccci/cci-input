@@ -23,9 +23,6 @@
                             <thead>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.manufacturer.fields.id') }}
-                                    </th>
-                                    <th>
                                         {{ trans('cruds.manufacturer.fields.creator') }}
                                     </th>
                                     <th>
@@ -61,9 +58,6 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                    </td>
-                                    <td>
-                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                                     </td>
                                     <td>
                                         <select class="search">
@@ -108,9 +102,6 @@
                             <tbody>
                                 @foreach($manufacturers as $key => $manufacturer)
                                     <tr data-entry-id="{{ $manufacturer->id }}">
-                                        <td>
-                                            {{ $manufacturer->id ?? '' }}
-                                        </td>
                                         <td>
                                             {{ $manufacturer->creator->name ?? '' }}
                                         </td>
@@ -229,14 +220,28 @@
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();
   });
-  $('.datatable thead').on('input', '.search', function () {
+  
+let visibleColumnsIndexes = null;
+$('.datatable thead').on('input', '.search', function () {
       let strict = $(this).attr('strict') || false
       let value = strict && this.value ? "^" + this.value + "$" : this.value
+
+      let index = $(this).parent().index()
+      if (visibleColumnsIndexes !== null) {
+        index = visibleColumnsIndexes[index]
+      }
+
       table
-        .column($(this).parent().index())
+        .column(index)
         .search(value, strict)
         .draw()
   });
+table.on('column-visibility.dt', function(e, settings, column, state) {
+      visibleColumnsIndexes = []
+      table.columns(":visible").every(function(colIdx) {
+          visibleColumnsIndexes.push(colIdx);
+      });
+  })
 })
 
 </script>

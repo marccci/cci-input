@@ -220,6 +220,26 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 53,
+                'title' => 'ownership_create',
+            ],
+            [
+                'id'    => 54,
+                'title' => 'ownership_edit',
+            ],
+            [
+                'id'    => 55,
+                'title' => 'ownership_show',
+            ],
+            [
+                'id'    => 56,
+                'title' => 'ownership_delete',
+            ],
+            [
+                'id'    => 57,
+                'title' => 'ownership_access',
+            ],
+            [
+                'id'    => 58,
                 'title' => 'profile_password_edit',
             ],
         ];

@@ -23,10 +23,10 @@
                             <thead>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.garage.fields.id') }}
+                                        {{ trans('cruds.garage.fields.user') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.garage.fields.user') }}
+                                        {{ trans('cruds.garage.fields.name') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.garage.fields.car') }}
@@ -45,15 +45,15 @@
                                     <td>
                                     </td>
                                     <td>
-                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                                    </td>
-                                    <td>
                                         <select class="search">
                                             <option value>{{ trans('global.all') }}</option>
                                             @foreach($users as $key => $item)
                                                 <option value="{{ $item->name }}">{{ $item->name }}</option>
                                             @endforeach
                                         </select>
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                                     </td>
                                     <td>
                                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
@@ -70,10 +70,10 @@
                                 @foreach($garages as $key => $garage)
                                     <tr data-entry-id="{{ $garage->id }}">
                                         <td>
-                                            {{ $garage->id ?? '' }}
+                                            {{ $garage->user->name ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $garage->user->name ?? '' }}
+                                            {{ $garage->name ?? '' }}
                                         </td>
                                         <td>
                                             {{ $garage->car ?? '' }}
@@ -172,14 +172,28 @@
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();
   });
-  $('.datatable thead').on('input', '.search', function () {
+  
+let visibleColumnsIndexes = null;
+$('.datatable thead').on('input', '.search', function () {
       let strict = $(this).attr('strict') || false
       let value = strict && this.value ? "^" + this.value + "$" : this.value
+
+      let index = $(this).parent().index()
+      if (visibleColumnsIndexes !== null) {
+        index = visibleColumnsIndexes[index]
+      }
+
       table
-        .column($(this).parent().index())
+        .column(index)
         .search(value, strict)
         .draw()
   });
+table.on('column-visibility.dt', function(e, settings, column, state) {
+      visibleColumnsIndexes = []
+      table.columns(":visible").every(function(colIdx) {
+          visibleColumnsIndexes.push(colIdx);
+      });
+  })
 })
 
 </script>

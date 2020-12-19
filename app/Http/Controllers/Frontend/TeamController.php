@@ -17,7 +17,7 @@ class TeamController extends Controller
     {
         abort_if(Gate::denies('team_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $teams = Team::all();
+        $teams = Team::with(['owner'])->get();
 
         return view('frontend.teams.index', compact('teams'));
     }

@@ -17,7 +17,7 @@ class UserAlertsController extends Controller
     {
         abort_if(Gate::denies('user_alert_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $userAlerts = UserAlert::all();
+        $userAlerts = UserAlert::with(['users'])->get();
 
         return view('frontend.userAlerts.index', compact('userAlerts'));
     }

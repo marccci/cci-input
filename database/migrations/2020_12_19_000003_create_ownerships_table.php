@@ -4,13 +4,13 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTeamsTable extends Migration
+class CreateOwnershipsTable extends Migration
 {
     public function up()
     {
-        Schema::create('teams', function (Blueprint $table) {
+        Schema::create('ownerships', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name')->nullable();
+            $table->string('user');
             $table->timestamps();
             $table->softDeletes();
         });

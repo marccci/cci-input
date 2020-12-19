@@ -2,25 +2,24 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Team;
+use App\Models\Ownership;
 use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Response;
 
-class StoreTeamRequest extends FormRequest
+class StoreOwnershipRequest extends FormRequest
 {
     public function authorize()
     {
-        return Gate::allows('team_create');
+        return Gate::allows('ownership_create');
     }
 
     public function rules()
     {
         return [
-            'name' => [
+            'user' => [
                 'string',
                 'required',
-                'unique:teams',
             ],
         ];
     }

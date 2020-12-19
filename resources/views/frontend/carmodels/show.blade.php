@@ -20,14 +20,6 @@
                             <tbody>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.carmodel.fields.id') }}
-                                    </th>
-                                    <td>
-                                        {{ $carmodel->id }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
                                         {{ trans('cruds.carmodel.fields.creator') }}
                                     </th>
                                     <td>
@@ -60,16 +52,6 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.carmodel.fields.car') }}
-                                    </th>
-                                    <td>
-                                        @foreach($carmodel->cars as $key => $car)
-                                            <span class="label label-info">{{ $car->name }}</span>
-                                        @endforeach
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
                                         {{ trans('cruds.carmodel.fields.first_year') }}
                                     </th>
                                     <td>
@@ -82,6 +64,16 @@
                                     </th>
                                     <td>
                                         {{ $carmodel->last_year }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.carmodel.fields.car') }}
+                                    </th>
+                                    <td>
+                                        @foreach($carmodel->cars as $key => $car)
+                                            <span class="label label-info">{{ $car->name }}</span>
+                                        @endforeach
                                     </td>
                                 </tr>
                             </tbody>

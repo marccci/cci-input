@@ -23,16 +23,13 @@
                             <thead>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.engine.fields.id') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.engine.fields.name') }}
-                                    </th>
-                                    <th>
                                         {{ trans('cruds.engine.fields.creator') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.engine.fields.owner') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.engine.fields.name') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.engine.fields.description') }}
@@ -44,13 +41,10 @@
                                         {{ trans('cruds.engine.fields.cylinder_number') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.engine.fields.block_config') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.engine.fields.power_units') }}
-                                    </th>
-                                    <th>
                                         {{ trans('cruds.engine.fields.engine_power') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.engine.fields.engine_power_units') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.engine.fields.engine_size') }}
@@ -71,6 +65,9 @@
                                         {{ trans('cruds.engine.fields.images') }}
                                     </th>
                                     <th>
+                                        {{ trans('cruds.engine.fields.block_config') }}
+                                    </th>
+                                    <th>
                                         &nbsp;
                                     </th>
                                 </tr>
@@ -78,12 +75,6 @@
                                     <td>
                                     </td>
                                     <td>
-                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                                    </td>
-                                    <td>
-                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                                    </td>
-                                    <td>
                                         <select class="search">
                                             <option value>{{ trans('global.all') }}</option>
                                             @foreach($users as $key => $item)
@@ -98,6 +89,9 @@
                                                 <option value="{{ $item->name }}">{{ $item->name }}</option>
                                             @endforeach
                                         </select>
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                                     </td>
                                     <td>
                                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
@@ -117,26 +111,41 @@
                                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                                     </td>
                                     <td>
+                                        <select class="search" strict="true">
+                                            <option value>{{ trans('global.all') }}</option>
+                                            @foreach(App\Models\Engine::ENGINE_POWER_UNITS_RADIO as $key => $item)
+                                                <option value="{{ $item }}">{{ $item }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <select class="search" strict="true">
+                                            <option value>{{ trans('global.all') }}</option>
+                                            @foreach(App\Models\Engine::ENGINE_SIZE_UNITS_RADIO as $key => $item)
+                                                <option value="{{ $item }}">{{ $item }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td>
                                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                                     </td>
                                     <td>
                                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                                     </td>
                                     <td>
-                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                                    </td>
-                                    <td>
-                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                                    </td>
-                                    <td>
-                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                                    </td>
-                                    <td>
-                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                                     </td>
                                     <td>
                                     </td>
                                     <td>
+                                        <select class="search" strict="true">
+                                            <option value>{{ trans('global.all') }}</option>
+                                            @foreach(App\Models\Engine::BLOCK_CONFIG_RADIO as $key => $item)
+                                                <option value="{{ $item }}">{{ $item }}</option>
+                                            @endforeach
+                                        </select>
                                     </td>
                                     <td>
                                     </td>
@@ -146,16 +155,13 @@
                                 @foreach($engines as $key => $engine)
                                     <tr data-entry-id="{{ $engine->id }}">
                                         <td>
-                                            {{ $engine->id ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ $engine->name ?? '' }}
-                                        </td>
-                                        <td>
                                             {{ $engine->creator->name ?? '' }}
                                         </td>
                                         <td>
                                             {{ $engine->owner->name ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $engine->name ?? '' }}
                                         </td>
                                         <td>
                                             {{ $engine->description ?? '' }}
@@ -167,19 +173,16 @@
                                             {{ $engine->cylinder_number ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $engine->block_config ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ $engine->power_units ?? '' }}
-                                        </td>
-                                        <td>
                                             {{ $engine->engine_power ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ App\Models\Engine::ENGINE_POWER_UNITS_RADIO[$engine->engine_power_units] ?? '' }}
                                         </td>
                                         <td>
                                             {{ $engine->engine_size ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $engine->engine_size_units ?? '' }}
+                                            {{ App\Models\Engine::ENGINE_SIZE_UNITS_RADIO[$engine->engine_size_units] ?? '' }}
                                         </td>
                                         <td>
                                             {{ $engine->bore ?? '' }}
@@ -200,6 +203,9 @@
                                                     <img src="{{ $media->getUrl('thumb') }}">
                                                 </a>
                                             @endforeach
+                                        </td>
+                                        <td>
+                                            {{ App\Models\Engine::BLOCK_CONFIG_RADIO[$engine->block_config] ?? '' }}
                                         </td>
                                         <td>
                                             @can('engine_show')
@@ -281,14 +287,28 @@
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();
   });
-  $('.datatable thead').on('input', '.search', function () {
+  
+let visibleColumnsIndexes = null;
+$('.datatable thead').on('input', '.search', function () {
       let strict = $(this).attr('strict') || false
       let value = strict && this.value ? "^" + this.value + "$" : this.value
+
+      let index = $(this).parent().index()
+      if (visibleColumnsIndexes !== null) {
+        index = visibleColumnsIndexes[index]
+      }
+
       table
-        .column($(this).parent().index())
+        .column(index)
         .search(value, strict)
         .draw()
   });
+table.on('column-visibility.dt', function(e, settings, column, state) {
+      visibleColumnsIndexes = []
+      table.columns(":visible").every(function(colIdx) {
+          visibleColumnsIndexes.push(colIdx);
+      });
+  })
 })
 
 </script>
