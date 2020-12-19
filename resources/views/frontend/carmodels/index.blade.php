@@ -23,9 +23,6 @@
                             <thead>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.carmodel.fields.id') }}
-                                    </th>
-                                    <th>
                                         {{ trans('cruds.carmodel.fields.creator') }}
                                     </th>
                                     <th>
@@ -38,13 +35,13 @@
                                         {{ trans('cruds.carmodel.fields.manufacturer') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.carmodel.fields.car') }}
-                                    </th>
-                                    <th>
                                         {{ trans('cruds.carmodel.fields.first_year') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.carmodel.fields.last_year') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.carmodel.fields.car') }}
                                     </th>
                                     <th>
                                         &nbsp;
@@ -52,9 +49,6 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                    </td>
-                                    <td>
-                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                                     </td>
                                     <td>
                                         <select class="search">
@@ -84,6 +78,10 @@
                                         </select>
                                     </td>
                                     <td>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
                                         <select class="search">
                                             <option value>{{ trans('global.all') }}</option>
                                             @foreach($cars as $key => $item)
@@ -93,18 +91,11 @@
                                     </td>
                                     <td>
                                     </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                    </td>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($carmodels as $key => $carmodel)
                                     <tr data-entry-id="{{ $carmodel->id }}">
-                                        <td>
-                                            {{ $carmodel->id ?? '' }}
-                                        </td>
                                         <td>
                                             {{ $carmodel->creator->name ?? '' }}
                                         </td>
@@ -118,15 +109,15 @@
                                             {{ $carmodel->manufacturer->name ?? '' }}
                                         </td>
                                         <td>
-                                            @foreach($carmodel->cars as $key => $item)
-                                                <span>{{ $item->name }}</span>
-                                            @endforeach
-                                        </td>
-                                        <td>
                                             {{ $carmodel->first_year ?? '' }}
                                         </td>
                                         <td>
                                             {{ $carmodel->last_year ?? '' }}
+                                        </td>
+                                        <td>
+                                            @foreach($carmodel->cars as $key => $item)
+                                                <span>{{ $item->name }}</span>
+                                            @endforeach
                                         </td>
                                         <td>
                                             @can('carmodel_show')
@@ -208,14 +199,28 @@
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();
   });
-  $('.datatable thead').on('input', '.search', function () {
+  
+let visibleColumnsIndexes = null;
+$('.datatable thead').on('input', '.search', function () {
       let strict = $(this).attr('strict') || false
       let value = strict && this.value ? "^" + this.value + "$" : this.value
+
+      let index = $(this).parent().index()
+      if (visibleColumnsIndexes !== null) {
+        index = visibleColumnsIndexes[index]
+      }
+
       table
-        .column($(this).parent().index())
+        .column(index)
         .search(value, strict)
         .draw()
   });
+table.on('column-visibility.dt', function(e, settings, column, state) {
+      visibleColumnsIndexes = []
+      table.columns(":visible").every(function(colIdx) {
+          visibleColumnsIndexes.push(colIdx);
+      });
+  })
 })
 
 </script>

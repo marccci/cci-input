@@ -9,7 +9,6 @@ use App\Http\Requests\UpdateCarmodelRequest;
 use App\Models\Car;
 use App\Models\Carmodel;
 use App\Models\Manufacturer;
-use App\Models\Team;
 use App\Models\User;
 use Gate;
 use Illuminate\Http\Request;
@@ -21,7 +20,7 @@ class CarmodelController extends Controller
     {
         abort_if(Gate::denies('carmodel_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $carmodels = Carmodel::all();
+        $carmodels = Carmodel::with(['creator', 'owner', 'manufacturer', 'cars'])->get();
 
         $users = User::get();
 
@@ -29,9 +28,7 @@ class CarmodelController extends Controller
 
         $cars = Car::get();
 
-        $teams = Team::get();
-
-        return view('frontend.carmodels.index', compact('carmodels', 'users', 'manufacturers', 'cars', 'teams'));
+        return view('frontend.carmodels.index', compact('carmodels', 'users', 'manufacturers', 'cars'));
     }
 
     public function create()
@@ -69,7 +66,7 @@ class CarmodelController extends Controller
 
         $cars = Car::all()->pluck('name', 'id');
 
-        $carmodel->load('creator', 'owner', 'manufacturer', 'cars', 'team');
+        $carmodel->load('creator', 'owner', 'manufacturer', 'cars');
 
         return view('frontend.carmodels.edit', compact('creators', 'owners', 'manufacturers', 'cars', 'carmodel'));
     }
@@ -86,7 +83,7 @@ class CarmodelController extends Controller
     {
         abort_if(Gate::denies('carmodel_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $carmodel->load('creator', 'owner', 'manufacturer', 'cars', 'team');
+        $carmodel->load('creator', 'owner', 'manufacturer', 'cars');
 
         return view('frontend.carmodels.show', compact('carmodel'));
     }

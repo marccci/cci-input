@@ -102,6 +102,11 @@
                                             {{ trans('cruds.carmodel.title') }}
                                         </a>
                                     @endcan
+                                    @can('ownership_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.ownerships.index') }}">
+                                            {{ trans('cruds.ownership.title') }}
+                                        </a>
+                                    @endcan
                                     @can('car_user_access')
                                         <a class="dropdown-item disabled" href="#">
                                             {{ trans('cruds.carUser.title') }}

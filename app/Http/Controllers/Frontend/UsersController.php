@@ -19,7 +19,7 @@ class UsersController extends Controller
     {
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $users = User::all();
+        $users = User::with(['roles', 'team'])->get();
 
         return view('frontend.users.index', compact('users'));
     }
@@ -68,7 +68,7 @@ class UsersController extends Controller
     {
         abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $user->load('roles', 'team', 'userGarages', 'creatorManufacturers', 'creatorEngines', 'creatorCars', 'userUserAlerts');
+        $user->load('roles', 'team', 'userGarages', 'creatorManufacturers', 'creatorEngines', 'creatorCars', 'ownerManufacturers', 'userUserAlerts');
 
         return view('frontend.users.show', compact('user'));
     }

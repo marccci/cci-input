@@ -21,7 +21,7 @@
             </a>
         </li>
         @can('car_management_access')
-            <li class="c-sidebar-nav-dropdown {{ request()->is("admin/manufacturers*") ? "c-show" : "" }} {{ request()->is("admin/engines*") ? "c-show" : "" }} {{ request()->is("admin/cars*") ? "c-show" : "" }} {{ request()->is("admin/carmodels*") ? "c-show" : "" }}">
+            <li class="c-sidebar-nav-dropdown {{ request()->is("admin/manufacturers*") ? "c-show" : "" }} {{ request()->is("admin/engines*") ? "c-show" : "" }} {{ request()->is("admin/cars*") ? "c-show" : "" }} {{ request()->is("admin/carmodels*") ? "c-show" : "" }} {{ request()->is("admin/ownerships*") ? "c-show" : "" }}">
                 <a class="c-sidebar-nav-dropdown-toggle" href="#">
                     <i class="fa-fw fas fa-car c-sidebar-nav-icon">
 
@@ -66,6 +66,16 @@
 
                                 </i>
                                 {{ trans('cruds.carmodel.title') }}
+                            </a>
+                        </li>
+                    @endcan
+                    @can('ownership_access')
+                        <li class="c-sidebar-nav-item">
+                            <a href="{{ route("admin.ownerships.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/ownerships") || request()->is("admin/ownerships/*") ? "c-active" : "" }}">
+                                <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
+
+                                </i>
+                                {{ trans('cruds.ownership.title') }}
                             </a>
                         </li>
                     @endcan

@@ -9,7 +9,6 @@ use App\Http\Requests\StoreCarRequest;
 use App\Http\Requests\UpdateCarRequest;
 use App\Models\Car;
 use App\Models\Manufacturer;
-use App\Models\Team;
 use App\Models\User;
 use Gate;
 use Illuminate\Http\Request;
@@ -24,15 +23,13 @@ class CarsController extends Controller
     {
         abort_if(Gate::denies('car_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $cars = Car::all();
+        $cars = Car::with(['creator', 'owner', 'manufacturer', 'media'])->get();
 
         $users = User::get();
 
         $manufacturers = Manufacturer::get();
 
-        $teams = Team::get();
-
-        return view('frontend.cars.index', compact('cars', 'users', 'manufacturers', 'teams'));
+        return view('frontend.cars.index', compact('cars', 'users', 'manufacturers'));
     }
 
     public function create()
@@ -77,7 +74,7 @@ class CarsController extends Controller
 
         $manufacturers = Manufacturer::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $car->load('creator', 'owner', 'manufacturer', 'team');
+        $car->load('creator', 'owner', 'manufacturer');
 
         return view('frontend.cars.edit', compact('creators', 'owners', 'manufacturers', 'car'));
     }
@@ -125,7 +122,7 @@ class CarsController extends Controller
     {
         abort_if(Gate::denies('car_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $car->load('creator', 'owner', 'manufacturer', 'team');
+        $car->load('creator', 'owner', 'manufacturer');
 
         return view('frontend.cars.show', compact('car'));
     }

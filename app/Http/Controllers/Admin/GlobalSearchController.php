@@ -14,6 +14,7 @@ class GlobalSearchController extends Controller
         'Car'          => 'cruds.car.title',
         'Garage'       => 'cruds.garage.title',
         'Carmodel'     => 'cruds.carmodel.title',
+        'Ownership'    => 'cruds.ownership.title',
     ];
 
     public function search(Request $request)

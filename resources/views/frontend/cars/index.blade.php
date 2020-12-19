@@ -32,13 +32,13 @@
                                         {{ trans('cruds.car.fields.owner') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.car.fields.name') }}
+                                        {{ trans('cruds.car.fields.manufacturer') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.car.fields.carmodel') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.car.fields.manufacturer') }}
+                                        {{ trans('cruds.car.fields.name') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.car.fields.engine') }}
@@ -76,18 +76,18 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                                    </td>
-                                    <td>
-                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                                    </td>
-                                    <td>
                                         <select class="search">
                                             <option value>{{ trans('global.all') }}</option>
                                             @foreach($manufacturers as $key => $item)
                                                 <option value="{{ $item->name }}">{{ $item->name }}</option>
                                             @endforeach
                                         </select>
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                                     </td>
                                     <td>
                                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
@@ -113,13 +113,13 @@
                                             {{ $car->owner->name ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $car->name ?? '' }}
+                                            {{ $car->manufacturer->name ?? '' }}
                                         </td>
                                         <td>
                                             {{ $car->carmodel ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $car->manufacturer->name ?? '' }}
+                                            {{ $car->name ?? '' }}
                                         </td>
                                         <td>
                                             {{ $car->engine ?? '' }}
@@ -218,14 +218,28 @@
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();
   });
-  $('.datatable thead').on('input', '.search', function () {
+  
+let visibleColumnsIndexes = null;
+$('.datatable thead').on('input', '.search', function () {
       let strict = $(this).attr('strict') || false
       let value = strict && this.value ? "^" + this.value + "$" : this.value
+
+      let index = $(this).parent().index()
+      if (visibleColumnsIndexes !== null) {
+        index = visibleColumnsIndexes[index]
+      }
+
       table
-        .column($(this).parent().index())
+        .column(index)
         .search(value, strict)
         .draw()
   });
+table.on('column-visibility.dt', function(e, settings, column, state) {
+      visibleColumnsIndexes = []
+      table.columns(":visible").every(function(colIdx) {
+          visibleColumnsIndexes.push(colIdx);
+      });
+  })
 })
 
 </script>

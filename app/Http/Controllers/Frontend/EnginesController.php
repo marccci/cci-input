@@ -9,7 +9,6 @@ use App\Http\Requests\StoreEngineRequest;
 use App\Http\Requests\UpdateEngineRequest;
 use App\Models\Engine;
 use App\Models\Manufacturer;
-use App\Models\Team;
 use App\Models\User;
 use Gate;
 use Illuminate\Http\Request;
@@ -24,15 +23,13 @@ class EnginesController extends Controller
     {
         abort_if(Gate::denies('engine_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $engines = Engine::all();
+        $engines = Engine::with(['creator', 'owner', 'manufacturer', 'media'])->get();
 
         $users = User::get();
 
         $manufacturers = Manufacturer::get();
 
-        $teams = Team::get();
-
-        return view('frontend.engines.index', compact('engines', 'users', 'manufacturers', 'teams'));
+        return view('frontend.engines.index', compact('engines', 'users', 'manufacturers'));
     }
 
     public function create()
@@ -77,7 +74,7 @@ class EnginesController extends Controller
 
         $manufacturers = Manufacturer::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $engine->load('creator', 'owner', 'manufacturer', 'team');
+        $engine->load('creator', 'owner', 'manufacturer');
 
         return view('frontend.engines.edit', compact('creators', 'owners', 'manufacturers', 'engine'));
     }
@@ -121,7 +118,7 @@ class EnginesController extends Controller
     {
         abort_if(Gate::denies('engine_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $engine->load('creator', 'owner', 'manufacturer', 'team');
+        $engine->load('creator', 'owner', 'manufacturer');
 
         return view('frontend.engines.show', compact('engine'));
     }

@@ -31,4 +31,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
 
     // Teams
     Route::apiResource('teams', 'TeamApiController');
+
+    // Ownerships
+    Route::apiResource('ownerships', 'OwnershipApiController');
 });

@@ -23,7 +23,7 @@ class ManufacturersController extends Controller
     {
         abort_if(Gate::denies('manufacturer_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $manufacturers = Manufacturer::all();
+        $manufacturers = Manufacturer::with(['creator', 'owner', 'team', 'media'])->get();
 
         $users = User::get();
 
