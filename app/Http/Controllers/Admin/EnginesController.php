@@ -9,7 +9,6 @@ use App\Http\Requests\StoreEngineRequest;
 use App\Http\Requests\UpdateEngineRequest;
 use App\Models\Engine;
 use App\Models\Manufacturer;
-use App\Models\Team;
 use App\Models\User;
 use Gate;
 use Illuminate\Http\Request;
@@ -26,7 +25,7 @@ class EnginesController extends Controller
         abort_if(Gate::denies('engine_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = Engine::with(['creator', 'owner', 'manufacturer', 'team'])->select(sprintf('%s.*', (new Engine)->table));
+            $query = Engine::with(['creator', 'owner', 'manufacturer'])->select(sprintf('%s.*', (new Engine)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -114,9 +113,8 @@ class EnginesController extends Controller
         $users         = User::get();
         $users         = User::get();
         $manufacturers = Manufacturer::get();
-        $teams         = Team::get();
 
-        return view('admin.engines.index', compact('users', 'users', 'manufacturers', 'teams'));
+        return view('admin.engines.index', compact('users', 'users', 'manufacturers'));
     }
 
     public function create()
@@ -161,7 +159,7 @@ class EnginesController extends Controller
 
         $manufacturers = Manufacturer::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $engine->load('creator', 'owner', 'manufacturer', 'team');
+        $engine->load('creator', 'owner', 'manufacturer');
 
         return view('admin.engines.edit', compact('creators', 'owners', 'manufacturers', 'engine'));
     }
@@ -205,7 +203,7 @@ class EnginesController extends Controller
     {
         abort_if(Gate::denies('engine_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $engine->load('creator', 'owner', 'manufacturer', 'team');
+        $engine->load('creator', 'owner', 'manufacturer');
 
         return view('admin.engines.show', compact('engine'));
     }

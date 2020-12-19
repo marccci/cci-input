@@ -140,83 +140,83 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 33,
-                'title' => 'team_create',
-            ],
-            [
-                'id'    => 34,
-                'title' => 'team_edit',
-            ],
-            [
-                'id'    => 35,
-                'title' => 'team_show',
-            ],
-            [
-                'id'    => 36,
-                'title' => 'team_delete',
-            ],
-            [
-                'id'    => 37,
-                'title' => 'team_access',
-            ],
-            [
-                'id'    => 38,
                 'title' => 'user_alert_create',
             ],
             [
-                'id'    => 39,
+                'id'    => 34,
                 'title' => 'user_alert_show',
             ],
             [
-                'id'    => 40,
+                'id'    => 35,
                 'title' => 'user_alert_delete',
             ],
             [
-                'id'    => 41,
+                'id'    => 36,
                 'title' => 'user_alert_access',
             ],
             [
-                'id'    => 42,
+                'id'    => 37,
                 'title' => 'car_user_access',
             ],
             [
-                'id'    => 43,
+                'id'    => 38,
                 'title' => 'garage_create',
             ],
             [
-                'id'    => 44,
+                'id'    => 39,
                 'title' => 'garage_edit',
             ],
             [
-                'id'    => 45,
+                'id'    => 40,
                 'title' => 'garage_show',
             ],
             [
-                'id'    => 46,
+                'id'    => 41,
                 'title' => 'garage_delete',
             ],
             [
-                'id'    => 47,
+                'id'    => 42,
                 'title' => 'garage_access',
             ],
             [
-                'id'    => 48,
+                'id'    => 43,
                 'title' => 'carmodel_create',
             ],
             [
-                'id'    => 49,
+                'id'    => 44,
                 'title' => 'carmodel_edit',
             ],
             [
-                'id'    => 50,
+                'id'    => 45,
                 'title' => 'carmodel_show',
             ],
             [
-                'id'    => 51,
+                'id'    => 46,
                 'title' => 'carmodel_delete',
             ],
             [
-                'id'    => 52,
+                'id'    => 47,
                 'title' => 'carmodel_access',
+            ],
+            [
+                'id'    => 48,
+                'title' => 'team_create',
+            ],
+            [
+                'id'    => 49,
+                'title' => 'team_edit',
+            ],
+            [
+                'id'    => 50,
+                'title' => 'team_show',
+            ],
+            [
+                'id'    => 51,
+                'title' => 'team_delete',
+            ],
+            [
+                'id'    => 52,
+                'title' => 'team_access',
             ],
             [
                 'id'    => 53,

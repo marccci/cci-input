@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Traits\MultiTenantModelTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +10,7 @@ use \DateTimeInterface;
 
 class Carmodel extends Model
 {
-    use SoftDeletes, MultiTenantModelTrait, HasFactory;
+    use SoftDeletes, HasFactory;
 
     public $table = 'carmodels';
 
@@ -38,7 +37,6 @@ class Carmodel extends Model
         'created_at',
         'updated_at',
         'deleted_at',
-        'team_id',
     ];
 
     protected function serializeDate(DateTimeInterface $date)
@@ -84,10 +82,5 @@ class Carmodel extends Model
     public function cars()
     {
         return $this->belongsToMany(Car::class);
-    }
-
-    public function team()
-    {
-        return $this->belongsTo(Team::class, 'team_id');
     }
 }

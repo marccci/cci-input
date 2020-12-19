@@ -13,8 +13,6 @@ class AddRelationshipFieldsToEnginesTable extends Migration
             $table->foreign('manufacturer_id', 'manufacturer_fk_2484909')->references('id')->on('manufacturers');
             $table->unsignedBigInteger('creator_id');
             $table->foreign('creator_id', 'creator_fk_2586858')->references('id')->on('users');
-            $table->unsignedBigInteger('team_id')->nullable();
-            $table->foreign('team_id', 'team_fk_2587507')->references('id')->on('teams');
             $table->unsignedBigInteger('owner_id');
             $table->foreign('owner_id', 'owner_fk_2595214')->references('id')->on('users');
         });

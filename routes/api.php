@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', 'middleware' => ['auth:api']], function () {
+Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', 'middleware' => ['auth:sanctum']], function () {
     // Permissions
     Route::apiResource('permissions', 'PermissionsApiController');
 
@@ -22,13 +22,13 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     Route::post('cars/media', 'CarsApiController@storeMedia')->name('cars.storeMedia');
     Route::apiResource('cars', 'CarsApiController');
 
-    // Teams
-    Route::apiResource('teams', 'TeamApiController');
-
     // Garages
     Route::post('garages/media', 'GarageApiController@storeMedia')->name('garages.storeMedia');
     Route::apiResource('garages', 'GarageApiController');
 
     // Carmodels
     Route::apiResource('carmodels', 'CarmodelApiController');
+
+    // Teams
+    Route::apiResource('teams', 'TeamApiController');
 });

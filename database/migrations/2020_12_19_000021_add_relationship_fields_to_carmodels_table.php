@@ -11,8 +11,6 @@ class AddRelationshipFieldsToCarmodelsTable extends Migration
         Schema::table('carmodels', function (Blueprint $table) {
             $table->unsignedBigInteger('manufacturer_id')->nullable();
             $table->foreign('manufacturer_id', 'manufacturer_fk_2578972')->references('id')->on('manufacturers');
-            $table->unsignedBigInteger('team_id')->nullable();
-            $table->foreign('team_id', 'team_fk_2587509')->references('id')->on('teams');
             $table->unsignedBigInteger('creator_id');
             $table->foreign('creator_id', 'creator_fk_2595217')->references('id')->on('users');
             $table->unsignedBigInteger('owner_id');
