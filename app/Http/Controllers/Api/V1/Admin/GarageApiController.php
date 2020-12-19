@@ -20,7 +20,7 @@ class GarageApiController extends Controller
     {
         abort_if(Gate::denies('garage_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new GarageResource(Garage::with(['user', 'team'])->get());
+        return new GarageResource(Garage::with(['user'])->get());
     }
 
     public function store(StoreGarageRequest $request)
@@ -44,7 +44,7 @@ class GarageApiController extends Controller
     {
         abort_if(Gate::denies('garage_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new GarageResource($garage->load(['user', 'team']));
+        return new GarageResource($garage->load(['user']));
     }
 
     public function update(UpdateGarageRequest $request, Garage $garage)

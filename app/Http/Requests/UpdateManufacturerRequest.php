@@ -21,6 +21,10 @@ class UpdateManufacturerRequest extends FormRequest
                 'required',
                 'integer',
             ],
+            'owner_id'     => [
+                'required',
+                'integer',
+            ],
             'name'         => [
                 'string',
                 'required',
@@ -44,10 +48,6 @@ class UpdateManufacturerRequest extends FormRequest
             'last_year'    => [
                 'required',
                 'date_format:' . config('panel.date_format'),
-            ],
-            'owner_id'     => [
-                'required',
-                'integer',
             ],
         ];
     }

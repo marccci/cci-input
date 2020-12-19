@@ -20,7 +20,7 @@ class EnginesApiController extends Controller
     {
         abort_if(Gate::denies('engine_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new EngineResource(Engine::with(['creator', 'owner', 'manufacturer', 'team'])->get());
+        return new EngineResource(Engine::with(['creator', 'owner', 'manufacturer'])->get());
     }
 
     public function store(StoreEngineRequest $request)
@@ -44,7 +44,7 @@ class EnginesApiController extends Controller
     {
         abort_if(Gate::denies('engine_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new EngineResource($engine->load(['creator', 'owner', 'manufacturer', 'team']));
+        return new EngineResource($engine->load(['creator', 'owner', 'manufacturer']));
     }
 
     public function update(UpdateEngineRequest $request, Engine $engine)

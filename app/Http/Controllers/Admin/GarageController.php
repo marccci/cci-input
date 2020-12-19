@@ -8,7 +8,6 @@ use App\Http\Requests\MassDestroyGarageRequest;
 use App\Http\Requests\StoreGarageRequest;
 use App\Http\Requests\UpdateGarageRequest;
 use App\Models\Garage;
-use App\Models\Team;
 use App\Models\User;
 use Gate;
 use Illuminate\Http\Request;
@@ -25,7 +24,7 @@ class GarageController extends Controller
         abort_if(Gate::denies('garage_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = Garage::with(['user', 'team'])->select(sprintf('%s.*', (new Garage)->table));
+            $query = Garage::with(['user'])->select(sprintf('%s.*', (new Garage)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -89,9 +88,8 @@ class GarageController extends Controller
         }
 
         $users = User::get();
-        $teams = Team::get();
 
-        return view('admin.garages.index', compact('users', 'teams'));
+        return view('admin.garages.index', compact('users'));
     }
 
     public function create()
@@ -128,7 +126,7 @@ class GarageController extends Controller
 
         $users = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $garage->load('user', 'team');
+        $garage->load('user');
 
         return view('admin.garages.edit', compact('users', 'garage'));
     }
@@ -176,7 +174,7 @@ class GarageController extends Controller
     {
         abort_if(Gate::denies('garage_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $garage->load('user', 'team');
+        $garage->load('user');
 
         return view('admin.garages.show', compact('garage'));
     }
