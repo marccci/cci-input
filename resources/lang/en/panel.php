@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'site_title' => 'CCI',
+    'site_title' => 'CCI $user->name;',
 ];
