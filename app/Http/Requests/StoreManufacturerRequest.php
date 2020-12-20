@@ -33,9 +33,6 @@ class StoreManufacturerRequest extends FormRequest
                 'string',
                 'nullable',
             ],
-            'logo'         => [
-                'required',
-            ],
             'country'      => [
                 'string',
                 'required',
