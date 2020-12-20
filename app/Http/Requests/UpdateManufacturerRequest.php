@@ -39,15 +39,19 @@ class UpdateManufacturerRequest extends FormRequest
             ],
             'country_code' => [
                 'string',
-                'required',
+                'nullable',
             ],
             'first_year'   => [
                 'required',
-                'date_format:' . config('panel.date_format'),
+                'integer',
+                'min:-2147483648',
+                'max:2147483647',
             ],
             'last_year'    => [
                 'required',
-                'date_format:' . config('panel.date_format'),
+                'integer',
+                'min:-2147483648',
+                'max:2147483647',
             ],
         ];
     }

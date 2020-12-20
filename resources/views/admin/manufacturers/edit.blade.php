@@ -91,8 +91,8 @@
                 <span class="help-block">{{ trans('cruds.manufacturer.fields.country_helper') }}</span>
             </div>
             <div class="form-group">
-                <label class="required" for="country_code">{{ trans('cruds.manufacturer.fields.country_code') }}</label>
-                <input class="form-control {{ $errors->has('country_code') ? 'is-invalid' : '' }}" type="text" name="country_code" id="country_code" value="{{ old('country_code', $manufacturer->country_code) }}" required>
+                <label for="country_code">{{ trans('cruds.manufacturer.fields.country_code') }}</label>
+                <input class="form-control {{ $errors->has('country_code') ? 'is-invalid' : '' }}" type="text" name="country_code" id="country_code" value="{{ old('country_code', $manufacturer->country_code) }}">
                 @if($errors->has('country_code'))
                     <div class="invalid-feedback">
                         {{ $errors->first('country_code') }}
@@ -102,7 +102,7 @@
             </div>
             <div class="form-group">
                 <label class="required" for="first_year">{{ trans('cruds.manufacturer.fields.first_year') }}</label>
-                <input class="form-control date {{ $errors->has('first_year') ? 'is-invalid' : '' }}" type="text" name="first_year" id="first_year" value="{{ old('first_year', $manufacturer->first_year) }}" required>
+                <input class="form-control {{ $errors->has('first_year') ? 'is-invalid' : '' }}" type="number" name="first_year" id="first_year" value="{{ old('first_year', $manufacturer->first_year) }}" step="1" required>
                 @if($errors->has('first_year'))
                     <div class="invalid-feedback">
                         {{ $errors->first('first_year') }}
@@ -112,7 +112,7 @@
             </div>
             <div class="form-group">
                 <label class="required" for="last_year">{{ trans('cruds.manufacturer.fields.last_year') }}</label>
-                <input class="form-control date {{ $errors->has('last_year') ? 'is-invalid' : '' }}" type="text" name="last_year" id="last_year" value="{{ old('last_year', $manufacturer->last_year) }}" required>
+                <input class="form-control {{ $errors->has('last_year') ? 'is-invalid' : '' }}" type="number" name="last_year" id="last_year" value="{{ old('last_year', $manufacturer->last_year) }}" step="1" required>
                 @if($errors->has('last_year'))
                     <div class="invalid-feedback">
                         {{ $errors->first('last_year') }}

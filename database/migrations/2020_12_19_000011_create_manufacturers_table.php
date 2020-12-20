@@ -13,9 +13,9 @@ class CreateManufacturersTable extends Migration
             $table->string('name');
             $table->string('description')->nullable();
             $table->string('country');
-            $table->date('first_year');
-            $table->date('last_year');
-            $table->string('country_code');
+            $table->string('country_code')->nullable();
+            $table->integer('first_year');
+            $table->integer('last_year');
             $table->timestamps();
             $table->softDeletes();
         });
