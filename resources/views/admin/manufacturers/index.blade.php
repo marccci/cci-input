@@ -43,9 +43,6 @@
                         {{ trans('cruds.manufacturer.fields.country') }}
                     </th>
                     <th>
-                        {{ trans('cruds.manufacturer.fields.country_code') }}
-                    </th>
-                    <th>
                         {{ trans('cruds.manufacturer.fields.first_year') }}
                     </th>
                     <th>
@@ -91,8 +88,7 @@
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
-                    </td>
-                    <td>
+                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
                     </td>
@@ -156,7 +152,6 @@
 { data: 'logo', name: 'logo', sortable: false, searchable: false },
 { data: 'image', name: 'image', sortable: false, searchable: false },
 { data: 'country', name: 'country' },
-{ data: 'country_code', name: 'country_code' },
 { data: 'first_year', name: 'first_year' },
 { data: 'last_year', name: 'last_year' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }

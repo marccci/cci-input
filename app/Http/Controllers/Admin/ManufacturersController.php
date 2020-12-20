@@ -87,8 +87,11 @@ class ManufacturersController extends Controller
             $table->editColumn('country', function ($row) {
                 return $row->country ? $row->country : "";
             });
-            $table->editColumn('country_code', function ($row) {
-                return $row->country_code ? $row->country_code : "";
+            $table->editColumn('first_year', function ($row) {
+                return $row->first_year ? $row->first_year : "";
+            });
+            $table->editColumn('last_year', function ($row) {
+                return $row->last_year ? $row->last_year : "";
             });
 
             $table->rawColumns(['actions', 'placeholder', 'creator', 'owner', 'logo', 'image']);

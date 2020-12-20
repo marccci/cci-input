@@ -89,14 +89,6 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.manufacturer.fields.country_code') }}
-                        </th>
-                        <td>
-                            {{ $manufacturer->country_code }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.manufacturer.fields.first_year') }}
                         </th>
                         <td>

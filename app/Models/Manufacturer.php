@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Traits\MultiTenantModelTrait;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -24,8 +23,6 @@ class Manufacturer extends Model implements HasMedia
     ];
 
     protected $dates = [
-        'first_year',
-        'last_year',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -46,9 +43,9 @@ class Manufacturer extends Model implements HasMedia
         'description',
         'country',
         'country_code',
+        'created_at',
         'first_year',
         'last_year',
-        'created_at',
         'updated_at',
         'deleted_at',
         'team_id',
@@ -108,26 +105,6 @@ class Manufacturer extends Model implements HasMedia
         });
 
         return $files;
-    }
-
-    public function getFirstYearAttribute($value)
-    {
-        return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
-    }
-
-    public function setFirstYearAttribute($value)
-    {
-        $this->attributes['first_year'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
-    }
-
-    public function getLastYearAttribute($value)
-    {
-        return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
-    }
-
-    public function setLastYearAttribute($value)
-    {
-        $this->attributes['last_year'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
     }
 
     public function team()
