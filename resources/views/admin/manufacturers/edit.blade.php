@@ -59,7 +59,7 @@
                 <span class="help-block">{{ trans('cruds.manufacturer.fields.description_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="logo">{{ trans('cruds.manufacturer.fields.logo') }}</label>
+                <label class="required" for="logo">{{ trans('cruds.manufacturer.fields.logo') }}</label>
                 <div class="needsclick dropzone {{ $errors->has('logo') ? 'is-invalid' : '' }}" id="logo-dropzone">
                 </div>
                 @if($errors->has('logo'))
