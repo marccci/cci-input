@@ -140,7 +140,7 @@
 @section('scripts')
 <script>
     Dropzone.options.logoDropzone = {
-    url: '{{ route('admin.manufacturers.storeMedia') }}',
+    url: '{{ route('frontend.manufacturers.storeMedia') }}',
     maxFilesize: 4, // MB
     acceptedFiles: '.jpeg,.jpg,.png,.gif',
     maxFiles: 1,
@@ -195,7 +195,7 @@
 <script>
     var uploadedImageMap = {}
 Dropzone.options.imageDropzone = {
-    url: '{{ route('admin.manufacturers.storeMedia') }}',
+    url: '{{ route('frontend.manufacturers.storeMedia') }}',
     maxFilesize: 4, // MB
     acceptedFiles: '.jpeg,.jpg,.png,.gif',
     addRemoveLinks: true,

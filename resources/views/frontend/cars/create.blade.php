@@ -125,7 +125,7 @@
 <script>
     var uploadedFileMap = {}
 Dropzone.options.fileDropzone = {
-    url: '{{ route('admin.cars.storeMedia') }}',
+    url: '{{ route('frontend.cars.storeMedia') }}',
     maxFilesize: 2, // MB
     addRemoveLinks: true,
     headers: {
@@ -181,7 +181,7 @@ Dropzone.options.fileDropzone = {
 <script>
     var uploadedImageMap = {}
 Dropzone.options.imageDropzone = {
-    url: '{{ route('admin.cars.storeMedia') }}',
+    url: '{{ route('frontend.cars.storeMedia') }}',
     maxFilesize: 4, // MB
     addRemoveLinks: true,
     headers: {
