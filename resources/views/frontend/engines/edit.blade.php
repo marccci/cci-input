@@ -209,7 +209,7 @@
 @section('scripts')
 <script>
     Dropzone.options.filesDropzone = {
-    url: '{{ route('admin.engines.storeMedia') }}',
+    url: '{{ route('frontend.engines.storeMedia') }}',
     maxFilesize: 15, // MB
     maxFiles: 1,
     addRemoveLinks: true,
@@ -260,7 +260,7 @@
 <script>
     var uploadedImagesMap = {}
 Dropzone.options.imagesDropzone = {
-    url: '{{ route('admin.engines.storeMedia') }}',
+    url: '{{ route('frontend.engines.storeMedia') }}',
     maxFilesize: 2, // MB
     acceptedFiles: '.jpeg,.jpg,.png,.gif',
     addRemoveLinks: true,

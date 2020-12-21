@@ -87,7 +87,7 @@
 <script>
     var uploadedFilesMap = {}
 Dropzone.options.filesDropzone = {
-    url: '{{ route('admin.garages.storeMedia') }}',
+    url: '{{ route('frontend.garages.storeMedia') }}',
     maxFilesize: 4, // MB
     addRemoveLinks: true,
     headers: {
@@ -143,7 +143,7 @@ Dropzone.options.filesDropzone = {
 <script>
     var uploadedImagesMap = {}
 Dropzone.options.imagesDropzone = {
-    url: '{{ route('admin.garages.storeMedia') }}',
+    url: '{{ route('frontend.garages.storeMedia') }}',
     maxFilesize: 4, // MB
     acceptedFiles: '.jpeg,.jpg,.png,.gif',
     addRemoveLinks: true,
