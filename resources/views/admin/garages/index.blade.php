@@ -28,13 +28,13 @@
                         {{ trans('cruds.garage.fields.name') }}
                     </th>
                     <th>
-                        {{ trans('cruds.garage.fields.car') }}
-                    </th>
-                    <th>
                         {{ trans('cruds.garage.fields.files') }}
                     </th>
                     <th>
                         {{ trans('cruds.garage.fields.images') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.garage.fields.car') }}
                     </th>
                     <th>
                         &nbsp;
@@ -55,11 +55,11 @@
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                    </td>
-                    <td>
                     </td>
                     <td>
                     </td>
@@ -118,9 +118,9 @@
       { data: 'placeholder', name: 'placeholder' },
 { data: 'user_name', name: 'user.name' },
 { data: 'name', name: 'name' },
-{ data: 'car', name: 'car' },
 { data: 'files', name: 'files', sortable: false, searchable: false },
 { data: 'images', name: 'images', sortable: false, searchable: false },
+{ data: 'car', name: 'car' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,

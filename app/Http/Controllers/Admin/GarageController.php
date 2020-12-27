@@ -52,9 +52,6 @@ class GarageController extends Controller
             $table->editColumn('name', function ($row) {
                 return $row->name ? $row->name : "";
             });
-            $table->editColumn('car', function ($row) {
-                return $row->car ? $row->car : "";
-            });
             $table->editColumn('files', function ($row) {
                 if (!$row->files) {
                     return '';
@@ -80,6 +77,9 @@ class GarageController extends Controller
                 }
 
                 return implode(' ', $links);
+            });
+            $table->editColumn('car', function ($row) {
+                return $row->car ? $row->car : "";
             });
 
             $table->rawColumns(['actions', 'placeholder', 'user', 'files', 'images']);

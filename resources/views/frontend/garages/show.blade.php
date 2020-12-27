@@ -36,14 +36,6 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.garage.fields.car') }}
-                                    </th>
-                                    <td>
-                                        {{ $garage->car }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
                                         {{ trans('cruds.garage.fields.files') }}
                                     </th>
                                     <td>
@@ -64,6 +56,14 @@
                                                 <img src="{{ $media->getUrl('thumb') }}">
                                             </a>
                                         @endforeach
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.garage.fields.car') }}
+                                    </th>
+                                    <td>
+                                        {{ $garage->car }}
                                     </td>
                                 </tr>
                             </tbody>
