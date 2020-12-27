@@ -34,16 +34,6 @@
                 <span class="help-block">{{ trans('cruds.garage.fields.name_helper') }}</span>
             </div>
             <div class="form-group">
-                <label class="required" for="car">{{ trans('cruds.garage.fields.car') }}</label>
-                <input class="form-control {{ $errors->has('car') ? 'is-invalid' : '' }}" type="text" name="car" id="car" value="{{ old('car', '') }}" required>
-                @if($errors->has('car'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('car') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.garage.fields.car_helper') }}</span>
-            </div>
-            <div class="form-group">
                 <label for="files">{{ trans('cruds.garage.fields.files') }}</label>
                 <div class="needsclick dropzone {{ $errors->has('files') ? 'is-invalid' : '' }}" id="files-dropzone">
                 </div>
@@ -64,6 +54,16 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.garage.fields.images_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="car">{{ trans('cruds.garage.fields.car') }}</label>
+                <input class="form-control {{ $errors->has('car') ? 'is-invalid' : '' }}" type="number" name="car" id="car" value="{{ old('car', '') }}" step="1" required>
+                @if($errors->has('car'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('car') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.garage.fields.car_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

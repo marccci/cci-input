@@ -26,8 +26,10 @@ class UpdateGarageRequest extends FormRequest
                 'required',
             ],
             'car'     => [
-                'string',
                 'required',
+                'integer',
+                'min:-2147483648',
+                'max:2147483647',
             ],
         ];
     }

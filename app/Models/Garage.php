@@ -22,7 +22,6 @@ class Garage extends Model implements HasMedia
     ];
 
     public static $searchable = [
-        'car',
         'files',
         'images',
     ];

@@ -221,10 +221,10 @@ return [
             'files_helper'      => ' ',
             'images'            => 'Images',
             'images_helper'     => ' ',
-            'car'               => 'Car',
-            'car_helper'        => ' ',
             'name'              => 'Name',
             'name_helper'       => ' ',
+            'car'               => 'Car',
+            'car_helper'        => ' ',
         ],
     ],
     'carmodel'       => [
