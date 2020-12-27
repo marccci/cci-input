@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="89acbf25-9d98-43d6-9407-7efe1296f233" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_28_20,_10_22_PM_[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -169,10 +169,16 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+    <property name="settings.editor.selected.configurable" value="application.passwordSafe" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
@@ -192,28 +198,23 @@
       <workItem from="1606518726064" duration="8721000" />
       <workItem from="1606599338401" duration="580000" />
       <workItem from="1608926005686" duration="51000" />
+      <workItem from="1608938580842" duration="2423000" />
     </task>
+    <task id="LOCAL-00001" summary="test commit">
+      <created>1608938632965</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1608938632965</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="2678" y="325" key="FileChooserDialogImpl" timestamp="1606585316695">
-      <screen x="1920" y="0" width="1920" height="1080" />
-    </state>
-    <state x="2678" y="325" key="FileChooserDialogImpl/0.0.1920.1034/1920.0.1920.1080@1920.0.1920.1080" timestamp="1606585316695" />
-    <state x="2654" y="454" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606598532793">
-      <screen x="1920" y="0" width="1920" height="1080" />
-    </state>
-    <state x="2654" y="454" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1034/1920.0.1920.1080@1920.0.1920.1080" timestamp="1606598532793" />
-    <state x="2595" y="289" width="914" height="595" key="find.popup" timestamp="1606582162892">
-      <screen x="1920" y="0" width="1920" height="1080" />
-    </state>
-    <state x="2595" y="289" width="914" height="595" key="find.popup/0.0.1920.1034/1920.0.1920.1080@1920.0.1920.1080" timestamp="1606582162892" />
-    <state x="2476" y="253" key="run.anything.popup" timestamp="1606599815263">
-      <screen x="1920" y="0" width="1920" height="1080" />
-    </state>
-    <state x="2476" y="253" key="run.anything.popup/0.0.1920.1034/1920.0.1920.1080@1920.0.1920.1080" timestamp="1606599815263" />
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="test commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="test commit" />
   </component>
 </project>
