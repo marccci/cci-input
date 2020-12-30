@@ -13,8 +13,6 @@ class AddRelationshipFieldsToManufacturersTable extends Migration
             $table->foreign('creator_id', 'creator_fk_2586857')->references('id')->on('users');
             $table->unsignedBigInteger('owner_id');
             $table->foreign('owner_id', 'owner_fk_2615073')->references('id')->on('users');
-            $table->unsignedBigInteger('team_id')->nullable();
-            $table->foreign('team_id', 'team_fk_2826092')->references('id')->on('teams');
         });
     }
 }

@@ -200,46 +200,26 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 48,
-                'title' => 'team_create',
-            ],
-            [
-                'id'    => 49,
-                'title' => 'team_edit',
-            ],
-            [
-                'id'    => 50,
-                'title' => 'team_show',
-            ],
-            [
-                'id'    => 51,
-                'title' => 'team_delete',
-            ],
-            [
-                'id'    => 52,
-                'title' => 'team_access',
-            ],
-            [
-                'id'    => 53,
                 'title' => 'ownership_create',
             ],
             [
-                'id'    => 54,
+                'id'    => 49,
                 'title' => 'ownership_edit',
             ],
             [
-                'id'    => 55,
+                'id'    => 50,
                 'title' => 'ownership_show',
             ],
             [
-                'id'    => 56,
+                'id'    => 51,
                 'title' => 'ownership_delete',
             ],
             [
-                'id'    => 57,
+                'id'    => 52,
                 'title' => 'ownership_access',
             ],
             [
-                'id'    => 58,
+                'id'    => 53,
                 'title' => 'profile_password_edit',
             ],
         ];

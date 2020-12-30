@@ -137,11 +137,6 @@
                                             {{ trans('cruds.user.title') }}
                                         </a>
                                     @endcan
-                                    @can('team_access')
-                                        <a class="dropdown-item ml-3" href="{{ route('frontend.teams.index') }}">
-                                            {{ trans('cruds.team.title') }}
-                                        </a>
-                                    @endcan
                                     @can('user_alert_access')
                                         <a class="dropdown-item" href="{{ route('frontend.user-alerts.index') }}">
                                             {{ trans('cruds.userAlert.title') }}

@@ -49,10 +49,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('carmodels/destroy', 'CarmodelController@massDestroy')->name('carmodels.massDestroy');
     Route::resource('carmodels', 'CarmodelController');
 
-    // Teams
-    Route::delete('teams/destroy', 'TeamController@massDestroy')->name('teams.massDestroy');
-    Route::resource('teams', 'TeamController');
-
     // Ownerships
     Route::delete('ownerships/destroy', 'OwnershipController@massDestroy')->name('ownerships.massDestroy');
     Route::resource('ownerships', 'OwnershipController');
@@ -69,8 +65,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('messenger/{topic}/reply', 'MessengerController@replyToTopic')->name('messenger.reply');
     Route::get('messenger/{topic}/reply', 'MessengerController@showReply')->name('messenger.showReply');
     Route::get('user-alerts/read', 'UserAlertsController@read');
-    Route::get('team-members', 'TeamMembersController@index')->name('team-members.index');
-    Route::post('team-members', 'TeamMembersController@invite')->name('team-members.invite');
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
 // Change password
@@ -127,10 +121,6 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['
     // Carmodels
     Route::delete('carmodels/destroy', 'CarmodelController@massDestroy')->name('carmodels.massDestroy');
     Route::resource('carmodels', 'CarmodelController');
-
-    // Teams
-    Route::delete('teams/destroy', 'TeamController@massDestroy')->name('teams.massDestroy');
-    Route::resource('teams', 'TeamController');
 
     // Ownerships
     Route::delete('ownerships/destroy', 'OwnershipController@massDestroy')->name('ownerships.massDestroy');

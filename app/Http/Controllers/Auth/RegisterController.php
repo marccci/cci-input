@@ -64,31 +64,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $user = User::create([
+        return User::create([
             'name'     => $data['name'],
             'email'    => $data['email'],
             'password' => Hash::make($data['password']),
-            'team_id'  => request()->input('team', null),
         ]);
-
-        if (!request()->has('team')) {
-            $team = \App\Models\Team::create([
-                'owner_id' => $user->id,
-                'name'     => $data['email'],
-            ]);
-
-            $user->update(['team_id' => $team->id]);
-        }
-
-        return $user;
-    }
-
-    public function showRegistrationForm()
-    {
-        if (request()->has('signature') && !request()->hasValidSignature()) {
-            return redirect()->route('register');
-        }
-
-        return view('auth.register');
     }
 }

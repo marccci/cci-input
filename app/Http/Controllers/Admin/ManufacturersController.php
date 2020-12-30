@@ -8,7 +8,6 @@ use App\Http\Requests\MassDestroyManufacturerRequest;
 use App\Http\Requests\StoreManufacturerRequest;
 use App\Http\Requests\UpdateManufacturerRequest;
 use App\Models\Manufacturer;
-use App\Models\Team;
 use App\Models\User;
 use Gate;
 use Illuminate\Http\Request;
@@ -25,7 +24,7 @@ class ManufacturersController extends Controller
         abort_if(Gate::denies('manufacturer_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = Manufacturer::with(['creator', 'owner', 'team'])->select(sprintf('%s.*', (new Manufacturer)->table));
+            $query = Manufacturer::with(['creator', 'owner'])->select(sprintf('%s.*', (new Manufacturer)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -100,10 +99,8 @@ class ManufacturersController extends Controller
         }
 
         $users = User::get();
-        $users = User::get();
-        $teams = Team::get();
 
-        return view('admin.manufacturers.index', compact('users', 'users', 'teams'));
+        return view('admin.manufacturers.index', compact('users'));
     }
 
     public function create()
@@ -144,7 +141,7 @@ class ManufacturersController extends Controller
 
         $owners = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $manufacturer->load('creator', 'owner', 'team');
+        $manufacturer->load('creator', 'owner');
 
         return view('admin.manufacturers.edit', compact('creators', 'owners', 'manufacturer'));
     }
@@ -188,7 +185,7 @@ class ManufacturersController extends Controller
     {
         abort_if(Gate::denies('manufacturer_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $manufacturer->load('creator', 'owner', 'team', 'manufacturerEngines', 'manufacturerCars');
+        $manufacturer->load('creator', 'owner', 'manufacturerEngines', 'manufacturerCars');
 
         return view('admin.manufacturers.show', compact('manufacturer'));
     }
