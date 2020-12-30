@@ -8,7 +8,6 @@ use App\Http\Requests\MassDestroyManufacturerRequest;
 use App\Http\Requests\StoreManufacturerRequest;
 use App\Http\Requests\UpdateManufacturerRequest;
 use App\Models\Manufacturer;
-use App\Models\Team;
 use App\Models\User;
 use Gate;
 use Illuminate\Http\Request;
@@ -23,13 +22,11 @@ class ManufacturersController extends Controller
     {
         abort_if(Gate::denies('manufacturer_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $manufacturers = Manufacturer::with(['creator', 'owner', 'team', 'media'])->get();
+        $manufacturers = Manufacturer::with(['creator', 'owner', 'media'])->get();
 
         $users = User::get();
 
-        $teams = Team::get();
-
-        return view('frontend.manufacturers.index', compact('manufacturers', 'users', 'teams'));
+        return view('frontend.manufacturers.index', compact('manufacturers', 'users'));
     }
 
     public function create()
@@ -70,7 +67,7 @@ class ManufacturersController extends Controller
 
         $owners = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $manufacturer->load('creator', 'owner', 'team');
+        $manufacturer->load('creator', 'owner');
 
         return view('frontend.manufacturers.edit', compact('creators', 'owners', 'manufacturer'));
     }
@@ -114,7 +111,7 @@ class ManufacturersController extends Controller
     {
         abort_if(Gate::denies('manufacturer_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $manufacturer->load('creator', 'owner', 'team', 'manufacturerEngines', 'manufacturerCars');
+        $manufacturer->load('creator', 'owner', 'manufacturerEngines', 'manufacturerCars');
 
         return view('frontend.manufacturers.show', compact('manufacturer'));
     }

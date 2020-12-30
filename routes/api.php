@@ -29,9 +29,6 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     // Carmodels
     Route::apiResource('carmodels', 'CarmodelApiController');
 
-    // Teams
-    Route::apiResource('teams', 'TeamApiController');
-
     // Ownerships
     Route::apiResource('ownerships', 'OwnershipApiController');
 });

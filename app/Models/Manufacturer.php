@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Traits\MultiTenantModelTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,7 +12,7 @@ use \DateTimeInterface;
 
 class Manufacturer extends Model implements HasMedia
 {
-    use SoftDeletes, MultiTenantModelTrait, InteractsWithMedia, HasFactory;
+    use SoftDeletes, InteractsWithMedia, HasFactory;
 
     public $table = 'manufacturers';
 
@@ -48,7 +47,6 @@ class Manufacturer extends Model implements HasMedia
         'last_year',
         'updated_at',
         'deleted_at',
-        'team_id',
     ];
 
     protected function serializeDate(DateTimeInterface $date)
@@ -105,10 +103,5 @@ class Manufacturer extends Model implements HasMedia
         });
 
         return $files;
-    }
-
-    public function team()
-    {
-        return $this->belongsTo(Team::class, 'team_id');
     }
 }
